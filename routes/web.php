@@ -21,11 +21,24 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
-    Route::post('/edit-profile', [App\Http\Controllers\HomeController::class, 'update'])->name('profile.edit');
-    Route::get('/change-password',function () {
-        return view('auth.passwords.reset');
-     })->name('change.password');
-});
+   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+   Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+   Route::post('/edit-profile', [App\Http\Controllers\HomeController::class, 'update'])->name('profile.edit');
+   Route::get('/change-password', function () {
+      return view('auth.passwords.reset');
+   })->name('change.password');
 
+   /** Truck module */
+   Route::get('truck/',  [App\Http\Controllers\TruckController::class, 'index'])->name('truck');
+   Route::get('truck/add', [App\Http\Controllers\TruckController::class, 'add'])->name('truck.add');
+   Route::post('truck/store', [App\Http\Controllers\TruckController::class, 'save'])->name('truck.store');
+   Route::get('truck/edit/{id?}',[App\Http\Controllers\TruckController::class, 'add'])->name('truck.edit');
+   Route::get('truck/delete/{id}', [App\Http\Controllers\TruckController::class, 'delete'])->name('truck.delete');
+
+    /** Farmer module */
+    Route::get('farmer/',  [App\Http\Controllers\FarmerController::class, 'index'])->name('farmer');
+    Route::get('farmer/add', [App\Http\Controllers\FarmerController::class, 'add'])->name('farmer.add');
+    Route::post('farmer/store', [App\Http\Controllers\FarmerController::class, 'save'])->name('farmer.store');
+    Route::get('farmer/edit/{id?}',[App\Http\Controllers\FarmerController::class, 'add'])->name('farmer.edit');
+    Route::get('farmer/delete/{id}', [App\Http\Controllers\FarmerController::class, 'delete'])->name('farmer.delete');
+});
