@@ -41,4 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('farmer/store', [App\Http\Controllers\FarmerController::class, 'save'])->name('farmer.store');
     Route::get('farmer/edit/{id?}',[App\Http\Controllers\FarmerController::class, 'add'])->name('farmer.edit');
     Route::get('farmer/delete/{id}', [App\Http\Controllers\FarmerController::class, 'delete'])->name('farmer.delete');
+
+    /** Market module */
+    Route::get('market/',  [App\Http\Controllers\MarketController::class, 'index'])->name('market');
+    Route::get('market/add', [App\Http\Controllers\MarketController::class, 'add'])->name('market.add');
+    Route::post('market/store', [App\Http\Controllers\MarketController::class, 'save'])->name('market.store');
+    Route::get('market/edit/{id?}',[App\Http\Controllers\MarketController::class, 'add'])->name('market.edit');
+    Route::get('market/delete/{id}', [App\Http\Controllers\MarketController::class, 'delete'])->name('market.delete');
 });
