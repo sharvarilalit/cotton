@@ -83,7 +83,7 @@
                                                         style='color:red'>*</span></label>
                                                 <input type="date" name="date" class="form-control" id="date"
                                                     placeholder="date"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->date : '' }}" />
+                                                    value="{{ isset($getfarmerbyId) ? date('Y-m-d',strtotime($getfarmerbyId->date)) : '' }}" />
                                                 @error('date')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror

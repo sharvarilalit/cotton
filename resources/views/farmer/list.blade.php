@@ -40,8 +40,8 @@ Truck Entries
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Truck Number</th>
                                     <th>Farmer Name</th>
+                                    <th>Truck Number</th>
                                     <th>Farmer Location</th>
                                     <th>Date</th>
                                     <th>Cotton Weight</th>
@@ -59,10 +59,10 @@ Truck Entries
                               @forelse($allcolors as $key=>$item)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$item->trucks->truck_no}}</td>
                                     <td>{{$item->name}}</td>
+                                    <td>{{$item->trucks->truck_no}}</td>
                                     <td>{{$item->location}}</td>
-                                    <td>{{$item->date}}</td>
+                                    <td>{{date('d-m-Y',strtotime($item->date))}}</td>
                                     <td>{{$item->cotton_weight}}</td>
                                     <td>{{$item->quantity}}</td>
                                     <td>{{$item->price}}</td>
