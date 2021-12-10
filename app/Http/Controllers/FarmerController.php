@@ -12,7 +12,7 @@ class FarmerController extends Controller
 
     public function index()
     {
-        $allcolors = Farmer::with('trucks')->get();
+        $allcolors = Farmer::with('trucks')->orderBy('id', 'DESC')->get();
         return view('farmer.list', compact('allcolors'));
     }
     public function add($id = null)
