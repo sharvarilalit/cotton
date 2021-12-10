@@ -62,7 +62,7 @@ Truck Entries
                                     <td>{{$item->trucks->truck_no}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->location}}</td>
-                                    <td>{{$item->date}}</td>
+                                    <td>{{date('d-m-Y',strtotime($item->date))}}</td>
                                     <td>{{$item->cotton_weight}}</td>
                                     <td>{{$item->quantity}}</td>
                                     <td>{{$item->price}}</td>
