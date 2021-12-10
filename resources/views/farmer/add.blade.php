@@ -65,8 +65,8 @@
                                             <div class="form-group">
                                                 <label for="name">{{ __('Truck') }} <span
                                                         style='color:red'>*</span></label>
-                                                <select type="text" name="truck_id" class="form-control" id="truck_id">
-                                                    <option>Select</option>
+                                                <select type="text" name="truck_id" class="form-control" id="truck_id" required="">
+                                                    <option value="">Select</option>
                                                     @foreach ($truck as $cats)
                                                         <option
                                                             {{ isset($getfarmerbyId) && $cats->id == $getfarmerbyId->truck_id ? 'selected' : '' }}
@@ -82,7 +82,7 @@
                                                 <label for="name">{{ __('Date') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="date" name="date" class="form-control" id="date"
-                                                    placeholder="date"
+                                                    placeholder="date" required=""
                                                     value="{{ isset($getfarmerbyId) ? date('Y-m-d',strtotime($getfarmerbyId->date)) : '' }}" />
                                                 @error('date')
                                                     <small style="color:red">{{ $message }}</small>
@@ -92,8 +92,8 @@
 
                                             <div class="form-group">
                                                 <label for="menu">Cotton Weight</label>
-                                                <select name="cotton_weight" id="cotton_weight" class="form-control ">
-                                                    <option value=" ">--- Select Cotton Weight ---</option>
+                                                <select name="cotton_weight" id="cotton_weight" class="form-control " required="">
+                                                    <option value="">--- Select Cotton Weight ---</option>
                                                     <option value="kintal" <?php if (!empty($getfarmerbyId)) {
                                                         echo $getfarmerbyId->cotton_weight == 'kintal' ? 'selected' : '';
                                                     } ?>> Kintal </option>
@@ -133,15 +133,14 @@
                                                 <input type="text" name="total_amount" class="form-control"
                                                     id="total_amount" placeholder="Total Amount"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->total_amount : '' }}"
-                                                    required="" readonly />
+                                                     readonly />
                                                 @error('total_amount')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Paid Amount') }} <span
-                                                        style='color:red'>*</span></label>
+                                                <label for="name">{{ __('Paid Amount') }} </label>
                                                 <input type="text" name="paid_amount" class="form-control"
                                                     id="paid_amount" placeholder="Paid Amount"
                                                     onkeyup="calculatePendingAmount()"
@@ -152,8 +151,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Pending Amount') }} <span
-                                                        style='color:red'>*</span></label>
+                                                <label for="name">{{ __('Pending Amount') }} </label>
                                                 <input type="text" name="pending_amount" class="form-control"
                                                     id="pending_amount" placeholder="Paid Amount"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->pending_amount : '' }}"
@@ -165,8 +163,8 @@
 
                                             <div class="form-group">
                                                 <label for="menu">Payment Mode</label>
-                                                <select name="payment_mode" id="payment_mode" class="form-control ">
-                                                    <option value=" ">--- Select Payment Mode ---</option>
+                                                <select name="payment_mode" id="payment_mode" class="form-control" required="">
+                                                    <option value="">--- Select Payment Mode ---</option>
                                                     <option value="Online" <?php if (!empty($getfarmerbyId)) {
     echo $getfarmerbyId->payment_mode == 'Online' ? 'selected' : '';
 } ?>> Online </option>
@@ -178,8 +176,8 @@
 
                                             <div class="form-group">
                                                 <label for="menu">Payment Status</label>
-                                                <select name="payment_status" id="payment_status" class="form-control ">
-                                                    <option value=" ">--- Select Payment Status ---</option>
+                                                <select name="payment_status" id="payment_status" class="form-control" required="">
+                                                    <option value="">--- Select Payment Status ---</option>
                                                     <option value="Pending" <?php if (!empty($getfarmerbyId)) {
     echo $getfarmerbyId->payment_status == 'Pending' ? 'selected' : '';
 } ?>> Pending </option>

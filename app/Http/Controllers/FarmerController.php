@@ -12,7 +12,7 @@ class FarmerController extends Controller
 
     public function index()
     {
-        $allcolors = Farmer::with('trucks')->get();
+        $allcolors = Farmer::with('trucks')->orderBy('id', 'DESC')->get();
         return view('farmer.list', compact('allcolors'));
     }
     public function add($id = null)
@@ -29,9 +29,6 @@ class FarmerController extends Controller
     }
     public function save(Request $request)
     {
-        //dd(1);
-
-       // dd($request->all());
         $request->validate([
             'name' => 'required|unique:farmer,name,' . $request->id,
             'location' => 'required',
@@ -63,8 +60,6 @@ class FarmerController extends Controller
             Farmer::create($input_array);
             return redirect('farmer/')->with('success', 'Farmer Details has been created successfully');
         } else {
-            // dd(2);
-
             $farmer = Farmer::findOrFail($request->id);
             if ($farmer) {
                 $farmer->date = $request->date;
