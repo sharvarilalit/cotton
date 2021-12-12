@@ -8,12 +8,12 @@ Farmer Entries
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Farmer Entries</h1>
+                <h1>Farmer Transaction  Entries</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Farmer Entries</li>
+                    <li class="breadcrumb-item active">Farmer Transaction Entries</li>
                 </ol>
             </div>
         </div>
@@ -35,13 +35,23 @@ Farmer Entries
                     @endif
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <label><a href="{{route('farmer.add') }}" class="btn btn-success">Add</a></label>
+                        <label><a href="{{route('ftransaction.add') }}" class="btn btn-success">Add</a></label>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>S.L</th>
                                     <th>Farmer Name</th>
                                     <th>Farmer Location</th>
+                                    <th>Truck Number</th>
+                                    <th>Date</th>
+                                    <th>Cotton Weight</th>
+                                    <th>Cotton Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total Amount</th>
+                                    <th>Paid Amount</th>
+                                    <th>Pending Amount</th>
+                                    <th>Payment Status</th>
+                                    <th>Payment Mode</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,10 +59,20 @@ Farmer Entries
                               @forelse($allcolors as $key=>$item)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->location}}</td>
-                                    <td><a href='{{route('farmer.edit',$item->id)}}' class="btn btn-info btn-sm"><i
-                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('farmer.delete',$item->id)}}"
+                                    <td>{{$item->farmers->name}}</td>
+                                    <td>{{$item->farmers->location}}</td>
+                                    <td>{{$item->trucks->truck_no}}</td>
+                                    <td>{{date('d-m-Y',strtotime($item->date))}}</td>
+                                    <td>{{$item->cotton_weight}}</td>
+                                    <td>{{$item->quantity}}</td>
+                                    <td>{{$item->price}}</td>
+                                    <td>{{$item->total_amount}}</td>
+                                    <td>{{$item->paid_amount}}</td>
+                                    <td>{{$item->pending_amount}}</td>
+                                    <td>{{$item->payment_status}}</td>
+                                    <td>{{$item->payment_mode}}</td>
+                                    <td><a href='{{route('ftransaction.edit',$item->id)}}' class="btn btn-info btn-sm"><i
+                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('ftransaction.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>

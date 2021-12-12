@@ -12,23 +12,8 @@ class Farmer extends Model
     protected $table ='farmer';
 
     protected $fillable = [
-        'name',
-        'location', 
-        'date',
-        'cotton_weight',
-        'truck_id',
-        'price',
-        'total_amount',
-        'paid_amount',
-        'pending_amount',
-        'payment_status',
-        'payment_mode',
-        'quantity'
+        'name', 
+        'location'
     ];
-
-    public function trucks()
-    {
-        return $this->belongsTo(Truck::class,'truck_id','id');
-    }
 
 }
