@@ -79,8 +79,8 @@
                                     <th>Farmer Location</th>
                                     <th>Truck Number</th>
                                     <th>Date</th>
-                                    <th>Cotton Weight</th>
-                                    <th>Cotton Quantity</th>
+                                    <th>Cotton Weight Qintal</th>
+                                    <th>Cotton Weight Kg</th>
                                     <th>Price</th>
                                     <th>Total Amount</th>
                                     <th>Paid Amount</th>
@@ -98,8 +98,8 @@
                                         <td>{{ $item->farmers->location }}</td>
                                         <td>{{ $item->trucks->truck_no }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
-                                        <td>{{ $item->cotton_weight }}</td>
-                                        <td>{{ $item->quantity }}</td>
+                                        <td>{{ $item->cotton_weight_qi }}</td>
+                                        <td>{{ $item->cotton_weight_kg }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->total_amount }}</td>
                                         <td>{{ $item->paid_amount }}</td>

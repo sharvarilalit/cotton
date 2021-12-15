@@ -83,7 +83,7 @@
                                             </div>
 
 
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="menu">Cotton Weight</label>
                                                 <select name="cotton_weight" id="cotton_weight" class="form-control " required="">
                                                     <option value="">--- Select Cotton Weight ---</option>
@@ -94,19 +94,33 @@
                                                         echo $getfarmerbyId->cotton_weight == 'kilo' ? 'selected' : '';
                                                     } ?>> Kilo </option>
                                                 </select>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Quantity') }} <span
+                                                <label for="name">{{ __('Cotton Weight (in Quintal)') }} <span
                                                         style='color:red'>*</span></label>
-                                                <input type="text" name="quantity" class="form-control" id="quantity"
-                                                    placeholder="Quantity" onkeyup="calculateAmount()"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->quantity : '' }}"
+                                                <input type="text" name="cotton_weight_qi" class="form-control" id="cotton_weight_qi"
+                                                    placeholder="Weight in Quintal" onkeyup="calculateAmount()"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->cotton_weight_qi : '' }}"
                                                     required="" />
-                                                @error('quantity')
+                                                @error('cotton_weight_qi')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="name">{{ __('Cotton Weight (in Kg)') }}</label>
+                                                <input type="text" name="cotton_weight_kg" class="form-control" id="cotton_weight_kg"
+                                                    placeholder="Weight in Kg" onkeyup="calculateAmount()"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->cotton_weight_kg : '' }}"
+                                                     />
+                                                @error('cotton_weight_kg')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <input type="hidden" name="kg" id="kg"  value="{{ isset($getfarmerbyId) ? $getfarmerbyId->cotton_weight_kg*10 : '' }}"/>
+
 
                                             <div class="form-group">
                                                 <label for="name">{{ __('Price') }} <span
@@ -207,10 +221,13 @@
     <script>
         function calculateAmount() {
             let price = $("#price").val();
-            let quantity = $("#quantity").val();
-
-            let getValue = price * quantity;
+            let cotton_weight_qi = $("#cotton_weight_qi").val();
+            let cotton_weight_kg = $("#cotton_weight_kg").val()==''?0:$("#cotton_weight_kg").val()/10;
+            let total = parseInt(cotton_weight_qi) + parseFloat(cotton_weight_kg);
+            //alert(total);
+            let getValue = total * price *100;
             $("#total_amount").val(getValue);
+            $("#kg").val(cotton_weight_kg);
             // alert(getValue);
         }
 
@@ -230,7 +247,7 @@
                     farmer_id: {
                         required: true,
                     },
-                    cotton_weight: {
+                    cotton_weight_qi: {
                          required: true,
                     },
                     truck_id: {

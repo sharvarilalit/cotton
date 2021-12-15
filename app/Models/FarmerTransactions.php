@@ -14,16 +14,16 @@ class FarmerTransactions extends Model
 
     protected $fillable = [
         'farmer_id',
-        'date',
-        'cotton_weight',
         'truck_id',
+        'date',
+        'cotton_weight_qi',
+        'cotton_weight_kg',
         'price',
         'total_amount',
         'paid_amount',
         'pending_amount',
         'payment_status',
-        'payment_mode',
-        'quantity'
+        'payment_mode'
     ];
 
     public function trucks()

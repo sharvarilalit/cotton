@@ -88,12 +88,6 @@
                     truck_no: {
                         required: true
                     },
-                    truck_mapadi_name: {
-                        required: true
-                    },
-                    truck_person_name: {
-                        required: true
-                    },
                 },
                 messages: {
                     truck_no: {

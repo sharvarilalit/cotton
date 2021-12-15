@@ -26,15 +26,13 @@ class TruckController extends Controller
     public function save(Request $request)
     {
 
+       
         $request->validate([
-            'truck_mapadi_name' => 'required',
-            'truck_person_name' => 'required',
-            'truck_no' => 'required', 'required|unique:truck,truck_no,' . $request->truck_no
+            'truck_no' => 'required|unique:truck,truck_no,' . $request->id
         ]);
         $input_array = array(
             'truck_no' => $request->truck_no,
-            'truck_mapadi_name' => $request->truck_mapadi_name,
-            'truck_person_name' => $request->truck_person_name
+            'additional_details' => $request->additional_details,
         );
 
         if ($request->id == 0) {
@@ -44,8 +42,7 @@ class TruckController extends Controller
 
             $truck = Truck::findOrFail($request->id);
             if ($truck) {
-                $truck->truck_mapadi_name = $request->truck_mapadi_name;
-                $truck->truck_person_name =  $request->truck_person_name;
+                $truck->additional_details = $request->additional_details;
                 $truck->truck_no  = $request->truck_no;
                 $truck->save();
                 return redirect('truck/')->with('success', 'Truck Details has been updated successfully');
