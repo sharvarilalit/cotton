@@ -7,15 +7,32 @@ use Illuminate\Http\Request;
 use App\Models\Truck;
 use App\Models\Farmer;
 use App\Models\FarmerTransactions;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FarmerTransactionExport;
 
 class FarmerTransactionController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $allcolors = FarmerTransactions::with('trucks','farmers')->orderBy('id', 'DESC')->get();
-        return view('farmerTransactions.list', compact('allcolors'));
+        $truck = Truck::all();
+        $farmer = Farmer::all();
+
+
+        $allcolors = FarmerTransactions::with('trucks', 'farmers');
+
+        if ($request->farmer_id) {
+            $allcolors =  $allcolors->where('farmer_id', $request->farmer_id);
+        }
+        if ($request->truck_id) {
+            $allcolors =  $allcolors->where('truck_id', $request->truck_id);
+        }
+        if ($request->date) {
+            $allcolors =  $allcolors->where('date', $request->date);
+        }
+
+        $allcolors =  $allcolors->orderBy('id', 'DESC')->get();
+        return view('farmerTransactions.list', compact('allcolors', 'truck', 'farmer'));
     }
     public function add($id = null)
     {
@@ -24,24 +41,25 @@ class FarmerTransactionController extends Controller
         $farmer = Farmer::all();
 
         if (is_null($id)) {
-            return view('farmerTransactions.add',compact('truck','farmer'));
+            return view('farmerTransactions.add', compact('truck', 'farmer'));
         } else {
             $getfarmerbyId = FarmerTransactions::find($id);
-            return view('farmerTransactions.add', compact('getfarmerbyId','truck','farmer'));
+            return view('farmerTransactions.add', compact('getfarmerbyId', 'truck', 'farmer'));
         }
     }
     public function save(Request $request)
     {
         $request->validate([
             'cotton_weight' => 'required',
-            'truck_id' =>'required',
-            'farmer_id' =>'required',
+            'truck_id' => 'required',
+            'farmer_id' => 'required',
             'price' => 'required',
             'total_amount' => 'required',
             'payment_status' => 'required',
             'payment_mode' => 'required',
             'quantity' => 'required',
-            'date' => 'required'
+            //'date' => 'required',
+            'date' => 'required|unique:farmer_transactions,truck_id,' . $request->truck_id . '|unique:farmer_transactions,date,' . $request->date . '|unique:farmer_transactions,farmer_id,' . $request->farmer_id
         ]);
         $input_array = array(
             'date' => $request->date,
@@ -58,7 +76,7 @@ class FarmerTransactionController extends Controller
         );
 
         if ($request->id == 0) {
-            Farmer::create($input_array);
+            FarmerTransactions::create($input_array);
             return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been created successfully');
         } else {
             $farmer = FarmerTransactions::findOrFail($request->id);
@@ -85,5 +103,33 @@ class FarmerTransactionController extends Controller
     {
         FarmerTransactions::find($id)->delete();
         return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been deleted successfully');
+    }
+
+    public function filter(Request $request)
+    {
+        $truck = Truck::all();
+        $farmer = Farmer::all();
+
+
+        $allcolors = FarmerTransactions::with('trucks', 'farmers');
+
+
+
+        if ($request->farmer_id) {
+            $allcolors =  $allcolors->where('farmer_id', $request->farmer_id);
+        }
+        if ($request->truck_id) {
+            $allcolors =  $allcolors->where('truck_id', $request->truck_id);
+        }
+
+        $allcolors =  $allcolors->orderBy('id', 'DESC')->get();
+        //   print_r( $allcolors->toArray() );
+        //   exit();
+        return view('farmerTransactions.list', compact('allcolors', 'truck', 'farmer'));
+    }
+
+    public function export(Request $request) 
+    {
+        return Excel::download(new FarmerTransactionExport($request), 'farmers.xlsx');
     }
 }

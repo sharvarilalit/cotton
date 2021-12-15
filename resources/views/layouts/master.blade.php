@@ -109,31 +109,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('truck') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Truck Entries
-                                </p>
+                            <a href="#" class="nav-link">
+                              <i class="nav-icon fas fa-chart-pie"></i>
+                              <p>
+                                Truck
+                                <i class="right fas fa-angle-left"></i>
+                              </p>
                             </a>
-                        </li>
+                            <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                <a href="{{ route('truck') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Truck Entries</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="{{ route('truck.charges') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Truck Charges</p>
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('farmer') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Farmer Entries
-                                </p>
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                              <p>
+                                Farmer
+                                <i class="right fas fa-angle-left"></i>
+                              </p>
                             </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('ftransaction') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Farmer Transactions
-                                </p>
-                            </a>
-                        </li>
+                            <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                <a href="{{ route('farmer') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Farmer Entries</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="{{ route('ftransaction') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Farmer Transactions</p>
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
 
                         <li class="nav-item">
                             <a href="{{ route('market') }}" class="nav-link">

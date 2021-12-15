@@ -41,6 +41,8 @@ Truck Entries
                                 <tr>
                                     <th>S.L</th>
                                     <th>Truck Number</th>
+                                    <th>Truck Mapadi Name</th>
+                                    <th>Truck Filler Name</th>
                                     <th>Additional Details</th>
                                     <th>Action</th>
                                 </tr>
@@ -50,6 +52,8 @@ Truck Entries
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$item->truck_no}}</td>
+                                    <td>{{$item->truck_mapadi_name}}</td>
+                                    <td>{{$item->truck_person_name}}</td>
                                     <td>{{$item->additional_details}}</td>
                                     <td><a href='{{route('truck.edit',$item->id)}}' class="btn btn-info btn-sm"><i
                                                 class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('truck.delete',$item->id)}}"

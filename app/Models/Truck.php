@@ -12,8 +12,7 @@ class Truck extends Model
 
     protected $fillable = [
         'truck_no',
-        'truck_mapadi_name', 
-        'truck_person_name'
+        'additional_details', 
     ];
 
 }

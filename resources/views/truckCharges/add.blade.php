@@ -49,6 +49,24 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Truck Mapadi Name</label>
+                                <input type="text" name="truck_mapadi_name" class="form-control" id="truck_mapadi_name" placeholder="Truck Mapadi Name"
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->truck_mapadi_name : '' }}" required="">
+                                @error('truck_mapadi_name')
+                                    <span>{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Truck Filler/Person Name</label>
+                                <input type="text" name="truck_person_name" class="form-control" id="truck_person_name" placeholder="Truck Filler Name"
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->truck_person_name : '' }}" required="">
+                                @error('truck_person_name')
+                                    <span>{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Truck Additional Details</label>
                                 <textarea type="text" name="additional_details" class="form-control" id="additional_details" placeholder="Additional Details"
                                    >{{ isset($getTruckbyId) ? $getTruckbyId->additional_details : '' }}</textarea>
