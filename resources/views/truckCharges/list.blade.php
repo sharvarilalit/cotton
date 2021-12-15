@@ -35,7 +35,7 @@ Truck Entries
                     @endif
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <label><a href="{{route('truck.add') }}" class="btn btn-success">Add</a></label>
+                        <label><a href="{{route('truck.charges.add') }}" class="btn btn-success">Add</a></label>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -55,8 +55,9 @@ Truck Entries
                                     <td>{{$item->truck_mapadi_name}}</td>
                                     <td>{{$item->truck_person_name}}</td>
                                     <td>{{$item->additional_details}}</td>
-                                    <td><a href='{{route('truck.edit',$item->id)}}' class="btn btn-info btn-sm"><i
-                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('truck.delete',$item->id)}}"
+                                    
+                                    <td><a href='{{route('truck.charges.edit',$item->id)}}' class="btn btn-info btn-sm"><i
+                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('truck.charges.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>

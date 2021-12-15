@@ -35,7 +35,7 @@
                             <strong>{{ $message }}</strong>
                         </div>
                     @endif
-                    <form method="post"  action='{{ route('truck.store') }}' id="myform">
+                    <form method="post"  action='{{ route('truck.charges.store') }}' id="myform">
                         @csrf
                         <input type="hidden" name="id" value="{{ isset($getTruckbyId) ? $getTruckbyId->id : 0  }}" />
                         <div class="card-body">
