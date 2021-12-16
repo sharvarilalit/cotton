@@ -13,7 +13,8 @@ class Farmer extends Model
 
     protected $fillable = [
         'name', 
-        'location'
+        'location',
+        'contact'
     ];
 
 }

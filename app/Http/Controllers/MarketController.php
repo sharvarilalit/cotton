@@ -32,22 +32,20 @@ class MarketController extends Controller
         $request->validate([
             'market_name' => 'required|unique:farmer,name,' . $request->id,
             'market_location' => 'required',
-            'truck_weight' => 'required',
+            'truck_weight_qi' => 'required',
             'truck_id' =>'required',
             'market_price' => 'required',
             'total_amount' => 'required',
             'date' => 'required',
-            'quantity' => 'required'
         ]);
         $input_array = array(
             'date' => $request->date,
             'market_location' => $request->market_location,
             'market_name' => $request->market_name,
-            'truck_weight' => $request->truck_weight,
+            'truck_weight_qi' => $request->truck_weight_qi,
             'truck_id' => $request->truck_id,
             'market_price' => $request->market_price,
             'total_amount' => $request->total_amount,
-            'quantity' => $request->quantity,
         );
 
         if ($request->id == 0) {
@@ -59,10 +57,10 @@ class MarketController extends Controller
                 $farmer->date = $request->date;
                 $farmer->market_location =  $request->market_location;
                 $farmer->market_name  = $request->market_name;
-                $farmer->truck_weight  = $request->truck_weight;
+                $farmer->truck_weight_qi  = $request->truck_weight_qi;
+                $farmer->truck_weight_kg  = $request->truck_weight_kg/10;
                 $farmer->truck_id  = $request->truck_id;
                 $farmer->market_price  = $request->market_price;
-                $farmer->quantity  = $request->price;
                 $farmer->save();
                 return redirect('market/')->with('success', 'Market Details has been updated successfully');
             } else {

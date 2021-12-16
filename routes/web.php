@@ -65,4 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
    Route::post('truck-charges/store', [App\Http\Controllers\TruckChargesController::class, 'save'])->name('truck.charges.store');
    Route::get('truck-charges/edit/{id?}', [App\Http\Controllers\TruckChargesController::class, 'add'])->name('truck.charges.edit');
    Route::get('truck-charges/delete/{id}', [App\Http\Controllers\TruckChargesController::class, 'delete'])->name('truck.charges.delete');
+
+   // Report Module
+   Route::get('sales-report/',  [App\Http\Controllers\ReportController::class, 'index'])->name('sales.report');
+
 });

@@ -62,6 +62,18 @@
                                                 @enderror
                                             </div>
 
+                                            <div class="form-group">
+                                                <label for="name">{{ __('Contact Number') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <input type="text" name="contact" class="form-control" id="contact"
+                                                    placeholder="Contact"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->contact : '' }}"
+                                                    required="" />
+                                                @error('contact')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
                                         </div>
                                         <div id="information-part" class="content" role="tabpanel"
                                             aria-labelledby="information-part-trigger">
@@ -112,6 +124,9 @@
                         required: true,
                     },
                     location: {
+                        required: true,
+                    },
+                    contact: {
                         required: true,
                     },
                 },

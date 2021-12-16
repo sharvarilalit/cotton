@@ -31,11 +31,13 @@ class FarmerController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:farmer,name,' . $request->id,
-            'location' => 'required'
+            'location' => 'required',
+            'contact' => 'required'
         ]);
         $input_array = array(
             'location' => $request->location,
-            'name' => $request->name
+            'name' => $request->name,
+            'contact' => $request->contact
         );
 
         if ($request->id == 0) {
@@ -46,6 +48,7 @@ class FarmerController extends Controller
             if ($farmer) {
                 $farmer->location =  $request->location;
                 $farmer->name  = $request->name;
+                $farmer->contact  = $request->contact;
                 $farmer->save();
                 return redirect('farmer/')->with('success', 'Farmer Details has been updated successfully');
             } else {

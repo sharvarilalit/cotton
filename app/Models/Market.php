@@ -15,11 +15,11 @@ class Market extends Model
         'market_name',
         'market_location', 
         'date',
-        'truck_weight',
+        'truck_weight_qi',
+        'truck_weight_kg',
         'truck_id',
         'market_price',
         'total_amount',
-        'quantity'
     ];
 
     public function trucks()

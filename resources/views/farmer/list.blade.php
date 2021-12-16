@@ -42,6 +42,7 @@ Farmer Entries
                                     <th>S.L</th>
                                     <th>Farmer Name</th>
                                     <th>Farmer Location</th>
+                                    <th>Farmer Contact No.</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,6 +52,7 @@ Farmer Entries
                                     <td>{{$key+1}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->location}}</td>
+                                    <td>{{$item->contact}}</td>
                                     <td><a href='{{route('farmer.edit',$item->id)}}' class="btn btn-info btn-sm"><i
                                                 class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('farmer.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>

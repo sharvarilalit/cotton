@@ -90,30 +90,30 @@
                                             </div>
 
 
-                                            <div class="form-group">
-                                                <label for="menu">Truck Weight</label>
-                                                <select name="truck_weight" id="truck_weight" class="form-control " required="">
-                                                    <option value="">--- Select Truck Weight ---</option>
-                                                    <option value="kintal" <?php if (!empty($getmarketbyId)) {
-                                                        echo $getmarketbyId->truck_weight == 'kintal' ? 'selected' : '';
-                                                    } ?>> Kintal </option>
-                                                                                                        <option value="kilo" <?php if (!empty($getmarketbyId)) {
-                                                        echo $getmarketbyId->truck_weight == 'kilo' ? 'selected' : '';
-                                                    } ?>> Kilo </option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name">{{ __('Quantity') }} <span
+                                           <div class="form-group">
+                                                <label for="name">{{ __('Truck Weight (in Quintal)') }} <span
                                                         style='color:red'>*</span></label>
-                                                <input type="text" name="quantity" class="form-control" id="quantity"
-                                                    placeholder="Quantity" onkeyup="calculateAmount()"
-                                                    value="{{ isset($getmarketbyId) ? $getmarketbyId->quantity : '' }}"
+                                                <input type="text" name="truck_weight_qi" class="form-control" id="truck_weight_qi"
+                                                    placeholder="Weight in Quintal" onkeyup="calculateAmount()"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->truck_weight_qi : '' }}"
                                                     required="" />
-                                                @error('quantity')
+                                                @error('truck_weight_qi')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="name">{{ __('Truck Weight (in Kg)') }}</label>
+                                                <input type="text" name="truck_weight_kg" class="form-control" id="truck_weight_kg"
+                                                    placeholder="Weight in Kg" onkeyup="calculateAmount()"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->truck_weight_kg*10 : '' }}"
+                                                     />
+                                                @error('truck_weight_kg')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <input type="hidden" name="kg" id="kg"  value="{{ isset($getfarmerbyId) ? $getfarmerbyId->truck_weight_kg*10 : '' }}"/>
 
                                             <div class="form-group">
                                                 <label for="name">{{ __('Market Price') }} <span
@@ -172,6 +172,18 @@
             // alert(getValue);
         }
 
+        function calculateAmount() {
+            let price = $("#price").val();
+            let truck_weight_qi = $("#truck_weight_qi").val();
+            let truck_weight_kg = $("#truck_weight_kg").val()==''?0:$("#truck_weight_kg").val()/10;
+            let total = parseInt(truck_weight_qi) + parseFloat(truck_weight_kg);
+            //alert(total);
+            let getValue = total * price *100;
+            $("#total_amount").val(getValue);
+            $("#kg").val(truck_weight_kg);
+            // alert(getValue);
+        }
+
     </script>
     <script type="text/javascript">
         $(function() {
@@ -184,7 +196,7 @@
                     market_location: {
                         required: true,
                     },
-                    truck_weight: {
+                    truck_weight_qi: {
                          required: true,
                     },
                     truck_id: {
