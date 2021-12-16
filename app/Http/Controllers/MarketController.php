@@ -23,7 +23,7 @@ class MarketController extends Controller
         if (is_null($id)) {
             return view('market.add',compact('truck'));
         } else {
-            $getfarmerbyId = Market::find($id);
+            $getmarketbyId = Market::find($id);
             return view('market.add', compact('getmarketbyId','truck'));
         }
     }
@@ -43,6 +43,7 @@ class MarketController extends Controller
             'market_location' => $request->market_location,
             'market_name' => $request->market_name,
             'truck_weight_qi' => $request->truck_weight_qi,
+            'truck_weight_kg' => $request->truck_weight_kg,
             'truck_id' => $request->truck_id,
             'market_price' => $request->market_price,
             'total_amount' => $request->total_amount,

@@ -44,8 +44,8 @@ Market Entries
                                     <th>Truck Number</th>
                                     <th>Market Location</th>
                                     <th>Date</th>
-                                    <th>Truck Weight</th>
-                                    <th>Truck Quantity</th>
+                                    <th>Truck Weight Quintal</th>
+                                    <th>Truck Weight KG</th>
                                     <th>Market Price</th>
                                     <th>Total Amount</th>
                                     <th>Action</th>
@@ -59,8 +59,8 @@ Market Entries
                                     <td>{{$item->trucks->truck_no}}</td>
                                     <td>{{$item->market_location}}</td>
                                     <td>{{date('d-m-Y',strtotime($item->date))}}</td>
-                                    <td>{{$item->truck_weight}}</td>
-                                    <td>{{$item->quantity}}</td>
+                                    <td>{{$item->truck_weight_qi}}</td>
+                                    <td>{{$item->truck_weight_kg}}</td>
                                     <td>{{$item->market_price}}</td>
                                     <td>{{$item->total_amount}}</td>
                                     <td><a href='{{route('market.edit',$item->id)}}' class="btn btn-info btn-sm"><i
