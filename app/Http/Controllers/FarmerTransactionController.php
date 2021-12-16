@@ -57,9 +57,7 @@ class FarmerTransactionController extends Controller
             'total_amount' => 'required',
             'payment_status' => 'required',
             'payment_mode' => 'required',
-            //'date' => 'required',
-            'date' => 'required|unique:farmer_transactions,date,' . $request->date . '|unique:farmer_transactions,truck_id,' . $request->truck_id . '|unique:farmer_transactions,farmer_id,' . $request->farmer_id,
-            //'date' => 'required'
+            'date' => 'required|unique:farmer_transactions,date,'.$request->id .'|unique:farmer_transactions,truck_id,'.$request->id.'|unique:farmer_transactions,farmer_id,'.$request->id
         ]);
         $input_array = array(
             'date' => $request->date,

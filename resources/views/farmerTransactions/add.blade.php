@@ -112,7 +112,7 @@
                                                 <label for="name">{{ __('Cotton Weight (in Kg)') }}</label>
                                                 <input type="text" name="cotton_weight_kg" class="form-control" id="cotton_weight_kg"
                                                     placeholder="Weight in Kg" onkeyup="calculateAmount()"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->cotton_weight_kg : '' }}"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->cotton_weight_kg*10 : '' }}"
                                                      />
                                                 @error('cotton_weight_kg')
                                                     <small style="color:red">{{ $message }}</small>
