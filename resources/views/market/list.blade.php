@@ -36,6 +36,38 @@ Market Entries
                     <!-- /.card-header -->
                     <div class="card-body">
                         <label><a href="{{route('market.add') }}" class="btn btn-success">Add</a></label>
+
+                        <form id="myform" action='{{ route('market') }}' method="get"
+                        >
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <select type="text" name="truck_id" class="form-control" id="truck_id"
+                                       >
+                                        <option value="">Filter By Truck</option>
+                                        @foreach ($truck as $cats)
+                                            <option value="{{$cats->id}}" @if($cats->id==request()->get("truck_id")) selected @endif>{{ $cats->truck_no }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <input type="date" name="from_date" class="form-control" id="from_date"
+                                    placeholder="From Date" 
+                                    value="{{ !empty(request()->get("from_date")) ? date('Y-m-d',strtotime(request()->get("from_date"))) : ''}}" />
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <input type="date" name="to_date" class="form-control" id="to_date"
+                                    placeholder="To Date" 
+                                    value="{{ !empty(request()->get("to_date")) ? date('Y-m-d',strtotime(request()->get("to_date"))) : ''}}" />
+                                </div>
+
+                                <button value="submit" class="btn btn-primary  " id="search"
+                                    name="submit">Search</button> &nbsp;&nbsp;
+                                <a href="{{ route('market') }}" class="btn btn-danger " id="reset"
+                                    name="reset">Reset</a>
+                            </div>
+                        </form>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>

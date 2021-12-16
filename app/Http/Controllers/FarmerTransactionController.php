@@ -103,28 +103,28 @@ class FarmerTransactionController extends Controller
         return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been deleted successfully');
     }
 
-    public function filter(Request $request)
-    {
-        $truck = Truck::all();
-        $farmer = Farmer::all();
+    // public function filter(Request $request)
+    // {
+    //     $truck = Truck::all();
+    //     $farmer = Farmer::all();
 
 
-        $allcolors = FarmerTransactions::with('trucks', 'farmers');
+    //     $allcolors = FarmerTransactions::with('trucks', 'farmers');
 
 
 
-        if ($request->farmer_id) {
-            $allcolors =  $allcolors->where('farmer_id', $request->farmer_id);
-        }
-        if ($request->truck_id) {
-            $allcolors =  $allcolors->where('truck_id', $request->truck_id);
-        }
+    //     if ($request->farmer_id) {
+    //         $allcolors =  $allcolors->where('farmer_id', $request->farmer_id);
+    //     }
+    //     if ($request->truck_id) {
+    //         $allcolors =  $allcolors->where('truck_id', $request->truck_id);
+    //     }
 
-        $allcolors =  $allcolors->orderBy('id', 'DESC')->get();
-        //   print_r( $allcolors->toArray() );
-        //   exit();
-        return view('farmerTransactions.list', compact('allcolors', 'truck', 'farmer'));
-    }
+    //     $allcolors =  $allcolors->orderBy('id', 'DESC')->get();
+    //     //   print_r( $allcolors->toArray() );
+    //     //   exit();
+    //     return view('farmerTransactions.list', compact('allcolors', 'truck', 'farmer'));
+    // }
 
     public function export(Request $request) 
     {

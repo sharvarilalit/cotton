@@ -37,7 +37,8 @@ class FarmerController extends Controller
         $input_array = array(
             'location' => $request->location,
             'name' => $request->name,
-            'contact' => $request->contact
+            'contact' => $request->contact,
+            'alternate_contact' => $request->alternate_contact
         );
 
         if ($request->id == 0) {
@@ -49,6 +50,7 @@ class FarmerController extends Controller
                 $farmer->location =  $request->location;
                 $farmer->name  = $request->name;
                 $farmer->contact  = $request->contact;
+                $farmer->alternate_contact  = $request->alternate_contact;
                 $farmer->save();
                 return redirect('farmer/')->with('success', 'Farmer Details has been updated successfully');
             } else {

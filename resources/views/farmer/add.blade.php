@@ -65,10 +65,21 @@
                                             <div class="form-group">
                                                 <label for="name">{{ __('Contact Number') }} <span
                                                         style='color:red'>*</span></label>
-                                                <input type="text" name="contact" class="form-control" id="contact"
+                                                <input type="number" name="contact" class="form-control" id="contact"
                                                     placeholder="Contact"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->contact : '' }}"
                                                     required="" />
+                                                @error('contact')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name">{{ __('Alternate Contact Number') }} </label>
+                                                <input type="number" name="alternate_contact" class="form-control" id="alternate_contact"
+                                                    placeholder="Alternate Contact"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->alternate_contact : '' }}"
+                                                     />
                                                 @error('contact')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror

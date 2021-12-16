@@ -10,10 +10,27 @@ use App\Models\Market;
 class MarketController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $allcolors = Market::with('trucks')->orderBy('id', 'DESC')->get();
-        return view('market.list', compact('allcolors'));
+        $truck = Truck::all();
+        $allcolors = Market::with('trucks');
+
+       
+        if ($request->truck_id) {
+            $allcolors =  $allcolors->where('truck_id', $request->truck_id);
+        }
+
+        if ($request->to_date) {
+            $allcolors =  $allcolors->where('date','<=', $request->to_date);
+        }
+
+        if ($request->from_date) {
+            $allcolors =  $allcolors->where('date','>=', $request->from_date);
+        }
+       
+        $allcolors =  $allcolors->orderBy('id', 'DESC')->get();
+
+        return view('market.list', compact('allcolors','truck'));
     }
     public function add($id = null)
     {
@@ -62,6 +79,7 @@ class MarketController extends Controller
                 $farmer->truck_weight_kg  = $request->truck_weight_kg/10;
                 $farmer->truck_id  = $request->truck_id;
                 $farmer->market_price  = $request->market_price;
+                $farmer->total_amount  = $request->total_amount;
                 $farmer->save();
                 return redirect('market/')->with('success', 'Market Details has been updated successfully');
             } else {
