@@ -16,14 +16,16 @@ class FarmerTransactions extends Model
         'farmer_id',
         'truck_id',
         'date',
-        'cotton_weight_qi',
-        'cotton_weight_kg',
+        'weight',
         'price',
         'total_amount',
         'paid_amount',
         'pending_amount',
         'payment_status',
-        'payment_mode'
+        'payment_mode',
+        'mapadi_name',
+        'through_person_name',
+
     ];
 
     public function trucks()

@@ -17,8 +17,7 @@ class FarmerTransactionController extends Controller
     {
         $truck = Truck::all();
         $farmer = Farmer::all();
-
-
+        
         $allcolors = FarmerTransactions::with('trucks', 'farmers');
 
         if ($request->farmer_id) {
@@ -52,6 +51,8 @@ class FarmerTransactionController extends Controller
         $request->validate([
             'cotton_weight_qi' => 'required',
             'truck_id' => 'required',
+            'mapadi_name' => 'required',
+            'through_person_name' => 'required',
             'farmer_id' => 'required',
             'price' => 'required',
             'total_amount' => 'required',
@@ -59,10 +60,20 @@ class FarmerTransactionController extends Controller
             'payment_mode' => 'required',
             'date' => 'required|unique:farmer_transactions,date,'.$request->id .'|unique:farmer_transactions,truck_id,'.$request->id.'|unique:farmer_transactions,farmer_id,'.$request->id
         ]);
+
+        $kg_weight = (!empty($request->cotton_weight_kg)) ? $request->cotton_weight_kg : 00;
+
+        $cotton_weight = $request->cotton_weight_qi.".".$kg_weight;
+
+      
+        // var_dump($request->cotton_weight_kg);
+        // exit();
+
         $input_array = array(
             'date' => $request->date,
-            'cotton_weight_qi' => $request->cotton_weight_qi,
-            'cotton_weight_kg' => $request->kg,
+            // 'cotton_weight_qi' => $request->cotton_weight_qi,
+            // 'cotton_weight_kg' => $request->kg,
+            'weight' => $cotton_weight,
             'truck_id' => $request->truck_id,
             'farmer_id' => $request->farmer_id,
             'price' => $request->price,
@@ -71,7 +82,11 @@ class FarmerTransactionController extends Controller
             'pending_amount' => $request->pending_amount,
             'payment_status' => $request->payment_status,
             'payment_mode' => $request->payment_mode,
+            'mapadi_name' => $request->mapadi_name,
+            'through_person_name' => $request->through_person_name,
         );
+
+        // var_dump($input_array);exit();
 
         if ($request->id == 0) {
             FarmerTransactions::create($input_array);
@@ -80,8 +95,9 @@ class FarmerTransactionController extends Controller
             $farmer = FarmerTransactions::findOrFail($request->id);
             if ($farmer) {
                 $farmer->date = $request->date;
-                $farmer->cotton_weight_qi  = $request->cotton_weight_qi;
-                $farmer->cotton_weight_kg  = $request->cotton_weight_kg/10;
+                // $farmer->cotton_weight_qi  = $request->cotton_weight_qi;
+                // $farmer->cotton_weight_kg  = $request->cotton_weight_kg/10;
+                $farmer->weight = $cotton_weight;
                 $farmer->truck_id  = $request->truck_id;
                 $farmer->price  = $request->price;
                 $farmer->total_amount  = $request->total_amount;
@@ -90,6 +106,9 @@ class FarmerTransactionController extends Controller
                 $farmer->payment_status  = $request->payment_status;
                 $farmer->payment_mode  = $request->payment_mode;
                 $farmer->farmer_id  = $request->farmer_id;
+                $farmer->mapadi_name  = $request->mapadi_name;
+                $farmer->through_person_name  = $request->through_person_name;
+
                 $farmer->save();
                 return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been updated successfully');
             } else {
