@@ -15,14 +15,15 @@ class TruckCharges extends Model
     protected $fillable = [
         'truck_id',
         'date',
-        'driver_name',
-        'truck_filler_name',
-        'location_from_to',
-        'vehicile_charges',
-        'labour_charges',
-        'village_commisions',
-        'route_charges',
-        'total_charges',
+        'village_charges',
+        'vehicle_charges',
+        'labor_charges',
+        'village_commision',
+        'route_charges', 
+        'vehicle_filling_out_charges',
+        'angadi_return_person_charges',
+        'total_charges_amount',
+        'jingping_amount',
     ];
 
     public function trucks()
@@ -30,10 +31,10 @@ class TruckCharges extends Model
         return $this->belongsTo(Truck::class,'truck_id','id');
     }
 
-    public function farmers()
-    {
-        return $this->belongsTo(Farmer::class,'farmer_id','id');
-    }
+    // public function farmers()
+    // {
+    //     return $this->belongsTo(Farmer::class,'farmer_id','id');
+    // }
 
 
 }

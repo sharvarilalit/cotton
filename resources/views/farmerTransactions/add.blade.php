@@ -71,6 +71,32 @@
                                                 @enderror
                                             </div>
 
+                                             <div class="form-group">
+                                                <label for="name">{{ __('Mapadi Name') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <input type="text" name="mapadi_name" class="form-control" id="mapadi_name"
+                                                    placeholder="Mapadi Name" 
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->mapadi_name : '' }}"
+                                                    required="" />
+                                                @error('mapadi_name')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name">{{ __('Through Person Name') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <input type="text" name="through_person_name" class="form-control" id="through_person_name"
+                                                    placeholder="Mapadi Name" 
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->through_person_name : '' }}"
+                                                    required="" />
+                                                @error('through_person_name')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+
+
                                             <div class="form-group">
                                                 <label for="name">{{ __('Date') }} <span
                                                         style='color:red'>*</span></label>
@@ -96,12 +122,18 @@
                                                 </select>
                                             </div> --}}
 
+                                            <?php if (!empty($getfarmerbyId)) {
+                                                         $kintal_kilo = explode('.', $getfarmerbyId->weight); 
+                                                        // var_dump($kintal_kilo);exit;
+                                                     }
+                                            ?>
+
                                             <div class="form-group">
                                                 <label for="name">{{ __('Cotton Weight (in Quintal)') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="cotton_weight_qi" class="form-control" id="cotton_weight_qi"
                                                     placeholder="Weight in Quintal" onkeyup="calculateAmount()"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->cotton_weight_qi : '' }}"
+                                                    value="{{ isset($getfarmerbyId) ? (int)$kintal_kilo[0] : '' }}"
                                                     required="" />
                                                 @error('cotton_weight_qi')
                                                     <small style="color:red">{{ $message }}</small>
@@ -112,7 +144,7 @@
                                                 <label for="name">{{ __('Cotton Weight (in Kg)') }}</label>
                                                 <input type="text" name="cotton_weight_kg" class="form-control" id="cotton_weight_kg"
                                                     placeholder="Weight in Kg" onkeyup="calculateAmount()"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->cotton_weight_kg*10 : '' }}"
+                                                    value="{{ isset($getfarmerbyId) ? (int)$kintal_kilo[1] : '' }}"
                                                      />
                                                 @error('cotton_weight_kg')
                                                     <small style="color:red">{{ $message }}</small>
