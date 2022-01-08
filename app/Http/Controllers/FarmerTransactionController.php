@@ -19,7 +19,7 @@ class FarmerTransactionController extends Controller
     {
         $truck = Truck::all();
         $farmer = Farmer::all();
-        
+
         $allcolors = FarmerTransactions::with('trucks', 'farmers');
 
         if ($request->farmer_id) {
@@ -60,14 +60,14 @@ class FarmerTransactionController extends Controller
             'total_amount' => 'required',
             'payment_status' => 'required',
             'payment_mode' => 'required',
-            'date' => 'required|unique:farmer_transactions,date,'.$request->id .'|unique:farmer_transactions,truck_id,'.$request->id.'|unique:farmer_transactions,farmer_id,'.$request->id
+            'date' => 'required|unique:farmer_transactions,date,' . $request->id . '|unique:farmer_transactions,truck_id,' . $request->id . '|unique:farmer_transactions,farmer_id,' . $request->id
         ]);
 
         $kg_weight = (!empty($request->cotton_weight_kg)) ? $request->cotton_weight_kg : 00;
 
-        $cotton_weight = $request->cotton_weight_qi.".".$kg_weight;
+        $cotton_weight = $request->cotton_weight_qi . "." . $kg_weight;
 
-      
+
         // var_dump($request->cotton_weight_kg);
         // exit();
 
@@ -91,16 +91,14 @@ class FarmerTransactionController extends Controller
         // var_dump($input_array);exit();
 
         if ($request->id == 0) {
-            $id = FarmerTransactions::create($input_array)->id ;
-            $farmer=Farmer::findOrFail($request->farmer_id);
+            $id = FarmerTransactions::create($input_array)->id;
+            $farmer = Farmer::findOrFail($request->farmer_id);
 
-            dd($farmer);
-            
-            $data['fid']=$request->farmer_id;
+            $data['fid'] = $request->farmer_id;
             $data['transaction_id'] = $id;
             $data['operation'] = "Insert";
             $data['user_id'] = Auth::user()->id;
-            $data['fname'] = Auth::user()->id;
+            $data['fname'] = $farmer->fname;
 
             log_generate($data);
 
@@ -122,8 +120,17 @@ class FarmerTransactionController extends Controller
                 $farmer->farmer_id  = $request->farmer_id;
                 $farmer->mapadi_name  = $request->mapadi_name;
                 $farmer->through_person_name  = $request->through_person_name;
-
                 $farmer->save();
+
+                $fa = Farmer::findOrFail($request->farmer_id);
+                $data['fid'] = $request->farmer_id;
+                $data['transaction_id'] = $request->id;
+                $data['operation'] = "Update";
+                $data['user_id'] = Auth::user()->id;
+                $data['fname'] = $fa->fname;
+
+                log_generate($data);
+
                 return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been updated successfully');
             } else {
                 return redirect('farmer-transaction/')->with('error', 'Farmer Transaction Details Not Found');
@@ -132,11 +139,32 @@ class FarmerTransactionController extends Controller
     }
     public function delete($id)
     {
-        FarmerTransactions::find($id)->delete();
-        return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been deleted successfully');
+        $ft = FarmerTransactions::findOrFail($id);
+        
+        if($ft){
+
+            $fa = Farmer::findOrFail($ft->farmer_id);
+            $data['fid'] = $ft->farmer_id;
+            $data['transaction_id'] = $ft->id;
+            $data['operation'] = "Delete";
+            $data['user_id'] = Auth::user()->id;
+            $data['fname'] = $fa->fname;
+    
+            log_generate($data);
+    
+            $ft->delete();
+    
+            return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been deleted successfully');
+        }
+        else{
+            return redirect('farmer-transaction/')->with('error', 'Data not Found');
+
+        }
+
+       
     }
 
-    public function export(Request $request) 
+    public function export(Request $request)
     {
         return Excel::download(new FarmerTransactionExport($request), 'farmers.xlsx');
     }
@@ -145,7 +173,7 @@ class FarmerTransactionController extends Controller
     //Farmer Log List
     public function flog(Request $request)
     {
-        $farmer = FarmerLog::with('farmers','users');
+        $farmer = FarmerLog::with('farmers', 'users');
         $flist = Farmer::all();
 
         if ($request->farmer_id) {
@@ -154,6 +182,6 @@ class FarmerTransactionController extends Controller
         $farmer =  $farmer->orderBy('id', 'DESC')->get();
 
 
-        return view('farmerTransactions.loglist', compact('farmer','flist'));
+        return view('farmerTransactions.loglist', compact('farmer', 'flist'));
     }
 }
