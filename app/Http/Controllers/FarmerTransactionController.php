@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Truck;
 use App\Models\Farmer;
+use App\Models\FarmerLog;
 use App\Models\FarmerTransactions;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\FarmerTransactionExport;
+use Illuminate\Support\Facades\Auth;
 
 class FarmerTransactionController extends Controller
 {
@@ -89,7 +91,19 @@ class FarmerTransactionController extends Controller
         // var_dump($input_array);exit();
 
         if ($request->id == 0) {
-            FarmerTransactions::create($input_array);
+            $id = FarmerTransactions::create($input_array)->id ;
+            $farmer=Farmer::findOrFail($request->farmer_id);
+
+            dd($farmer);
+            
+            $data['fid']=$request->farmer_id;
+            $data['transaction_id'] = $id;
+            $data['operation'] = "Insert";
+            $data['user_id'] = Auth::user()->id;
+            $data['fname'] = Auth::user()->id;
+
+            log_generate($data);
+
             return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been created successfully');
         } else {
             $farmer = FarmerTransactions::findOrFail($request->id);
@@ -122,31 +136,24 @@ class FarmerTransactionController extends Controller
         return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been deleted successfully');
     }
 
-    // public function filter(Request $request)
-    // {
-    //     $truck = Truck::all();
-    //     $farmer = Farmer::all();
-
-
-    //     $allcolors = FarmerTransactions::with('trucks', 'farmers');
-
-
-
-    //     if ($request->farmer_id) {
-    //         $allcolors =  $allcolors->where('farmer_id', $request->farmer_id);
-    //     }
-    //     if ($request->truck_id) {
-    //         $allcolors =  $allcolors->where('truck_id', $request->truck_id);
-    //     }
-
-    //     $allcolors =  $allcolors->orderBy('id', 'DESC')->get();
-    //     //   print_r( $allcolors->toArray() );
-    //     //   exit();
-    //     return view('farmerTransactions.list', compact('allcolors', 'truck', 'farmer'));
-    // }
-
     public function export(Request $request) 
     {
         return Excel::download(new FarmerTransactionExport($request), 'farmers.xlsx');
+    }
+
+
+    //Farmer Log List
+    public function flog(Request $request)
+    {
+        $farmer = FarmerLog::with('farmers','users');
+        $flist = Farmer::all();
+
+        if ($request->farmer_id) {
+            $farmer =  $farmer->where('fid', $request->farmer_id);
+        }
+        $farmer =  $farmer->orderBy('id', 'DESC')->get();
+
+
+        return view('farmerTransactions.loglist', compact('farmer','flist'));
     }
 }

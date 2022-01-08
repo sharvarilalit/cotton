@@ -148,6 +148,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <p>Farmer Transactions</p>
                                 </a>
                               </li>
+                              <li class="nav-item">
+                                <a href="{{ route('flog') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Farmer Log</p>
+                                </a>
+                              </li>
                             </ul>
                           </li>
 
