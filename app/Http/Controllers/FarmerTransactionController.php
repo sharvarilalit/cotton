@@ -62,7 +62,7 @@ class FarmerTransactionController extends Controller
             'payment_status' => 'required',
             'payment_mode' => 'required',
             // 'date' => 'required|unique:farmer_transactions,date,' . $request->id . '|unique:farmer_transactions,truck_id,' . $request->id . '|unique:farmer_transactions,farmer_id,' . $request->id
-           // 'date' =>'required|unique:farmer_transactions,date|unique:farmer_transactions,truck_id|unique:farmer_transactions,farmer_id,' . $request->id
+             // 'date' =>'required|unique:farmer_transactions,date|unique:farmer_transactions,truck_id|unique:farmer_transactions,farmer_id,' . $request->id
             'date' => Rule::unique('farmer_transactions')->ignore($request->id)->where(function ($query) use ($request) {
                  return $query->where('truck_id', $request->truck_id)->where('farmer_id', $request->farmer_id)->where('date',$request->date);
              }),
@@ -93,16 +93,9 @@ class FarmerTransactionController extends Controller
             'through_person_name' => $request->through_person_name,
         );
 
-        // var_dump($input_array);exit();
+        //var_dump($input_array);exit();
 
         if ($request->id == 0) {
-
-            $request->validate([
-                'date' => Rule::unique('farmer_transactions')->where(function ($query) use ($request) {
-                    return $query->where('truck_id', $request->truck_id)->where('farmer_id', $request->farmer_id)->where('date',$request->date);
-                  }),
-            ]);
-
             $id = FarmerTransactions::create($input_array)->id;
             $farmer = Farmer::findOrFail($request->farmer_id);
             $ft = FarmerTransactions::findOrFail($id);

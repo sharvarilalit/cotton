@@ -110,8 +110,13 @@
                                         <td>{{ $item->pending_amount }}</td>
                                         <td>{{ $item->payment_status }}</td>
                                         <td>{{ $item->payment_mode }}</td>
-                                        <td><a href='{{ route('ftransaction.edit', $item->id) }}'
+                                        <td>
+                                            <?php 
+                                                if( $item->pending_amount != 0  ) { ?>
+                                                <a href='{{ route('ftransaction.edit', $item->id) }}'
                                                 class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
+                                           <?php } ?>
+                                         
                                                 <a href='{{ route('ftransaction.export') }}'
                                                     class="btn btn-success btn-sm"><i class="fas fa-download"></i></a>&nbsp;
                                                  <a
