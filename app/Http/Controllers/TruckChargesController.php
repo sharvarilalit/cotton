@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Truck;
 use App\Models\TruckCharges;
+use Illuminate\Validation\Rule;
 
 class TruckChargesController extends Controller
 {
@@ -46,7 +47,9 @@ class TruckChargesController extends Controller
 
         $request->validate([          
             'truck_id' => 'required',
-            'date' => 'required|unique:truck_charges,date,' . $request->id . '|unique:truck_charges,truck_id,' . $request->id ,
+            'date' => Rule::unique('truck_charges')->ignore($request->id)->where(function ($query) use ($request) {
+                return $query->where('truck_id', $request->truck_id)->where('date',$request->date);
+            }),
             'village_charges' => 'required',
             'vehicle_charges' => 'required',
             'labor_charges' => 'required',

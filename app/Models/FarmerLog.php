@@ -17,7 +17,8 @@ class FarmerLog extends Model
         'operation',
         'fname',
         'uid',
-        'transaction_id'
+        'transaction_id',
+        'transaction_number'
     ];
 
 

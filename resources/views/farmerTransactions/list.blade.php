@@ -75,6 +75,7 @@
                             <thead>
                                 <tr>
                                     <th>S.L</th>
+                                    <th>Transaction Number</th>
                                     <th>Farmer Name</th>
                                     <th>Farmer Location</th>
                                     <th>Truck Number</th>
@@ -95,6 +96,7 @@
                                 @forelse($allcolors as $key=>$item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
+                                        <td>{{ $item->transaction_number }}</td>
                                         <td>{{ $item->farmers->name }}</td>
                                         <td>{{ $item->farmers->location }}</td>
                                         <td>{{ $item->trucks->truck_no }}</td>

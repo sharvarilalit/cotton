@@ -11,6 +11,7 @@ use App\Models\FarmerTransactions;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\FarmerTransactionExport;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class FarmerTransactionController extends Controller
 {
@@ -60,7 +61,11 @@ class FarmerTransactionController extends Controller
             'total_amount' => 'required',
             'payment_status' => 'required',
             'payment_mode' => 'required',
-            'date' => 'required|unique:farmer_transactions,date,' . $request->id . '|unique:farmer_transactions,truck_id,' . $request->id . '|unique:farmer_transactions,farmer_id,' . $request->id
+            // 'date' => 'required|unique:farmer_transactions,date,' . $request->id . '|unique:farmer_transactions,truck_id,' . $request->id . '|unique:farmer_transactions,farmer_id,' . $request->id
+           // 'date' =>'required|unique:farmer_transactions,date|unique:farmer_transactions,truck_id|unique:farmer_transactions,farmer_id,' . $request->id
+            'date' => Rule::unique('farmer_transactions')->ignore($request->id)->where(function ($query) use ($request) {
+                 return $query->where('truck_id', $request->truck_id)->where('farmer_id', $request->farmer_id)->where('date',$request->date);
+             }),
         ]);
 
         $kg_weight = (!empty($request->cotton_weight_kg)) ? $request->cotton_weight_kg : 00;
@@ -91,16 +96,28 @@ class FarmerTransactionController extends Controller
         // var_dump($input_array);exit();
 
         if ($request->id == 0) {
+
+            $request->validate([
+                'date' => Rule::unique('farmer_transactions')->where(function ($query) use ($request) {
+                    return $query->where('truck_id', $request->truck_id)->where('farmer_id', $request->farmer_id)->where('date',$request->date);
+                  }),
+            ]);
+
             $id = FarmerTransactions::create($input_array)->id;
             $farmer = Farmer::findOrFail($request->farmer_id);
+            $ft = FarmerTransactions::findOrFail($id);
 
-            $data['fid'] = $request->farmer_id;
-            $data['transaction_id'] = $id;
-            $data['operation'] = "Created Entry";
-            $data['uid'] = Auth::user()->id;
-            $data['fname'] = $farmer->name;
-
-            log_generate($data);
+            if($ft){
+                $data['fid'] = $request->farmer_id;
+                $data['transaction_id'] = $id;
+                $data['operation'] = "Created Entry";
+                $data['uid'] = Auth::user()->id;
+                $data['fname'] = $farmer->name;
+                $data['transaction_number'] = $ft->transaction_number;
+    
+                log_generate($data);
+            }
+          
 
             return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been created successfully');
         } else {
@@ -120,16 +137,25 @@ class FarmerTransactionController extends Controller
                 $farmer->farmer_id  = $request->farmer_id;
                 $farmer->mapadi_name  = $request->mapadi_name;
                 $farmer->through_person_name  = $request->through_person_name;
-                $farmer->save();
+                $result =  $farmer->save();
 
                 $fa = Farmer::findOrFail($request->farmer_id);
-                $data['fid'] = $request->farmer_id;
-                $data['transaction_id'] = $request->id;
-                $data['operation'] = "Updated Entry";
-                $data['uid'] = Auth::user()->id;
-                $data['fname'] = $fa->name;
+                $ft = FarmerTransactions::findOrFail($request->id);
 
-                log_generate($data);
+                if($ft){
+
+                    // print_r($ft->transaction_number);
+                    // exit();
+
+                    $data['fid'] = $request->farmer_id;
+                    $data['transaction_id'] = $request->id;
+                    $data['operation'] = "Updated Entry";
+                    $data['uid'] = Auth::user()->id;
+                    $data['fname'] = $fa->name;
+                    $data['transaction_number'] = $ft->transaction_number;
+
+                    log_generate($data);
+                }
 
                 return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been updated successfully');
             } else {
@@ -148,7 +174,8 @@ class FarmerTransactionController extends Controller
             $data['operation'] = "Deleted Entry";
             $data['uid'] = Auth::user()->id;
             $data['fname'] = $fa->name;
-    
+            $data['transaction_number'] = $ft->transaction_number;
+
             log_generate($data);
             $ft->delete();
     
