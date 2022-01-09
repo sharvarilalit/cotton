@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\FarmerTransactionExport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redirect;
 
 class FarmerTransactionController extends Controller
 {
@@ -46,7 +47,13 @@ class FarmerTransactionController extends Controller
             return view('farmerTransactions.add', compact('truck', 'farmer'));
         } else {
             $getfarmerbyId = FarmerTransactions::find($id);
-            return view('farmerTransactions.add', compact('getfarmerbyId', 'truck', 'farmer'));
+
+            if ($getfarmerbyId && $getfarmerbyId->pending_amount !=0) {
+                return view('farmerTransactions.add', compact('getfarmerbyId', 'truck', 'farmer'));
+            }
+            else{
+                return Redirect::to('/farmer-transaction');
+            }
         }
     }
     public function save(Request $request)
