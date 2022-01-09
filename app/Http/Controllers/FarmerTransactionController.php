@@ -96,9 +96,9 @@ class FarmerTransactionController extends Controller
 
             $data['fid'] = $request->farmer_id;
             $data['transaction_id'] = $id;
-            $data['operation'] = "Insert";
-            $data['user_id'] = Auth::user()->id;
-            $data['fname'] = $farmer->fname;
+            $data['operation'] = "Created Entry";
+            $data['uid'] = Auth::user()->id;
+            $data['fname'] = $farmer->name;
 
             log_generate($data);
 
@@ -125,9 +125,9 @@ class FarmerTransactionController extends Controller
                 $fa = Farmer::findOrFail($request->farmer_id);
                 $data['fid'] = $request->farmer_id;
                 $data['transaction_id'] = $request->id;
-                $data['operation'] = "Update";
-                $data['user_id'] = Auth::user()->id;
-                $data['fname'] = $fa->fname;
+                $data['operation'] = "Updated Entry";
+                $data['uid'] = Auth::user()->id;
+                $data['fname'] = $fa->name;
 
                 log_generate($data);
 
@@ -142,16 +142,14 @@ class FarmerTransactionController extends Controller
         $ft = FarmerTransactions::findOrFail($id);
         
         if($ft){
-
             $fa = Farmer::findOrFail($ft->farmer_id);
             $data['fid'] = $ft->farmer_id;
             $data['transaction_id'] = $ft->id;
-            $data['operation'] = "Delete";
-            $data['user_id'] = Auth::user()->id;
-            $data['fname'] = $fa->fname;
+            $data['operation'] = "Deleted Entry";
+            $data['uid'] = Auth::user()->id;
+            $data['fname'] = $fa->name;
     
             log_generate($data);
-    
             $ft->delete();
     
             return redirect('farmer-transaction/')->with('success', 'Farmer Transaction Details has been deleted successfully');
@@ -183,5 +181,16 @@ class FarmerTransactionController extends Controller
 
 
         return view('farmerTransactions.loglist', compact('farmer', 'flist'));
+    }
+
+    //view farmer transaction histroy
+    public function viewHistroy(Request $request)
+    {
+        $farmer = FarmerLog::with('farmers', 'users');
+        if ($request->id) {
+            $farmer =  $farmer->where('transaction_id', $request->id);
+        }
+        $farmer =  $farmer->orderBy('id', 'DESC')->get();
+        return view('farmerTransactions.view', compact('farmer'));
     }
 }

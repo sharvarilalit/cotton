@@ -46,7 +46,7 @@ class TruckChargesController extends Controller
 
         $request->validate([          
             'truck_id' => 'required',
-            'date' => 'required|unique:truck_charges,date,'.$request->id,
+            'date' => 'required|unique:truck_charges,date,' . $request->id . '|unique:truck_charges,truck_id,' . $request->id ,
             'village_charges' => 'required',
             'vehicle_charges' => 'required',
             'labor_charges' => 'required',

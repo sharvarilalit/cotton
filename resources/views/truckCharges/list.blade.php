@@ -57,7 +57,7 @@ Truck Charges Entries
                               @forelse($allcolors as $key=>$item)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$item->truck_no}}</td>
+                                    <td>{{$item->trucks->truck_no}}</td>
                                     <td>{{$item->village_charges}}</td>
                                     <td>{{$item->vehicle_charges}}</td>
                                     <td>{{$item->labor_charges}}</td>

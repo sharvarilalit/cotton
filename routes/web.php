@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
    //Route::get('farmer-transaction/filter', [App\Http\Controllers\FarmerTransactionController::class, 'filter'])->name('ftransaction.filter');
    Route::get('farmer-transaction/export', [App\Http\Controllers\FarmerTransactionController::class, 'export'])->name('ftransaction.export');
    Route::get('farmer-log/',  [App\Http\Controllers\FarmerTransactionController::class, 'flog'])->name('flog');
+   Route::get('farmer-transaction/view/{id?}', [App\Http\Controllers\FarmerTransactionController::class, 'viewHistroy'])->name('ftransaction.view');
 
    /** Truck Charges module */
    Route::get('truck-charges/',  [App\Http\Controllers\TruckChargesController::class, 'index'])->name('truck.charges');
