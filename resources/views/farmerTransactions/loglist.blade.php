@@ -48,6 +48,11 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group col-md-3">
+                                    <input type="date" name="filter_date" class="form-control" id="filter_date"
+                                    placeholder="date" 
+                                    value="{{ !empty(request()->get("filter_date")) ? date('Y-m-d',strtotime(request()->get("filter_date"))) : ''}}" />
+                                </div>
                                 <button value="submit" class="btn btn-primary  " id="search"
                                     name="submit">Search</button> &nbsp;&nbsp;
                                 <a href="{{ route('flog') }}" class="btn btn-danger " id="reset"
@@ -60,24 +65,29 @@
                                 <tr>
                                     <th>S.L</th>
                                     <th>Farmer Name</th>
-                                    <th>Operation</th>
-                                    <th>Updated By</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>Paid Amount</th>
+                                    <th>Date</th>
+                                    <th>Payment status</th>
+                                    <th>Payment mode</th>
+                                    <th>Sent By</th>
                                 </tr>
                             </thead>
                             <tbody>
+                               
                                 @forelse($farmer as $key=>$item)
+                                    
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->fname }}</td>
-                                        <td>{{ $item->operation }}</td>
+                                        <td>{{ number_format($item->paid_amount) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                                        <td>{{ $item->payment_status }}</td>
+                                        <td>{{ $item->payment_mode }}</td>
                                         <td>{{ $item->users->name}}</td>
-                                        <td>{{ date('d-m-Y h:i:s A', strtotime($item->created_at)) }}</td>
-                                        <td>{{ date('d-m-Y h:i:s A', strtotime($item->updated_at)) }}</td>
                                     </tr>
                                 @endforeach
-                                </tfoot>
+                                
+                                </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->

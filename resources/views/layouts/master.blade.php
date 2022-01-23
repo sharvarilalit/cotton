@@ -105,7 +105,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                              <i class="nav-icon fas fa-chart-pie"></i>
+                              <i class="fas fa-truck nav-icon"></i>
                               <p>
                                 Truck
                                 <i class="right fas fa-angle-left"></i>
@@ -115,13 +115,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('truck') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Truck Entries</p>
+                                  <p>New</p>
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('truck.charges') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Truck Charges</p>
+                                  <p>Charges</p>
                                 </a>
                               </li>
                             </ul>
@@ -129,7 +129,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                                <i class="fas fa-users nav-icon"></i>
                               <p>
                                 Farmer
                                 <i class="right fas fa-angle-left"></i>
@@ -139,19 +139,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('farmer') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Farmer Entries</p>
+                                  <p>New</p>
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('ftransaction') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Farmer Transactions</p>
+                                  <p>Details</p>
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('flog') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Farmer Log</p>
+                                  <p>Payment</p>
                                 </a>
                               </li>
                             </ul>
@@ -159,9 +159,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <li class="nav-item">
                             <a href="{{ route('market') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                                <i class="fas fa-landmark nav-icon"></i>
                                 <p>
                                     Market Entries
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('profit.loss') }}" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                                <i class="fas fa-balance-scale-right nav-icon"></i>
+                                <p>
+                                    Profit Loss
                                 </p>
                             </a>
                         </li>

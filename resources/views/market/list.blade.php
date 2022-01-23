@@ -41,6 +41,7 @@ Market Entries
                         >
                             <div class="row">
                                 <div class="form-group col-md-3">
+                                      <label> </label>
                                     <select type="text" name="truck_id" class="form-control" id="truck_id"
                                        >
                                         <option value="">Filter By Truck</option>
@@ -51,12 +52,14 @@ Market Entries
                                 </div>
 
                                 <div class="form-group col-md-3">
+                                      <label>From</label>
                                     <input type="date" name="from_date" class="form-control" id="from_date"
                                     placeholder="From Date" 
                                     value="{{ !empty(request()->get("from_date")) ? date('Y-m-d',strtotime(request()->get("from_date"))) : ''}}" />
                                 </div>
 
                                 <div class="form-group col-md-3">
+                                      <label>To</label>
                                     <input type="date" name="to_date" class="form-control" id="to_date"
                                     placeholder="To Date" 
                                     value="{{ !empty(request()->get("to_date")) ? date('Y-m-d',strtotime(request()->get("to_date"))) : ''}}" />
@@ -76,8 +79,7 @@ Market Entries
                                     <th>Truck Number</th>
                                     <th>Market Location</th>
                                     <th>Date</th>
-                                    <th>Truck Weight Quintal</th>
-                                    <th>Truck Weight KG</th>
+                                    <th>Cotton Weight</th>
                                     <th>Market Price</th>
                                     <th>Total Amount</th>
                                     <th>Action</th>
@@ -91,10 +93,9 @@ Market Entries
                                     <td>{{$item->trucks->truck_no}}</td>
                                     <td>{{$item->market_location}}</td>
                                     <td>{{date('d-m-Y',strtotime($item->date))}}</td>
-                                    <td>{{$item->truck_weight_qi}}</td>
-                                    <td>{{$item->truck_weight_kg}}</td>
-                                    <td>{{$item->market_price}}</td>
-                                    <td>{{$item->total_amount}}</td>
+                                     <td>{{ $item->quantity }}</td>
+                                    <td>{{ number_format($item->market_price)}}</td>
+                                    <td>{{number_format($item->total_amount)}}</td>
                                     <td><a href='{{route('market.edit',$item->id)}}' class="btn btn-info btn-sm"><i
                                                 class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('market.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>

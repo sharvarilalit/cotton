@@ -20,8 +20,8 @@ class TruckChargesController extends Controller
         if ($request->truck_id) {
             $allcolors =  $allcolors->where('truck_id', $request->truck_id);
         }
-        if ($request->date) {
-            $allcolors =  $allcolors->where('date', $request->date);
+        if ($request->filter_date) {
+            $allcolors =  $allcolors->where('date', $request->filter_date);
         }
 
         $allcolors =  $allcolors->orderBy('id', 'DESC')->get();
@@ -74,6 +74,7 @@ class TruckChargesController extends Controller
             'angadi_return_person_charges' => $request->angadi_return_person_charges,
             'total_charges_amount' => $request->total_charges_amount,
             'jingping_amount' => $request->jingping_amount,
+            'truck_total_amount' => (int)str_replace(',', '', $request->total_amount),
         );
 
         if ($request->id == 0) {
@@ -94,6 +95,7 @@ class TruckChargesController extends Controller
                 $truck->angadi_return_person_charges =  $request->angadi_return_person_charges;
                 $truck->total_charges_amount =  $request->total_charges_amount;
                 $truck->jingping_amount =  $request->jingping_amount;
+                $truck->truck_total_amount = (int)str_replace(',', '', $request->total_amount);
                 $truck->save();
                 return redirect('truck-charges/')->with('success', 'Truck Charges has been updated successfully');
             } else {

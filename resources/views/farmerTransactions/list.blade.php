@@ -87,8 +87,8 @@
                                     <th>Total Amount</th>
                                     <th>Paid Amount</th>
                                     <th>Pending Amount</th>
-                                    <th>Payment Status</th>
-                                    <th>Payment Mode</th>
+                                    <!-- <th>Payment Status</th>
+                                    <th>Payment Mode</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -101,15 +101,11 @@
                                         <td>{{ $item->farmers->location }}</td>
                                         <td>{{ $item->trucks->truck_no }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
-                                      <!--   <td>{{ $item->cotton_weight_qi }}</td>
-                                        <td>{{ $item->cotton_weight_kg }}</td> -->
-                                         <td>{{ $item->weight }}</td>
-                                        <td>{{ $item->price }}</td>
-                                        <td>{{ $item->total_amount }}</td>
-                                        <td>{{ $item->paid_amount }}</td>
-                                        <td>{{ $item->pending_amount }}</td>
-                                        <td>{{ $item->payment_status }}</td>
-                                        <td>{{ $item->payment_mode }}</td>
+                                        <td>{{ $item->weight }}</td>
+                                        <td>{{ number_format($item->price) }}</td>
+                                        <td>{{ number_format($item->total_amount) }}</td>
+                                        <td>{{ number_format($item->paid_amount) }}</td>
+                                        <td>{{ number_format($item->pending_amount) }}</td>
                                         <td>
                                             <?php 
                                                 if( $item->pending_amount != 0  ) { ?>

@@ -42,12 +42,12 @@
                                             <div class="form-group">
                                                 <label for="name">{{ __('Farmer name') }} <span
                                                         style='color:red'>*</span></label>
-                                                <select type="text" name="farmer_id" class="form-control" id="farmer_id" required="">
+                                                <select type="text" name="farmer_id" class="form-control" id="farmer_id" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}>
                                                     <option value="">Select</option>
                                                     @foreach ($farmer as $cats)
                                                         <option
                                                             {{ isset($getfarmerbyId) && $cats->id == $getfarmerbyId->farmer_id ? 'selected' : '' }}
-                                                            value={{ $cats->id }}>{{ $cats->name }}</option>
+                                                            value={{ $cats->id }}>{{ $cats->name }} ({{ $cats->location }})</option>
                                                     @endforeach
                                                 </select>
                                                 @error('farmer_id')
@@ -58,7 +58,7 @@
                                             <div class="form-group">
                                                 <label for="name">{{ __('Truck') }} <span
                                                         style='color:red'>*</span></label>
-                                                <select type="text" name="truck_id" class="form-control" id="truck_id" required="">
+                                                <select type="text" name="truck_id" class="form-control" id="truck_id" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}>
                                                     <option value="">Select</option>
                                                     @foreach ($truck as $cats)
                                                         <option
@@ -77,7 +77,7 @@
                                                 <input type="text" name="mapadi_name" class="form-control" id="mapadi_name"
                                                     placeholder="Mapadi Name" 
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->mapadi_name : '' }}"
-                                                    required="" />
+                                                    required="" onkeypress="validateText(event)" maxlength="100" {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
                                                 @error('mapadi_name')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -89,7 +89,7 @@
                                                 <input type="text" name="through_person_name" class="form-control" id="through_person_name"
                                                     placeholder="Mapadi Name" 
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->through_person_name : '' }}"
-                                                    required="" />
+                                                    required="" onkeypress="validateText(event)" maxlength="100" {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
                                                 @error('through_person_name')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -102,7 +102,7 @@
                                                         style='color:red'>*</span></label>
                                                 <input type="date" name="date" class="form-control" id="date"
                                                     placeholder="date" required=""
-                                                    value="{{ isset($getfarmerbyId) ? date('Y-m-d',strtotime($getfarmerbyId->date)) : '' }}" />
+                                                    value="{{ isset($getfarmerbyId) ? date('Y-m-d',strtotime($getfarmerbyId->date)) : '' }}"  {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
                                                 @error('date')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -134,7 +134,7 @@
                                                 <input type="text" name="cotton_weight_qi" class="form-control" id="cotton_weight_qi"
                                                     placeholder="Weight in Quintal" onkeyup="calculateAmount()"
                                                     value="{{ isset($getfarmerbyId) ? (int)$kintal_kilo[0] : '' }}"
-                                                    required="" />
+                                                    required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
                                                 @error('cotton_weight_qi')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -145,7 +145,7 @@
                                                 <input type="text" name="cotton_weight_kg" class="form-control" id="cotton_weight_kg"
                                                     placeholder="Weight in Kg" onkeyup="calculateAmount()"
                                                     value="{{ isset($getfarmerbyId) ? (int)$kintal_kilo[1] : '' }}"
-                                                     />
+                                                     maxlength="2" {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
                                                 @error('cotton_weight_kg')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -160,7 +160,7 @@
                                                 <input type="text" name="price" class="form-control" id="price"
                                                     placeholder="Price" onkeyup="calculateAmount()"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->price : '' }}"
-                                                    required="" />
+                                                    required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
                                                 @error('price')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -182,17 +182,19 @@
                                                 <label for="name">{{ __('Paid Amount') }} </label>
                                                 <input type="text" name="paid_amount" class="form-control"
                                                     id="paid_amount" placeholder="Paid Amount"
-                                                    onkeyup="calculatePendingAmount()"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->paid_amount : '' }}" />
+                                                    onkeyup="{{ isset($getfarmerbyId) ? 'calculatePaidPendingAmount()' : 'calculatePendingAmount()' }}" />
+                                                    <span id="paid-error" style="color: red"></span>
                                                 @error('paid_amount')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
                                             </div>
 
+                                            <input type="hidden" name="pending_state" id="pending_state" value="{{ isset($getfarmerbyId) ? $getfarmerbyId->pending_amount : '' }}">
+
                                             <div class="form-group">
                                                 <label for="name">{{ __('Pending Amount') }} </label>
                                                 <input type="text" name="pending_amount" class="form-control"
-                                                    id="pending_amount" placeholder="Paid Amount"
+                                                    id="pending_amount" placeholder="Pending Amount"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->pending_amount : '' }}"
                                                     readonly />
                                                 @error('pending_amount')
@@ -200,9 +202,24 @@
                                                 @enderror
                                             </div>
 
+                                            @if (isset($getfarmerbyId)) 
+                                              <div class="form-group">
+                                                <label for="name">{{ __('Transction Payment Date') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <input type="date" name="trans_date" class="form-control" id="trans_date"
+                                                    placeholder="date" required=""/>
+                                                @error('trans_date')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                            @endif
+
                                             <div class="form-group">
                                                 <label for="menu">Payment Mode</label>
-                                                <select name="payment_mode" id="payment_mode" class="form-control" required="">
+                                                <span class="payment-error" style="color: red">
+                                                    {{ isset($getfarmerbyId) ? '*' : '' }}
+                                                </span>
+                                                <select name="payment_mode" id="payment_mode" class="form-control" {{ isset($getfarmerbyId) ? 'required' : '' }}>
                                                     <option value="">--- Select Payment Mode ---</option>
                                                     <option value="Online" <?php if (!empty($getfarmerbyId)) {
     echo $getfarmerbyId->payment_mode == 'Online' ? 'selected' : '';
@@ -211,11 +228,15 @@
     echo $getfarmerbyId->payment_mode == 'Offline' ? 'selected' : '';
 } ?>> Offline </option>
                                                 </select>
+
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="menu">Payment Status</label>
-                                                <select name="payment_status" id="payment_status" class="form-control" required="">
+                                                 <span class="payment-error" style="color: red">
+                                                     {{ isset($getfarmerbyId) ? '*' : '' }}
+                                                 </span>
+                                                <select name="payment_status" id="payment_status" class="form-control" {{ isset($getfarmerbyId) ? 'required' : '' }}>
                                                     <option value="">--- Select Payment Status ---</option>
                                                     <option value="Pending" <?php if (!empty($getfarmerbyId)) {
     echo $getfarmerbyId->payment_status == 'Pending' ? 'selected' : '';
@@ -224,13 +245,14 @@
     echo $getfarmerbyId->payment_status == 'Paid' ? 'selected' : '';
 } ?>> Paid </option>
                                                 </select>
+                                               
                                             </div>
 
 
                                         </div>
                                         <div id="information-part" class="content" role="tabpanel"
                                             aria-labelledby="information-part-trigger">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">{{ isset($getfarmerbyId) ? 'Update' : 'Submit' }}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -254,11 +276,12 @@
         function calculateAmount() {
             let price = $("#price").val();
             let cotton_weight_qi = $("#cotton_weight_qi").val();
-            let cotton_weight_kg = $("#cotton_weight_kg").val()==''?0:$("#cotton_weight_kg").val()/10;
-            let total = parseInt(cotton_weight_qi) + parseFloat(cotton_weight_kg);
+            let cotton_weight_kg = $("#cotton_weight_kg").val()==''?0:$("#cotton_weight_kg").val();
+
+            let total = parseInt(cotton_weight_qi) +"."+ parseFloat(cotton_weight_kg);
             //alert(total);
-            let getValue = total * price *100;
-            $("#total_amount").val(getValue);
+            let getValue = total * price;
+            $("#total_amount").val(getValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $("#kg").val(cotton_weight_kg);
             // alert(getValue);
         }
@@ -266,9 +289,50 @@
         function calculatePendingAmount() {
             let total_amount = $("#total_amount").val();
             let paid_amount = $("#paid_amount").val();
+            let pending_amount = parseInt(total_amount.replace(/,/g , '')) - paid_amount;
+            $("#pending_amount").val(pending_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
+            if(paid_amount != ""){
+                $("#payment_status").attr("required","");
+                $("#payment_mode").attr("required","");
+                $(".payment-error").text("*");
+            }
+            else{
+                $("#payment_status").removeAttr("required","");
+                $("#payment_mode").removeAttr("required","");
+                $(".payment-error").text(" "); 
+            }
+            
+            if(paid_amount > parseInt(total_amount.replace(/,/g , ''))){
+                $("#paid-error").text("Amount should be less than or equal to total amount");
+            }
+            else{
+                $("#paid-error").text("");
+            }
+        }
+
+        function validateText(e){
+            var key = e.keyCode;
+            if ((key >= 33 && key <= 64) || ( key >=91 && key <= 96) || ( key >=123 && key <= 126)) {
+                e.preventDefault();
+            }
+        }
+
+        function calculatePaidPendingAmount() {
+            let total_amount = $("#pending_state").val();
+            let paid_amount = $("#paid_amount").val();
             let pending_amount = total_amount - paid_amount;
-            $("#pending_amount").val(pending_amount);
+            $("#pending_amount").val(pending_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+            console.log("paid amount"+paid_amount);
+             console.log("to amount"+total_amount);
+
+            if(parseInt(paid_amount) > parseInt(total_amount)){
+                $("#paid-error").text("You already paid some amount then amount should be less than or equal to Pending Amount");
+            }
+            else{
+                $("#paid-error").text("");
+            }
         }
     </script>
     <script type="text/javascript">
@@ -290,13 +354,7 @@
                     },
                     total_amount: {
                         required: true,
-                    },
-                    payment_status: {
-                         required: true,
-                    },
-                    payment_mode: {
-                         required: true,
-                    },
+                    }
                 },
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
@@ -308,6 +366,16 @@
                 },
                 unhighlight: function(element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
+                },
+                submitHandler:function(element) {
+                    let paid_error = $("#paid-error").text();
+                    console.log(paid_error);
+                    if(paid_error != "") {
+                        return false;
+                    }
+                    else{
+                        return true;
+                    }
                 }
             });
         });

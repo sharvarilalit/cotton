@@ -24,6 +24,7 @@ class TruckCharges extends Model
         'angadi_return_person_charges',
         'total_charges_amount',
         'jingping_amount',
+        'truck_total_amount'
     ];
 
     public function trucks()

@@ -20,11 +20,17 @@ class Market extends Model
         'truck_id',
         'market_price',
         'total_amount',
+        'quantity'
     ];
 
     public function trucks()
     {
         return $this->belongsTo(Truck::class,'truck_id','id');
+    }
+
+    public function truck_charges()
+    {
+        return $this->belongsTo(TruckCharges::class,'truck_id','id');
     }
 
 }

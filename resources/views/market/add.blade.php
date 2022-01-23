@@ -44,7 +44,7 @@
                                                 <input type="text" name="market_name" class="form-control"
                                                     id="exampleInputEmail1" placeholder="Name"
                                                     value="{{ isset($getmarketbyId) ? $getmarketbyId->market_name : '' }}"
-                                                    required="" />
+                                                    required="" maxlength="30" />
                                                 @error('market_name')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -56,7 +56,7 @@
                                                 <input type="text" name="market_location" class="form-control" id="market_location"
                                                     placeholder="Location"
                                                     value="{{ isset($getmarketbyId) ? $getmarketbyId->market_location : '' }}"
-                                                    required="" />
+                                                    required="" maxlength="30"/>
                                                 @error('market_location')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -65,7 +65,7 @@
                                             <div class="form-group">
                                                 <label for="name">{{ __('Truck') }} <span
                                                         style='color:red'>*</span></label>
-                                                <select type="text" name="truck_id" class="form-control" id="truck_id" required="">
+                                                <select type="text" name="truck_id" class="form-control" id="truck_id" required=""  {{ isset($getmarketbyId) ? 'readonly' : '' }} >
                                                     <option value="">Select</option>
                                                     @foreach ($truck as $cats)
                                                         <option
@@ -83,7 +83,7 @@
                                                         style='color:red'>*</span></label>
                                                 <input type="date" name="date" class="form-control" id="date"
                                                     placeholder="date" required=""
-                                                    value="{{ isset($getmarketbyId) ? date('Y-m-d',strtotime($getmarketbyId->date)) : '' }}" />
+                                                    value="{{ isset($getmarketbyId) ? date('Y-m-d',strtotime($getmarketbyId->date)) : '' }}" {{ isset($getmarketbyId) ? 'readonly' : '' }} />
                                                 @error('date')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
@@ -142,7 +142,7 @@
                                         </div>
                                         <div id="information-part" class="content" role="tabpanel"
                                             aria-labelledby="information-part-trigger">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary"> {{ isset($getmarketbyId) ? 'Update' : 'Submit' }} </button>
                                         </div>
                                     </div>
                                 </form>
@@ -166,11 +166,11 @@
         function calculateAmount() {
             let price = $("#market_price").val();
             let truck_weight_qi = $("#truck_weight_qi").val();
-            let truck_weight_kg = $("#truck_weight_kg").val()==''?0:$("#truck_weight_kg").val()/10;
-            let total = parseInt(truck_weight_qi) + parseFloat(truck_weight_kg);
+            let truck_weight_kg = $("#truck_weight_kg").val()==''?0:$("#truck_weight_kg").val();
+            let total = parseInt(truck_weight_qi) + "." +parseInt(truck_weight_kg);
             //alert(total);
-            let getValue = total * price *100;
-            $("#total_amount").val(getValue);
+            let getValue = total * price;
+            $("#total_amount").val(getValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $("#kg").val(truck_weight_kg);
             // alert(getValue);
         }

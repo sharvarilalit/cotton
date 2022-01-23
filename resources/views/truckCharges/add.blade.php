@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label for="name">{{ __('Truck') }} <span
                                         style='color:red'>*</span></label>
-                                <select type="text" name="truck_id" class="form-control" id="truck_id" required="">
+                                <select type="text" name="truck_id" class="form-control" id="truck_id" required=""  {{ isset($getTruckbyId) ? 'readonly' : '' }}>
                                     <option value="">Select</option>
                                     @foreach ($truck as $cats)
                                         <option
@@ -69,90 +69,111 @@
                                         style='color:red'>*</span></label>
                                 <input type="date" name="date" class="form-control" id="date"
                                     placeholder="date" required=""
-                                    value="{{ isset($getTruckbyId) ? date('Y-m-d',strtotime($getTruckbyId->date)) : '' }}" />
+                                    value="{{ isset($getTruckbyId) ? date('Y-m-d',strtotime($getTruckbyId->date)) : '' }}" {{ isset($getTruckbyId) ? 'readonly' : '' }}/>
                                 @error('date')
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Village Price Rate</label>
+                                <label for="exampleInputEmail1">Village Price Rate<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="village_charges" class="form-control" id="village_charges" placeholder="Village Price Rate"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->village_charges : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->village_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('village_charges')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Vehicle Cost</label>
+                                <label for="exampleInputEmail1">Vehicle Cost<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="vehicle_charges" class="form-control" id="vehicle_charges" placeholder="Vehicle Cost"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->vehicle_charges : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->vehicle_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('vehicle_charges')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Labour Cost</label>
+                                <label for="exampleInputEmail1">Labour Cost<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="labor_charges" class="form-control" id="labor_charges" placeholder="Labour Cost"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->labor_charges : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->labor_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('labor_charges')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Village Commission</label>
+                                <label for="exampleInputEmail1">Village Commission<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="village_commision" class="form-control" id="village_commision" placeholder="Village Commission"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->village_commision : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->village_commision : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('village_commision')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Route Charges</label>
+                                <label for="exampleInputEmail1">Route Charges<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="route_charges" class="form-control" id="route_charges" placeholder="Route Charges"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->route_charges : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->route_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('route_charges')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Vehicle Fillingout Charges</label>
+                                <label for="exampleInputEmail1">Vehicle Fillingout Charges<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="vehicle_filling_out_charges" class="form-control" id="vehicle_filling_out_charges" placeholder="Route Charges"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->vehicle_filling_out_charges : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->vehicle_filling_out_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('vehicle_filling_out_charges')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Angadi and Return Person Charges</label>
+                                <label for="exampleInputEmail1">Angadi and Return Person Charges<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="angadi_return_person_charges" class="form-control" id="angadi_return_person_charges" placeholder="Angadi and Return Person Charges"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->angadi_return_person_charges : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->angadi_return_person_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('angadi_return_person_charges')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Total Charges Amount</label>
+                                <label for="exampleInputEmail1">Total Charges Amount<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="total_charges_amount" class="form-control" id="total_charges_amount" placeholder="Total Charges Amount"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->total_charges_amount : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->total_charges_amount : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('total_charges_amount')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Jingping Amount</label>
+                                <label for="exampleInputEmail1">Jingping Amount<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" name="jingping_amount" class="form-control" id="jingping_amount" placeholder="Jingping Amount"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->jingping_amount : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->jingping_amount : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
                                 @error('jingping_amount')
                                     <span>{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">{{ __('Total Amount') }} <span
+                                        style='color:red'>*</span></label>
+                                <input type="text" name="total_amount" class="form-control"
+                                    id="total_amount" placeholder="Total Amount"
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->total_amount : '' }}"
+                                     readonly />
+                                @error('total_amount')
+                                    <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
 
@@ -206,6 +227,31 @@
 <!-- /.content -->
 @endsection
 @section('script')
+
+<script type="text/javascript">
+     function validateAmount(e){
+        var key = e.keyCode;
+        if (!(key >= 48 && key <= 57)) {
+            e.preventDefault();
+        }
+    }
+     function calculateAmount() {
+        let village_charges = $("#village_charges").val();
+        let vehicle_charges = $("#vehicle_charges").val();
+        let labor_charges = $("#labor_charges").val();
+        let village_commision = $("#village_commision").val();
+        let route_charges = $("#route_charges").val();
+        let vehicle_filling_out_charges = $("#vehicle_filling_out_charges").val();
+        let angadi_return_person_charges = $("#angadi_return_person_charges").val();
+        let total_charges_amount = $("#total_charges_amount").val();
+        let jingping_amount = $("#jingping_amount").val();
+        
+
+        let total = parseInt(village_charges) + parseFloat(vehicle_charges)+ parseFloat(labor_charges)+ parseFloat(village_commision)+ parseFloat(route_charges)+ parseFloat(vehicle_filling_out_charges)+ parseFloat(angadi_return_person_charges)+ parseFloat(total_charges_amount)+ parseFloat(jingping_amount);
+        $("#total_amount").val(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            // alert(getValue);
+    }
+</script>
 
     <script>
         $(function() {

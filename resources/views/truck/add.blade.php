@@ -42,7 +42,8 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Truck Number</label>
                                 <input type="text" name="truck_no" class="form-control" id="truck_no" placeholder="Truck Number"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->truck_no : '' }}" required="">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->truck_no : '' }}" required="" >
+                                <span id="truck-error" style="color: red"></span>
                                 @error('truck_no')
                                     <span>{{ $message }}</span>
                                 @enderror
@@ -104,6 +105,20 @@
                 },
                 unhighlight: function(element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
+                },
+                submitHandler: function(element){
+                    let truck_no = $('#truck_no').val();
+                    // str = "MH/14/AA/2000";                                               
+                    // var truck_pattern = /^[A-Z]{2}[-][0-9]{1,2}(?:[A-Z])?(?:[A-Z]*)? [0-9]{4}$/;
+                    var truck_pattern = /[A-Z]{2}\/[0-9]{2}\/[A-Z]{2}\/\d{4}$/i;
+                    if(truck_no.match(truck_pattern)){
+                        $('#truck-error').text(" ");
+                        return true;
+                    }
+                    else{
+                        $('#truck-error').text("Please enter valid Truck No");
+                        return false;
+                    }
                 }
             });
         });

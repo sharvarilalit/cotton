@@ -1,19 +1,19 @@
 @extends('layouts.master')
 @section('content')
 @section('title')
-    Farmer Entries
+Market Entries
 @endsection
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Farmer Transaction Histroy</h1>
+                <h1>Profit Loss</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Farmer Transaction Histroy</li>
+                    <li class="breadcrumb-item active">Profit Loss</li>
                 </ol>
             </div>
         </div>
@@ -26,42 +26,45 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-
-                  
+                   
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
                     <!-- /.card-header -->
                     <div class="card-body">
+                      
+                    
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Farmer Name</th>
-                                    <th>Paid Amount</th>
+                                    <th>Truck Number</th>
                                     <th>Date</th>
-                                    <th>Payment status</th>
-                                    <th>Payment mode</th>
-                                    <th>Sent By</th>
+                                    <th>Truck Amount</th>
+                                    <th>Market Amount</th>
+                                    <th>Total Profit/Loss</th>
+                                    <th>P/L</th>
+                                    <!-- <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
-                                 <?php $total_amount = 0 ; ?>
-                                @forelse($farmer as $key=>$item)
-                                     <?php $total_amount += $item->paid_amount ?>
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $item->fname }}</td>
-                                        <td>{{ number_format($item->paid_amount) }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
-                                        <td>{{ $item->payment_status }}</td>
-                                        <td>{{ $item->payment_mode }}</td>
-                                        <td>{{ $item->users->name}}</td>
-                                    </tr>
-
+                              @foreach($profit_data as $key=>$item)
+                            
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$item['truck_no']}}</td>
+                                    <td>{{date('d-m-Y',strtotime($item['date']))}}</td>
+                                    <td>{{ number_format($item['truck_total_amount'])}}</td>
+                                    <td>{{number_format($item['market_total_amount'])}}</td>
+                                    <td><b>{{ number_format($item['profit_loss']) }}</b></td>
+                                    <td class="{{ $item['result_pl'] }}">{{ $item['result_pl'] }}</td>                                
+                                </tr>
                                 @endforeach
-                                   
-                                </tbody>
-
+                                </tfoot>
                         </table>
-                        <p style="margin-top:20px"><b>Total Paid Amount : {{ number_format($total_amount) }}/-</b></p>
                     </div>
                     <!-- /.card-body -->
                 </div>

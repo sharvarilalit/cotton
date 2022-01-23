@@ -67919,3 +67919,15 @@ readers do not read off random characters that represent icons */
   font-family: "Font Awesome 5 Free";
   font-weight: 400;
 }
+
+/*custom css*/
+.profit,.loss {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.profit{
+  color:green;
+}
+.loss{
+  color:red;
+}

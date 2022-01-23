@@ -18,7 +18,11 @@ class FarmerLog extends Model
         'fname',
         'uid',
         'transaction_id',
-        'transaction_number'
+        'transaction_number',
+        'paid_amount',
+        'payment_status',
+        'payment_mode',
+        'created_at'
     ];
 
 
