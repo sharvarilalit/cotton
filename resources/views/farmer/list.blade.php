@@ -33,6 +33,14 @@ Farmer Entries
                             <strong>{{ $message }}</strong>
                         </div>
                     @endif
+
+                    @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                   @endif
+                   
                     <!-- /.card-header -->
                     <div class="card-body">
                         <label><a href="{{route('farmer.add') }}" class="btn btn-success">Add</a></label>

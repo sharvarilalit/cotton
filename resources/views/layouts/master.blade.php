@@ -139,19 +139,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('farmer') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>New</p>
+                                  <p>Farmer Entries</p>
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('ftransaction') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Details</p>
+                                  <p> Transaction Details</p>
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('flog') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Payment</p>
+                                  <p>Payment Details</p>
                                 </a>
                               </li>
                             </ul>
@@ -167,7 +167,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('profit.loss') }}" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <i class="fas fa-balance-scale-right nav-icon"></i>
@@ -175,11 +175,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Profit Loss
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                              <i class="nav-icon fas fa-chart-pie"></i>
+                              <i class="fas fa-balance-scale-right nav-icon"></i>
                               <p>
                                 Report
                                 <i class="right fas fa-angle-left"></i>
@@ -187,7 +187,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                               <li class="nav-item">
-                                <a href="{{ route('sales.report') }}" class="nav-link">
+                                {{-- <a href="{{ route('sales.report') }}" class="nav-link"> --}}
+                                  <a href="{{ route('profit.loss') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Sales Report</p>
                                 </a>

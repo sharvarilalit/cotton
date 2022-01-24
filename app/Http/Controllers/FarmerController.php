@@ -60,6 +60,14 @@ class FarmerController extends Controller
     }
     public function delete($id)
     {
+
+        $farmer = Truck::findOrFail($id);
+
+        if ($farmer->ftransactions()->exists())
+        {
+            return redirect('farmer/')->with('error', 'Farmer cannot be deleted due to existence of related resources.');
+        }
+
         Farmer::find($id)->delete();
         return redirect('farmer/')->with('success', 'Farmer Details has been deleted successfully');
     }

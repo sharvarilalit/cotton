@@ -54,10 +54,12 @@ Truck Charges Entries
                                     placeholder="date" 
                                     value="{{ !empty(request()->get("filter_date")) ? date('Y-m-d',strtotime(request()->get("filter_date"))) : ''}}" />
                                 </div>
-                                <button value="submit" class="btn btn-primary  " id="search"
-                                    name="submit">Search</button> &nbsp;&nbsp;
-                                <a href="{{ route('flog') }}" class="btn btn-danger " id="reset"
-                                    name="reset">Reset</a>
+                                <div class="form-group col-md-3">
+                                    <button value="submit" class="btn btn-primary  " id="search"
+                                        name="submit">Search</button> &nbsp;&nbsp;
+                                    <a href="{{ route('flog') }}" class="btn btn-danger " id="reset"
+                                        name="reset">Reset</a>
+                                </div>
                             </div>
                         </form>
                         <table id="example2" class="table table-bordered table-hover">

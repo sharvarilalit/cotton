@@ -64,10 +64,12 @@
                                     placeholder="date" 
                                     value="{{ !empty(request()->get("date")) ? date('Y-m-d',strtotime(request()->get("date"))) : ''}}" />
                                 </div>
-                                <button value="submit" class="btn btn-primary  " id="search"
-                                    name="submit">Search</button> &nbsp;&nbsp;
-                                <a href="{{ route('ftransaction') }}" class="btn btn-danger " id="reset"
-                                    name="reset">Reset</a>
+                                <div class="form-group col-md-3">
+                                    <button value="submit" class="btn btn-primary  " id="search"
+                                        name="submit">Search</button> &nbsp;&nbsp;
+                                    <a href="{{ route('ftransaction') }}" class="btn btn-danger " id="reset"
+                                        name="reset">Reset</a>
+                                </div>
                             </div>
                         </form>
 

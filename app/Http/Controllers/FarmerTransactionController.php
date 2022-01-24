@@ -58,6 +58,8 @@ class FarmerTransactionController extends Controller
     }
     public function save(Request $request)
     {
+
+        
         $request->validate([
             'cotton_weight_qi' => 'required',
             'truck_id' => 'required',
@@ -149,6 +151,9 @@ class FarmerTransactionController extends Controller
                 // $farmer->farmer_id  = $request->farmer_id;
                 // $farmer->mapadi_name  = $request->mapadi_name;
                 // $farmer->through_person_name  = $request->through_person_name;
+                if( $request->pending_amount==0){
+                    $farmer->payment_status  = $request->payment_status;
+                }
                 $result =  $farmer->save();
 
                 $fa = Farmer::findOrFail($request->farmer_id);

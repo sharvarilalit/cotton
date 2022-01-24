@@ -41,10 +41,10 @@ Market Entries
                         >
                             <div class="row">
                                 <div class="form-group col-md-3">
-                                      <label> </label>
+                                    <label>Filter By Truck</label>
                                     <select type="text" name="truck_id" class="form-control" id="truck_id"
                                        >
-                                        <option value="">Filter By Truck</option>
+                                        <option value="">Select Truck</option>
                                         @foreach ($truck as $cats)
                                             <option value="{{$cats->id}}" @if($cats->id==request()->get("truck_id")) selected @endif>{{ $cats->truck_no }}</option>
                                         @endforeach
@@ -64,11 +64,12 @@ Market Entries
                                     placeholder="To Date" 
                                     value="{{ !empty(request()->get("to_date")) ? date('Y-m-d',strtotime(request()->get("to_date"))) : ''}}" />
                                 </div>
-
-                                <button value="submit" class="btn btn-primary  " id="search"
-                                    name="submit">Search</button> &nbsp;&nbsp;
-                                <a href="{{ route('market') }}" class="btn btn-danger " id="reset"
-                                    name="reset">Reset</a>
+                                <div class="form-group col-md-3" style="margin-top:25px;">
+                                    <button value="submit" class="btn btn-primary  " id="search"
+                                        name="submit">Search</button> &nbsp;&nbsp;
+                                    <a href="{{ route('market') }}" class="btn btn-danger" id="reset"
+                                        name="reset">Reset</a>
+                                </div>
                             </div>
                         </form>
                         <table id="example2" class="table table-bordered table-hover">

@@ -53,6 +53,15 @@ class TruckController extends Controller
     }
     public function delete($id)
     {
+
+        $truck = Truck::findOrFail($id);
+
+        if ($truck->truck_charges()->exists()
+            || $truck->markets()->exists())
+        {
+            return redirect('truck/')->with('error', 'Truck cannot be deleted due to existence of related resources.');
+        }
+
         Truck::find($id)->delete();
         return redirect('truck/')->with('success', 'Truck Details has been deleted successfully');
     }

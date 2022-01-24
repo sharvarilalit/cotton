@@ -292,7 +292,9 @@
             let pending_amount = parseInt(total_amount.replace(/,/g , '')) - paid_amount;
             $("#pending_amount").val(pending_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-            if(paid_amount != ""){
+           // console.log('pending_amount', pending_amount)
+
+            if(pending_amount != 0){
                 $("#payment_status").attr("required","");
                 $("#payment_mode").attr("required","");
                 $(".payment-error").text("*");
@@ -302,6 +304,7 @@
                 $("#payment_mode").removeAttr("required","");
                 $(".payment-error").text(" "); 
             }
+         
             
             if(paid_amount > parseInt(total_amount.replace(/,/g , ''))){
                 $("#paid-error").text("Amount should be less than or equal to total amount");
@@ -324,14 +327,23 @@
             let pending_amount = total_amount - paid_amount;
             $("#pending_amount").val(pending_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-            console.log("paid amount"+paid_amount);
-             console.log("to amount"+total_amount);
+          //  console.log("paid amount"+paid_amount);
+           //  console.log("to amount"+total_amount);
 
             if(parseInt(paid_amount) > parseInt(total_amount)){
                 $("#paid-error").text("You already paid some amount then amount should be less than or equal to Pending Amount");
             }
             else{
                 $("#paid-error").text("");
+            }
+
+            if(pending_amount == 0){
+                $("#payment_status").val("Paid").attr("selected","selected");
+               // $("#payment_status").attr("disabled","");
+            }
+            else{
+                $("#payment_status").val("Pending").attr("selected","selected");
+              //  $("#payment_status").removeAttr("disabled","");
             }
         }
     </script>
@@ -369,7 +381,7 @@
                 },
                 submitHandler:function(element) {
                     let paid_error = $("#paid-error").text();
-                    console.log(paid_error);
+                   // console.log(paid_error);
                     if(paid_error != "") {
                         return false;
                     }

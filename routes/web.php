@@ -72,7 +72,4 @@ Route::group(['middleware' => 'auth'], function () {
    /** Profit loss */
     Route::get('profit-loss/',  [App\Http\Controllers\ProfitLossController::class, 'index'])->name('profit.loss');
 
-   // Report Module
-   Route::get('sales-report/',  [App\Http\Controllers\ReportController::class, 'index'])->name('sales.report');
-
 });
