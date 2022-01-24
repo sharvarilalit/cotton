@@ -41,7 +41,7 @@ Market Entries
                         >
                             <div class="row">
                                 <div class="form-group col-md-3">
-                                      <label> </label>
+                                      <!-- <label> </label> -->
                                     <select type="text" name="truck_id" class="form-control" id="truck_id"
                                        >
                                         <option value="">Filter By Truck</option>
@@ -52,22 +52,22 @@ Market Entries
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                      <label>From</label>
+                                      <!-- <label>From</label> -->
                                     <input type="date" name="from_date" class="form-control" id="from_date"
                                     placeholder="From Date" 
                                     value="{{ !empty(request()->get("from_date")) ? date('Y-m-d',strtotime(request()->get("from_date"))) : ''}}" />
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                      <label>To</label>
+                                      <!-- <label>To</label> -->
                                     <input type="date" name="to_date" class="form-control" id="to_date"
                                     placeholder="To Date" 
                                     value="{{ !empty(request()->get("to_date")) ? date('Y-m-d',strtotime(request()->get("to_date"))) : ''}}" />
                                 </div>
 
-                                <button value="submit" class="btn btn-primary  " id="search"
+                                <button value="submit" class="btn btn-primary h-25 " id="search"
                                     name="submit">Search</button> &nbsp;&nbsp;
-                                <a href="{{ route('market') }}" class="btn btn-danger " id="reset"
+                                <a href="{{ route('market') }}" class="btn btn-danger h-25" id="reset"
                                     name="reset">Reset</a>
                             </div>
                         </form>
@@ -102,7 +102,7 @@ Market Entries
                                     </td>
                                 </tr>
                                 @endforeach
-                                </tfoot>
+                                </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->

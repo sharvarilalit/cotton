@@ -61,7 +61,7 @@ Farmer Entries
                                     </td>
                                 </tr>
                                 @endforeach
-                                </tfoot>
+                                </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->

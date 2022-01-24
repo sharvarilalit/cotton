@@ -64,9 +64,9 @@
                                     placeholder="date" 
                                     value="{{ !empty(request()->get("date")) ? date('Y-m-d',strtotime(request()->get("date"))) : ''}}" />
                                 </div>
-                                <button value="submit" class="btn btn-primary  " id="search"
+                                <button value="submit" class="btn btn-primary h-25 " id="search"
                                     name="submit">Search</button> &nbsp;&nbsp;
-                                <a href="{{ route('ftransaction') }}" class="btn btn-danger " id="reset"
+                                <a href="{{ route('ftransaction') }}" class="btn btn-danger h-25" id="reset"
                                     name="reset">Reset</a>
                             </div>
                         </form>
@@ -126,7 +126,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                </tfoot>
+                                </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->

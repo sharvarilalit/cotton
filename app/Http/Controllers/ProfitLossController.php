@@ -44,7 +44,7 @@ class ProfitLossController extends Controller
 
             $profit_loss = $value->total_amount - $market[0]->truck_total_amount;
 
-            $result_pl = ($profit_loss > 0) ? "profit" : "loss" ;
+            $result_pl = ($profit_loss > 0) ? "Profit" : "Loss" ;
 
             $profit_data[] = [
                 'truck_no' => $value->truck_no,
