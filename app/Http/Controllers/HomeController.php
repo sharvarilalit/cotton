@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Farmer;
+use App\Models\Market;
+use App\Models\Truck;
+
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -25,7 +29,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        $farmer =   Farmer::count();    
+        $market =   Market::count();    
+        $truck =   Truck::count();    
+
+
+        return view('home',compact('farmer','market','truck'));
     }
 
     public function profile(){

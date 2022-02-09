@@ -27,14 +27,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="index3.html" class="nav-link">{{__('messages.home')}}</a>
                 </li>
             </ul>
 
+            
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link" data-toggle="dropdown" href="#">
+                      <i class="fa fa-language" aria-hidden="true"></i> {{ Config::get('languages')[App::getLocale()]['display'] }}
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                      @foreach (Config::get('languages') as $lang => $language)
+                      @if ($lang != App::getLocale())
+                              <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language['display']}}</a>
+                              <div class="dropdown-divider"></div>
+
+                       @endif
+                     @endforeach
+
+                  </div>
+              </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="fa fa-cog" aria-hidden="true"></i>
@@ -98,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="{{ route('home') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Home
+                                  {{__('messages.home')}}
                                 </p>
                             </a>
                         </li>

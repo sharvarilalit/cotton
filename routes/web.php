@@ -71,5 +71,6 @@ Route::group(['middleware' => 'auth'], function () {
 
    /** Profit loss */
     Route::get('profit-loss/',  [App\Http\Controllers\ProfitLossController::class, 'index'])->name('profit.loss');
+    Route::get('lang/{lang}', [ App\Http\Controllers\LanguageController::class,'switchLang'])->name('lang.switch');
 
 });
