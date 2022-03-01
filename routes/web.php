@@ -75,4 +75,17 @@ Route::group(['middleware' => 'auth'], function () {
    // Report Module
    Route::get('sales-report/',  [App\Http\Controllers\ReportController::class, 'index'])->name('sales.report');
 
+
+     /** Outside Payment module */
+   Route::get('outside-payment/',  [App\Http\Controllers\OutsidePaymentController::class, 'index'])->name('outsidep');
+   Route::get('outside-payment/add', [App\Http\Controllers\OutsidePaymentController::class, 'add'])->name('outsidep.add');
+   Route::post('outside-payment/store', [App\Http\Controllers\OutsidePaymentController::class, 'save'])->name('outsidep.store');
+   Route::get('outside-payment/edit/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'add'])->name('outsidep.edit');
+   Route::get('outside-payment/delete/{id}', [App\Http\Controllers\OutsidePaymentController::class, 'delete'])->name('outsidep.delete');
+
+    Route::get('outside-payment/export', [App\Http\Controllers\OutsidePaymentController::class, 'export'])->name('outsidep.export');
+    Route::get('outside-log/',  [App\Http\Controllers\OutsidePaymentController::class, 'flog'])->name('oplog');
+   Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
+   
+
 });

@@ -13,7 +13,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Truck Entries</a></li>
-                        <li class="breadcrumb-item active">Add</li>
+                        <li class="breadcrumb-item active">{{__('messages.add')}}</li>
                     </ol>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         <input type="hidden" name="id" value="{{ isset($getTruckbyId) ? $getTruckbyId->id : 0  }}" />
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Truck Number</label>
+                                <label for="exampleInputEmail1">{{__('messages.truck_number')}}</label>
                                 <input type="text" name="truck_no" class="form-control" id="truck_no" placeholder="Truck Number"
                                     value="{{ isset($getTruckbyId) ? $getTruckbyId->truck_no : '' }}" required="" >
                                 <span id="truck-error" style="color: red"></span>
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Truck Additional Details</label>
+                                <label for="exampleInputEmail1">{{__('messages.truck_additional_details')}}</label>
                                 <textarea type="text" name="additional_details" class="form-control" id="additional_details" placeholder="Additional Details"
                                    >{{ isset($getTruckbyId) ? $getTruckbyId->additional_details : '' }}</textarea>
                                 @error('additional_details')

@@ -107,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">
                               <i class="fas fa-truck nav-icon"></i>
                               <p>
-                                Truck
+                                {{__('messages.truck')}}
                                 <i class="right fas fa-angle-left"></i>
                               </p>
                             </a>
@@ -131,7 +131,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">
                                 <i class="fas fa-users nav-icon"></i>
                               <p>
-                                Farmer
+                                {{__('messages.farmar')}}
                                 <i class="right fas fa-angle-left"></i>
                               </p>
                             </a>
@@ -162,7 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <i class="fas fa-landmark nav-icon"></i>
                                 <p>
-                                    Market Entries
+                                    {{__('messages.market')}}
                                 </p>
                             </a>
                         </li>
@@ -194,6 +194,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </li>
                             </ul>
                           </li>
+
+
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="fas fa-truck nav-icon"></i>
+                              <p>
+                               {{__('messages.outside_payment')}}
+                                <i class="right fas fa-angle-left"></i>
+                              </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a href="{{ route('oplog') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Agent Payment Details</p>
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

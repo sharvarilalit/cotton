@@ -109,7 +109,7 @@ class FarmerTransactionController extends Controller
             if($ft){
                 $data['fid'] = $request->farmer_id;
                 $data['transaction_id'] = $id;
-                $data['operation'] = "Created Entry";
+                // $data['operation'] = "Created Entry";
                 $data['uid'] = Auth::user()->id;
                 $data['fname'] = $farmer->name;
                 $data['transaction_number'] = $ft->transaction_number;
@@ -159,7 +159,7 @@ class FarmerTransactionController extends Controller
                   
                     $data['fid'] = $request->farmer_id;
                     $data['transaction_id'] = $request->id;
-                    $data['operation'] = "Updated Entry";
+                    // $data['operation'] = "Updated Entry";
                     $data['uid'] = Auth::user()->id;
                     $data['fname'] = $fa->name;
                     $data['transaction_number'] = $ft->transaction_number;
@@ -187,7 +187,7 @@ class FarmerTransactionController extends Controller
             $fa = Farmer::findOrFail($ft->farmer_id);
             $data['fid'] = $ft->farmer_id;
             $data['transaction_id'] = $ft->id;
-            $data['operation'] = "Deleted Entry";
+            // $data['operation'] = "Deleted Entry";
             $data['uid'] = Auth::user()->id;
             $data['fname'] = $fa->name;
             $data['transaction_number'] = $ft->transaction_number;

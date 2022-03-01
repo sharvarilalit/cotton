@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Farmer</a></li>
-                        <li class="breadcrumb-item active">Add</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">{{ __('messages.farmar')}}</a></li>
+                        <li class="breadcrumb-item active">{{ __('messages.add')}}</li>
                     </ol>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                                         <div id="logins-part" class="content" role="tabpanel"
                                             aria-labelledby="logins-part-trigger">
                                             <div class="form-group">
-                                                <label for="name">{{ __('Farmer Name') }} <span
+                                                <label for="name">{{ __('messages.farmar_name') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="name" class="form-control"
                                                     id="exampleInputEmail1" placeholder="Name"
@@ -51,7 +51,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Location') }} <span
+                                                <label for="name">{{ __('messages.location') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="location" class="form-control" id="location"
                                                     placeholder="Location"
@@ -63,7 +63,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Contact Number') }} <span
+                                                <label for="name">{{ __('messages.contact_number') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="tel" name="contact" class="form-control" id="contact"
                                                     placeholder="Contact"
@@ -77,7 +77,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Alternate Contact Number') }} </label>
+                                                <label for="name">{{ __('messages.alternate_contact_number') }} </label>
                                                 <input type="tel" name="alternate_contact" class="form-control" id="alternate_contact"
                                                     placeholder="Alternate Contact"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->alternate_contact : '' }}"
