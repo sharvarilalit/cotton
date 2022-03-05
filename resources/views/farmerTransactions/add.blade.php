@@ -40,7 +40,7 @@
                                             aria-labelledby="logins-part-trigger">
                                           
                                             <div class="form-group">
-                                                <label for="name">{{ __('Farmer name') }} <span
+                                                <label for="name">{{ __('messages.farmar_name') }} <span
                                                         style='color:red'>*</span></label>
                                                 <select type="text" name="farmer_id" class="form-control" id="farmer_id" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}>
                                                     <option value="">Select</option>
@@ -56,7 +56,7 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label for="name">{{ __('Truck') }} <span
+                                                <label for="name">{{ __('messages.truck') }} <span
                                                         style='color:red'>*</span></label>
                                                 <select type="text" name="truck_id" class="form-control" id="truck_id" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}>
                                                     <option value="">Select</option>
@@ -72,7 +72,7 @@
                                             </div>
 
                                              <div class="form-group">
-                                                <label for="name">{{ __('Mapadi Name') }} <span
+                                                <label for="name">{{ __('messages.mapadi_name') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="mapadi_name" class="form-control" id="mapadi_name"
                                                     placeholder="Mapadi Name" 
@@ -84,7 +84,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Through Person Name') }} <span
+                                                <label for="name">{{ __('messages.through_person_name') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="through_person_name" class="form-control" id="through_person_name"
                                                     placeholder="Mapadi Name" 
@@ -98,7 +98,7 @@
 
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Date') }} <span
+                                                <label for="name">{{ __('messages.date') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="date" name="date" class="form-control" id="date"
                                                     placeholder="date" required=""
@@ -129,7 +129,7 @@
                                             ?>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Cotton Weight (in Quintal)') }} <span
+                                                <label for="name">{{ __('messages.cotton_weight_qnt') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="cotton_weight_qi" class="form-control" id="cotton_weight_qi"
                                                     placeholder="Weight in Quintal" onkeyup="calculateAmount()"
@@ -141,7 +141,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Cotton Weight (in Kg)') }}</label>
+                                                <label for="name">{{ __('messages.cotton_weight_kg') }}</label>
                                                 <input type="text" name="cotton_weight_kg" class="form-control" id="cotton_weight_kg"
                                                     placeholder="Weight in Kg" onkeyup="calculateAmount()"
                                                     value="{{ isset($getfarmerbyId) ? (int)$kintal_kilo[1] : '' }}"
@@ -155,7 +155,7 @@
 
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Price') }} <span
+                                                <label for="name">{{ __('messages.price') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="price" class="form-control" id="price"
                                                     placeholder="Price" onkeyup="calculateAmount()"
@@ -167,7 +167,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Total Amount') }} <span
+                                                <label for="name">{{ __('messages.total_amount') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="total_amount" class="form-control"
                                                     id="total_amount" placeholder="Total Amount"
@@ -179,7 +179,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Paid Amount') }} </label>
+                                                <label for="name">{{ __('messages.paid_amount') }} </label>
                                                 <input type="text" name="paid_amount" class="form-control"
                                                     id="paid_amount" placeholder="Paid Amount"
                                                     onkeyup="{{ isset($getfarmerbyId) ? 'calculatePaidPendingAmount()' : 'calculatePendingAmount()' }}" />
@@ -192,7 +192,7 @@
                                             <input type="hidden" name="pending_state" id="pending_state" value="{{ isset($getfarmerbyId) ? $getfarmerbyId->pending_amount : '' }}">
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Pending Amount') }} </label>
+                                                <label for="name">{{ __('messages.pending_amount') }} </label>
                                                 <input type="text" name="pending_amount" class="form-control"
                                                     id="pending_amount" placeholder="Pending Amount"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->pending_amount : '' }}"
@@ -204,7 +204,7 @@
 
                                             @if (isset($getfarmerbyId)) 
                                               <div class="form-group">
-                                                <label for="name">{{ __('Transction Payment Date') }} <span
+                                                <label for="name">{{ __('messages.transction_payment_date') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="date" name="trans_date" class="form-control" id="trans_date"
                                                     placeholder="date" required=""/>
@@ -215,7 +215,7 @@
                                             @endif
 
                                             <div class="form-group">
-                                                <label for="menu">Payment Mode</label>
+                                                <label for="menu">{{__('messages.payment_method')}}</label>
                                                 <span class="payment-error" style="color: red">
                                                     {{ isset($getfarmerbyId) ? '*' : '' }}
                                                 </span>
@@ -232,7 +232,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="menu">Payment Status</label>
+                                                <label for="menu">{{__('messages.payment_status')}}</label>
                                                  <span class="payment-error" style="color: red">
                                                      {{ isset($getfarmerbyId) ? '*' : '' }}
                                                  </span>

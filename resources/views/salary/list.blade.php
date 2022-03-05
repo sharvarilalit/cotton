@@ -1,19 +1,19 @@
 @extends('layouts.master')
 @section('content')
 @section('title')
-Truck Entries
+Farmer Entries
 @endsection
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Truck Entries</h1>
+                <h1>{{__('messages.salary_entries')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Truck Entries</li>
+                    <li class="breadcrumb-item active">{{__('messages.salary_entries')}}</li>
                 </ol>
             </div>
         </div>
@@ -40,15 +40,18 @@ Truck Entries
                         <strong>{{ $message }}</strong>
                     </div>
                    @endif
+                   
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <label><a href="{{route('truck.add') }}" class="btn btn-success">Add</a></label>
+                        <label><a href="{{route('salary.add') }}" class="btn btn-success">{{__('messages.add')}}</a></label>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Truck Number</th>
-                                    <th>Additional Details</th>
+                                    <th>{{__('messages.username')}}</th>
+                                    <th>{{__('messages.amount')}}</th>
+                                    <th>{{__('messages.payment_mode')}}</th>
+                                    <th>{{__('messages.payment_date')}}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -56,10 +59,12 @@ Truck Entries
                               @forelse($allcolors as $key=>$item)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$item->truck_no}}</td>
-                                    <td>{{$item->additional_details}}</td>
-                                    <td><a href='{{route('truck.edit',$item->id)}}' class="btn btn-info btn-sm"><i
-                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('truck.delete',$item->id)}}"
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->amount}}</td>
+                                    <td>{{$item->payment_mode==1?'Online':'Offline'}}</td>
+                                    <td>{{$item->payment_date}}</td>
+                                    <td><a href='{{route('salary.edit',$item->id)}}' class="btn btn-info btn-sm"><i
+                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('farmer.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>

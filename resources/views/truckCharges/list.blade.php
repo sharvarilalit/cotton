@@ -8,12 +8,12 @@ Truck Charges Entries
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Truck Charges Entries</h1>
+                <h1>{{__('messages.truck_charges_entries')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Truck Charges Entries</li>
+                    <li class="breadcrumb-item active">{{__('messages.truck_charges_entries')}}</li>
                 </ol>
             </div>
         </div>
@@ -54,30 +54,28 @@ Truck Charges Entries
                                     placeholder="date" 
                                     value="{{ !empty(request()->get("filter_date")) ? date('Y-m-d',strtotime(request()->get("filter_date"))) : ''}}" />
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <button value="submit" class="btn btn-primary  " id="search"
-                                        name="submit">Search</button> &nbsp;&nbsp;
-                                    <a href="{{ route('flog') }}" class="btn btn-danger " id="reset"
-                                        name="reset">Reset</a>
-                                </div>
+                                <button value="submit" class="btn btn-primary h-25 " id="search"
+                                    name="submit">Search</button> &nbsp;&nbsp;
+                                <a href="{{ route('flog') }}" class="btn btn-danger h-25" id="reset"
+                                    name="reset">Reset</a>
                             </div>
                         </form>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Truck Number</th>
-                                    <th>Date</th>
-                                    <th>Village Price Rate</th>
-                                    <th>Vehicle Cost</th>
-                                    <th>Labour Cost</th>
-                                    <th>Village Commission</th>
-                                    <th>Route Charges</th>
-                                    <th>Vehicle Fillingout Charges</th>
-                                    <th>Angadi and Return Person Charges</th>
+                                    <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.date')}}</th>
+                                    <th>{{ __('messages.village_price_rate') }}</th>
+                                    <th>{{ __('messages.vehicle_cost') }}</th>
+                                    <th>{{ __('messages.labour_cost') }}</th>
+                                    <th>{{ __('messages.village_commission') }}</th>
+                                    <th>{{ __('messages.route_charges') }}</th>
+                                    <th>{{ __('messages.vehicle_fillingout_charges') }}</th>
+                                    <th>{{ __('messages.angadi_and_return_person_charges') }}</th>
                                     <th>Total Charges Amount</th>
                                     <th>Jingping Amount</th>
-                                    <th>Total Amount </th>
+                                    <th>{{__('messages.total_amount')}}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -104,7 +102,7 @@ Truck Charges Entries
                                     
                                 </tr>
                                 @endforeach
-                                </tfoot>
+                                </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->

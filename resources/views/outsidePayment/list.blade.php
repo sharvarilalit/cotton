@@ -1,19 +1,19 @@
 @extends('layouts.master')
 @section('content')
 @section('title')
-    Farmer Entries
+    Outside Entries
 @endsection
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Farmer Details</h1>
+                <h1>Outside Transaction Entries</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Farmer Details</li>
+                    <li class="breadcrumb-item active">Outside Transaction Entries</li>
                 </ol>
             </div>
         </div>
@@ -35,39 +35,23 @@
                     @endif
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <label><a href="{{ route('ftransaction.add') }}" class="btn btn-success">Add</a></label>
+                        <label><a href="{{ route('outsidep.add') }}" class="btn btn-success">Add</a></label>
 
-                        <form id="myform" action='{{ route('ftransaction') }}' method="get"
+                        <form id="myform" action='{{ route('outsidep') }}' method="get"
                         >
                             <div class="row">
-                                <div class="form-group col-md-3">
-                                    <select type="text" name="farmer_id" class="form-control" id="farmer_id"
-                                       >
-                                        <option value="">Filter By Farmer</option>
-                                        @foreach ($farmer as $cats)
-                                            <option value={{ $cats->id }} @if($cats->id==request()->get("farmer_id")) selected @endif>{{ $cats->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <select type="text" name="truck_id" class="form-control" id="truck_id"
-                                       >
-                                        <option value="">Filter By Truck</option>
-                                        @foreach ($truck as $cats)
-                                            <option value="{{$cats->id}}" @if($cats->id==request()->get("truck_id")) selected @endif>{{ $cats->truck_no }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
+                              
                                 <div class="form-group col-md-3">
                                     <input type="date" name="date" class="form-control" id="date"
                                     placeholder="date" 
                                     value="{{ !empty(request()->get("date")) ? date('Y-m-d',strtotime(request()->get("date"))) : ''}}" />
                                 </div>
-                                <button value="submit" class="btn btn-primary h-25 " id="search"
-                                    name="submit">Search</button> &nbsp;&nbsp;
-                                <a href="{{ route('ftransaction') }}" class="btn btn-danger h-25" id="reset"
-                                    name="reset">Reset</a>
+                                <div class="form-group col-md-3">
+                                    <button value="submit" class="btn btn-primary  " id="search"
+                                        name="submit">Search</button> &nbsp;&nbsp;
+                                    <a href="{{ route('ftransaction') }}" class="btn btn-danger " id="reset"
+                                        name="reset">Reset</a>
+                                </div>
                             </div>
                         </form>
 
@@ -75,58 +59,57 @@
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Transaction Number</th>
-                                    <th>Farmer Name</th>
-                                    <th>Farmer Location</th>
-                                    <th>Truck Number</th>
+                                   <!--  <th>Transaction Number</th> -->
+                                    <th>Agent Name</th>
+                                   <!--  <th>Farmer Location</th> -->
+                                    <!-- <th>Truck Number</th> -->
                                     <th>Date</th>
                                     <!-- <th>Cotton Weight Qintal</th>
                                     <th>Cotton Weight Kg</th> -->
-                                    <th>Cotton Weight</th>
-                                    <th>Price</th>
-                                    <th>Total Amount</th>
+                                    <!-- <th>Cotton Weight</th> -->
+                                    <th>Amount</th>
+                                    <!-- <th>Total Amount</th> -->
                                     <th>Paid Amount</th>
                                     <th>Pending Amount</th>
                                     <!-- <th>Payment Status</th>
                                     <th>Payment Mode</th> -->
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($allcolors as $key=>$item)
+                                  @forelse($outside_payment as $key=>$item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $item->transaction_number }}</td>
-                                        <td>{{ $item->farmers->name }}</td>
-                                        <td>{{ $item->farmers->location }}</td>
-                                        <td>{{ $item->trucks->truck_no }}</td>
+                                        <td>{{ $item->name }}</td>                        
                                         <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
-                                        <td>{{ $item->weight }}</td>
-                                        <td>{{ number_format($item->price) }}</td>
-                                        <td>{{ number_format($item->total_amount) }}</td>
+                                      
+                                        <td>{{ number_format($item->amount) }}</td>   
                                         <td>{{ number_format($item->paid_amount) }}</td>
                                         <td>{{ number_format($item->pending_amount) }}</td>
+                                  
                                         <td>
                                             <?php 
                                                 if( $item->pending_amount != 0  ) { ?>
-                                                <a href='{{ route('ftransaction.edit', $item->id) }}'
+                                                <a href='{{ route('outsidep.edit', $item->id) }}'
                                                 class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
                                            <?php } ?>
                                          
-                                                <a href='{{ route('ftransaction.export') }}'
+                                                <a href='{{ route('outsidep.export') }}'
                                                     class="btn btn-success btn-sm"><i class="fas fa-download"></i></a>&nbsp;
                                                  <a
-                                                    href="{{ route('ftransaction.view', $item->id) }}"
+                                                    href="{{ route('outsidep.view', $item->id) }}"
                                                     class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                                 <a
                                                 onclick="return confirm('Are you sure?')"
-                                                href="{{ route('ftransaction.delete', $item->id) }}"
+                                                href="{{ route('outsidep.delete', $item->id) }}"
                                                 class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                                 
                                         </td>
                                     </tr>
                                 @endforeach
-                                </tbody>
+                                </tfoot>
+
+                            </thead>
+                            <tbody>
+                               
                         </table>
                     </div>
                     <!-- /.card-body -->

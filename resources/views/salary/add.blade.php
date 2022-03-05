@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <div class="bs-stepper">
 
-                                <form id="myform" action='{{ route('farmer.store') }}' method="POST"
+                                <form id="myform" action='{{ route('salary.store') }}' method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name='id'
@@ -39,36 +39,35 @@
                                         <div id="logins-part" class="content" role="tabpanel"
                                             aria-labelledby="logins-part-trigger">
                                             <div class="form-group">
-                                                <label for="name">{{ __('messages.farmar_name') }} <span
+                                                <label for="name">{{ __('messages.username') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="name" class="form-control"
                                                     id="exampleInputEmail1" placeholder="Name"
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->name : '' }}"
-                                                    required="" onkeypress="validateText(event)" maxlength="100" />
+                                                    required=""  />
                                                 @error('name')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('messages.location') }} <span
+                                                <label for="name">{{ __('messages.date') }} <span
                                                         style='color:red'>*</span></label>
-                                                <input type="text" name="location" class="form-control" id="location"
-                                                    placeholder="Location"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->location : '' }}"
-                                                    required="" onkeypress="validateText(event)" maxlength="20" />
-                                                @error('location')
+                                                <input type="date" name="payment_date" class="form-control" id="payment_date"
+                                                    placeholder="date" required=""
+                                                    value="{{ isset($getfarmerbyId) ? date('Y-m-d',strtotime($getfarmerbyId->payment_date)) : '' }}"  {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
+                                                @error('date')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('messages.contact_number') }} <span
+                                                <label for="name">{{ __('messages.amount') }} <span
                                                         style='color:red'>*</span></label>
-                                                <input type="tel" name="contact" class="form-control" id="contact"
-                                                    placeholder="Contact"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->contact : '' }}"
-                                                    required="" maxlength="15" onkeypress="validatePhone(event)"/>
+                                                <input type="number" name="amount" class="form-control" id="contact"
+                                                    placeholder="Amount"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->amount : '' }}"
+                                                    required="" />
                                                 <span id="contact-error" style="color: red"></span>
 
                                                 @error('contact')
@@ -77,15 +76,32 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('messages.alternate_contact_number') }} </label>
-                                                <input type="tel" name="alternate_contact" class="form-control" id="alternate_contact"
-                                                    placeholder="Alternate Contact"
-                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->alternate_contact : '' }}"
-                                                      maxlength="15" onkeypress="validatePhone(event)"/>
-                                                 <span id="alcontact-error" style="color: red"></span>
-                                                @error('contact')
-                                                    <small style="color:red">{{ $message }}</small>
-                                                @enderror
+                                                <label for="menu">{{__('messages.payment_method')}}</label>
+                                                <span class="payment-error" style="color: red">
+                                                    {{ isset($getfarmerbyId) ? '*' : '' }}
+                                                </span>
+                                                <select name="payment_mode" id="payment_mode" class="form-control" {{ isset($getfarmerbyId) ? 'required' : '' }}>
+                                                    <option value="">--- Select Payment Mode ---</option>
+                                                    <option value="Online" <?php if (!empty($getfarmerbyId)) {
+                                                        echo $getfarmerbyId->payment_mode == 'Online' ? 'selected' : '';
+                                                    } ?>> Online </option>
+                                                                                                        <option value="Offline" <?php if (!empty($getfarmerbyId)) {
+                                                        echo $getfarmerbyId->payment_mode == 'Offline' ? 'selected' : '';
+                                                    } ?>> Offline </option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="form-group transaction">
+                                                <label for="menu">{{__('messages.tansaction_number')}}</label>
+                                                <span class="payment-error" style="color: red">
+                                                    {{ isset($getfarmerbyId) ? '*' : '' }}
+                                                </span>
+                                                <input type="text" name="tansaction_number" class="form-control" id="tansaction_number"
+                                                    placeholder="Transaction Number"
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->tansaction_number : '' }}"
+                                                    required="" />
+
                                             </div>
 
                                         </div>
@@ -126,24 +142,34 @@
         }
     </script>
     <script type="text/javascript">
+
+        $(document).ready(function(){
+
+        $('#countrylist').change(function(e){
+        // Your event handler
+        });
+
+        // And now fire change event when the DOM is ready
+        $('#countrylist').trigger('change');
+        });
+
         $(function() {
+
+            $('.transaction').hide();
 
             $('#myform').validate({
                 rules: {
                     name: {
                         required: true,
                     },
-                    location: {
+                    payment_date: {
                         required: true,
                     },
-                    contact: {
+                    payment_mode: {
                         required: true,
-                        minlength:10,
-                        maxlength:15
                     },
-                    alternate_contact :{
-                        minlength:10,
-                        maxlength:15
+                    tansaction_number :{
+                        required: true,
                     }
                 },
                 errorElement: 'span',
@@ -182,6 +208,20 @@
                    
                 }
             });
+            
+            
         });
+
+        $('#payment_mode').change(function(){
+               var val = $(this).val();
+                $('.transaction').hide();
+                if(val == 'Online'){
+                    $('.transaction').show();
+                }
+            })
+
+            $('#payment_mode').trigger('change');
+
+
     </script>
 @endsection

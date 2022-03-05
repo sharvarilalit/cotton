@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Truck;
+use DB;
 
 class TruckController extends Controller
 {
@@ -63,6 +64,10 @@ class TruckController extends Controller
         }
 
         Truck::find($id)->delete();
+        // DB::table('truck')->where('id', $id)->delete();
+         // DB::table('truck')
+         //        ->where('id', $id)
+         //        ->update(['truck_status' => 0]);
         return redirect('truck/')->with('success', 'Truck Details has been deleted successfully');
     }
 }

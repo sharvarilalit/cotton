@@ -75,7 +75,8 @@
               <div class="small-box bg-danger">
                 <div class="inner">
                   <h3 style="visibility: hidden">{{$truck}}</h3>
-                  <p>Profit/Loss Report</p>
+                  <p>Profit/Loss 
+                    Report</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>

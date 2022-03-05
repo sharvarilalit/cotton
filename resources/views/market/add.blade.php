@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Market</a></li>
-                        <li class="breadcrumb-item active">Add</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">{{ __('messages.market') }}</a></li>
+                        <li class="breadcrumb-item active">{{ __('messages.add') }}</li>
                     </ol>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                                         <div id="logins-part" class="content" role="tabpanel"
                                             aria-labelledby="logins-part-trigger">
                                             <div class="form-group">
-                                                <label for="market_name">{{ __('Market Name') }} <span
+                                                <label for="market_name">{{ __('messages.market_name') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="market_name" class="form-control"
                                                     id="exampleInputEmail1" placeholder="Name"
@@ -51,7 +51,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Location') }} <span
+                                                <label for="name">{{ __('messages.location') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="market_location" class="form-control" id="market_location"
                                                     placeholder="Location"
@@ -63,7 +63,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Truck') }} <span
+                                                <label for="name">{{ __('messages.truck') }} <span
                                                         style='color:red'>*</span></label>
                                                 <select type="text" name="truck_id" class="form-control" id="truck_id" required=""  {{ isset($getmarketbyId) ? 'readonly' : '' }} >
                                                     <option value="">Select</option>
@@ -79,7 +79,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Date') }} <span
+                                                <label for="name">{{ __('messages.date') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="date" name="date" class="form-control" id="date"
                                                     placeholder="date" required=""
@@ -91,7 +91,7 @@
 
 
                                            <div class="form-group">
-                                                <label for="name">{{ __('Truck Weight (in Quintal)') }} <span
+                                                <label for="name">{{ __('messages.truck_weight_qnt') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="truck_weight_qi" class="form-control" id="truck_weight_qi"
                                                     placeholder="Weight in Quintal" onkeyup="calculateAmount()"
@@ -103,7 +103,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Truck Weight (in Kg)') }}</label>
+                                                <label for="name">{{ __('messages.truck_weight_kg') }}</label>
                                                 <input type="text" name="truck_weight_kg" class="form-control" id="truck_weight_kg"
                                                     placeholder="Weight in Kg" onkeyup="calculateAmount()"
                                                     value="{{ isset($getmarketbyId) ? $getmarketbyId->truck_weight_kg*10 : '' }}"
@@ -116,7 +116,7 @@
                                             <input type="hidden" name="kg" id="kg"  value="{{ isset($getmarketbyId) ? $getmarketbyId->truck_weight_kg*10 : '' }}"/>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Market Price') }} <span
+                                                <label for="name">{{ __('messages.market_price') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="market_price" class="form-control" id="market_price"
                                                     placeholder="Price" onkeyup="calculateAmount()"
@@ -128,7 +128,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('Total Amount') }} <span
+                                                <label for="name">{{ __('messages.total_amount') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="total_amount" class="form-control"
                                                     id="total_amount" placeholder="Total Amount"

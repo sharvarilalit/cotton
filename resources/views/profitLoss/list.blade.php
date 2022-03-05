@@ -60,10 +60,10 @@ Market Entries
                                     <td>{{ number_format($item['truck_total_amount'])}}</td>
                                     <td>{{number_format($item['market_total_amount'])}}</td>
                                     <td><b>{{ number_format($item['profit_loss']) }}</b></td>
-                                    <td class="{{ $item['result_pl'] }}">{{ $item['result_pl'] }}</td>                                
+                                    <td class="{{ strtolower($item['result_pl']) }}">{{ $item['result_pl'] }}</td>                                
                                 </tr>
                                 @endforeach
-                                </tfoot>
+                                </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->

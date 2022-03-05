@@ -8,12 +8,12 @@ Farmer Entries
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Farmer Entries</h1>
+                <h1>{{__('messages.farmar_entries')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Farmer Entries</li>
+                    <li class="breadcrumb-item active">{{__('messages.farmar_entries')}}</li>
                 </ol>
             </div>
         </div>
@@ -43,15 +43,15 @@ Farmer Entries
                    
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <label><a href="{{route('farmer.add') }}" class="btn btn-success">Add</a></label>
+                        <label><a href="{{route('farmer.add') }}" class="btn btn-success">{{__('messages.add')}}</a></label>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Farmer Name</th>
-                                    <th>Farmer Location</th>
-                                    <th>Farmer Contact No.</th>
-                                    <th>Farmer Alternate No.</th>
+                                    <th>{{__('messages.farmar_name')}}</th>
+                                    <th>{{__('messages.location')}}</th>
+                                    <th>{{__('messages.contact_number')}}</th>
+                                    <th>{{__('messages.alternate_contact_number')}}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -69,7 +69,7 @@ Farmer Entries
                                     </td>
                                 </tr>
                                 @endforeach
-                                </tfoot>
+                                </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->

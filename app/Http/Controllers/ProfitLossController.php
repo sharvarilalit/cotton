@@ -43,6 +43,23 @@ class ProfitLossController extends Controller
 
         return view('profitLoss.list', compact('profit_data'));
 
+            $profit_loss = $value->total_amount - $market[0]->truck_total_amount;
+
+            $result_pl = ($profit_loss > 0) ? "Profit" : "Loss" ;
+
+            $profit_data[] = [
+                'truck_no' => $value->truck_no,
+                'truck_total_amount' => $market[0]->truck_total_amount,
+                'market_total_amount' => $value->total_amount,
+                // 'market_weight' => $value->quantity,
+                // 'market_rate' => $value->market_price,
+                'date' => $pl_date,
+                'profit_loss' => $profit_loss,
+                'result_pl' => $result_pl,
+            ];
+
+            // $profit_data[$value->truck_id]['truck_no'] = $value->truck_no;
+            
         }
        
 }

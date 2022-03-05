@@ -73,4 +73,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profit-loss/',  [App\Http\Controllers\ProfitLossController::class, 'index'])->name('profit.loss');
     Route::get('lang/{lang}', [ App\Http\Controllers\LanguageController::class,'switchLang'])->name('lang.switch');
 
+
+     /** Outside Payment module */
+   Route::get('outside-payment/',  [App\Http\Controllers\OutsidePaymentController::class, 'index'])->name('outsidep');
+   Route::get('outside-payment/add', [App\Http\Controllers\OutsidePaymentController::class, 'add'])->name('outsidep.add');
+   Route::post('outside-payment/store', [App\Http\Controllers\OutsidePaymentController::class, 'save'])->name('outsidep.store');
+   Route::get('outside-payment/edit/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'add'])->name('outsidep.edit');
+   Route::get('outside-payment/delete/{id}', [App\Http\Controllers\OutsidePaymentController::class, 'delete'])->name('outsidep.delete');
+
+    Route::get('outside-payment/export', [App\Http\Controllers\OutsidePaymentController::class, 'export'])->name('outsidep.export');
+    Route::get('outside-log/',  [App\Http\Controllers\OutsidePaymentController::class, 'flog'])->name('oplog');
+    Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
+   
+
+    /** Salary Payment module */
+    Route::get('salary/',  [App\Http\Controllers\SalaryController::class, 'index'])->name('salary');
+    Route::get('salary/add', [App\Http\Controllers\SalaryController::class, 'add'])->name('salary.add');
+    Route::post('salary/store', [App\Http\Controllers\SalaryController::class, 'save'])->name('salary.store');
+    Route::get('salary/edit/{id?}', [App\Http\Controllers\SalaryController::class, 'add'])->name('salary.edit');
+    Route::get('salary/delete/{id}', [App\Http\Controllers\SalaryController::class, 'delete'])->name('salary.delete');
 });

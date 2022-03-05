@@ -61,7 +61,7 @@ class FarmerController extends Controller
     public function delete($id)
     {
 
-        $farmer = Truck::findOrFail($id);
+        $farmer = Farmer::findOrFail($id);
 
         if ($farmer->ftransactions()->exists())
         {
