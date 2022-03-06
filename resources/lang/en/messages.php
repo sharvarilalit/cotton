@@ -42,6 +42,18 @@
       'agent_name' => 'Agent Name',
       'amount' => 'Amount',
 
+<<<<<<< HEAD
+=======
+      'username' =>'Username',
+      'payment_mode' =>'Payment Mode',
+      'payment_date' =>'Payment Date',
+      'salary_entries' =>'Salary Entries',
+      'payment' =>'Payment',
+      'agent_payment_details' => 'Agent payment Details',
+      'salary' =>"Salary",
+      'tansaction_number' => 'Transction Number',
+      'farmer_extra_entries' => 'Farmer Extra Payment',
+>>>>>>> 4046d18... New extra payment changes
 
    ];
 ?>

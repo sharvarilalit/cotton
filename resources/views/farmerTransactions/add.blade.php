@@ -231,7 +231,7 @@
 
                                             </div>
 
-                                            <div class="form-group">
+                                           <!--  <div class="form-group">
                                                 <label for="menu">{{__('messages.payment_status')}}</label>
                                                  <span class="payment-error" style="color: red">
                                                      {{ isset($getfarmerbyId) ? '*' : '' }}
@@ -246,7 +246,7 @@
 } ?>> Paid </option>
                                                 </select>
                                                
-                                            </div>
+                                            </div> -->
 
 
                                         </div>
@@ -292,13 +292,20 @@
             let pending_amount = parseInt(total_amount.replace(/,/g , '')) - paid_amount;
             $("#pending_amount").val(pending_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
+<<<<<<< HEAD
             if(paid_amount != ""){
                 $("#payment_status").attr("required","");
+=======
+           // console.log('pending_amount', pending_amount)
+
+            if(pending_amount != 0){
+                // $("#payment_status").attr("required","");
+>>>>>>> 4046d18... New extra payment changes
                 $("#payment_mode").attr("required","");
                 $(".payment-error").text("*");
             }
             else{
-                $("#payment_status").removeAttr("required","");
+                // $("#payment_status").removeAttr("required","");
                 $("#payment_mode").removeAttr("required","");
                 $(".payment-error").text(" "); 
             }
@@ -333,6 +340,18 @@
             else{
                 $("#paid-error").text("");
             }
+<<<<<<< HEAD
+=======
+
+            // if(pending_amount == 0){
+            //     $("#payment_status").val("Paid").attr("selected","selected");
+            //    // $("#payment_status").attr("disabled","");
+            // }
+            // else{
+            //     $("#payment_status").val("Pending").attr("selected","selected");
+            //   //  $("#payment_status").removeAttr("disabled","");
+            // }
+>>>>>>> 4046d18... New extra payment changes
         }
     </script>
     <script type="text/javascript">

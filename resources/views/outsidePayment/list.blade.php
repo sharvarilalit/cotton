@@ -49,7 +49,7 @@
                                 <div class="form-group col-md-3">
                                     <button value="submit" class="btn btn-primary  " id="search"
                                         name="submit">Search</button> &nbsp;&nbsp;
-                                    <a href="{{ route('ftransaction') }}" class="btn btn-danger " id="reset"
+                                    <a href="{{ route('outsidep') }}" class="btn btn-danger " id="reset"
                                         name="reset">Reset</a>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->name }}</td>                        
-                                        <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->payment_date)) }}</td>
                                       
                                         <td>{{ number_format($item->amount) }}</td>   
                                         <td>{{ number_format($item->paid_amount) }}</td>

@@ -41,6 +41,17 @@ Route::group(['middleware' => 'auth'], function () {
    Route::post('farmer/store', [App\Http\Controllers\FarmerController::class, 'save'])->name('farmer.store');
    Route::get('farmer/edit/{id?}', [App\Http\Controllers\FarmerController::class, 'add'])->name('farmer.edit');
    Route::get('farmer/delete/{id}', [App\Http\Controllers\FarmerController::class, 'delete'])->name('farmer.delete');
+   
+
+   Route::get('farmer/extra-payment/{id}', [App\Http\Controllers\FarmerController::class, 'extraPayment'])->name('farmer.extra-payment');
+
+   Route::post('farmer/extra-store', [App\Http\Controllers\FarmerController::class, 'extraSave'])->name('farmer.extra-store');
+   Route::get('farmer/extra-list/{id}',  [App\Http\Controllers\FarmerController::class, 'extraList'])->name('farmer.extra-list');
+   Route::get('farmer/extra-delete/{id}', [App\Http\Controllers\FarmerController::class, 'extraDelete'])->name('farmer.extra-delete');
+
+
+
+
 
    /** Market module */
    Route::get('market/',  [App\Http\Controllers\MarketController::class, 'index'])->name('market');
@@ -85,7 +96,23 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('outside-payment/export', [App\Http\Controllers\OutsidePaymentController::class, 'export'])->name('outsidep.export');
     Route::get('outside-log/',  [App\Http\Controllers\OutsidePaymentController::class, 'flog'])->name('oplog');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4046d18... New extra payment changes
    Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
+
+<<<<<<< HEAD
+=======
+    Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
    
 
+    /** Salary Payment module */
+    Route::get('salary/',  [App\Http\Controllers\SalaryController::class, 'index'])->name('salary');
+    Route::get('salary/add', [App\Http\Controllers\SalaryController::class, 'add'])->name('salary.add');
+    Route::post('salary/store', [App\Http\Controllers\SalaryController::class, 'save'])->name('salary.store');
+    Route::get('salary/edit/{id?}', [App\Http\Controllers\SalaryController::class, 'add'])->name('salary.edit');
+    Route::get('salary/delete/{id}', [App\Http\Controllers\SalaryController::class, 'delete'])->name('salary.delete');
+
+>>>>>>> 4046d18... New extra payment changes
 });

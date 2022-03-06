@@ -41,8 +41,26 @@
       'mapadi_name' => 'गाडी भरणाऱ्या मापाडी चे नाव',
       'mapadi_name' => 'गाडी भरणाऱ्या मापाडी चे नाव',
       'outside_payment' => '',
+<<<<<<< HEAD
       'amount' => '',
       'agent_name' => '',
+=======
+
+      'amount' => '',
+      'agent_name' => '',
+
+      'amount' => 'रक्कम',
+      'agent_name' => '',
+      'username' =>'वापरकर्तानाव',
+      'payment_mode' =>'पेमेंट मोड',
+      'payment_date' =>'पगाराची तारीख',
+      'salary_entries' =>'पगार नोंदी',
+      'payment' =>'पेमेंट',
+      'agent_payment_details' => 'एजंट पेमेंट तपशील',
+      'salary' =>"पगार",
+      'tansaction_number' => ''
+
+>>>>>>> 4046d18... New extra payment changes
 
    ];
 ?>

@@ -127,7 +127,7 @@
 
                                             </div>
 
-                                            <div class="form-group">
+                                          <!--   <div class="form-group">
                                                 <label for="menu">{{__('messages.payment_status')}}</label>
                                                  <span class="payment-error" style="color: red">
                                                      *
@@ -138,7 +138,7 @@
                                                     <option value="Paid"> Paid </option>
                                                 </select>
                                                
-                                            </div>
+                                            </div> -->
 
                                         @endif
 
@@ -198,14 +198,14 @@
                 $("#paid-error").text("");
             }
 
-            if(pending_amount == 0){
-                $("#payment_status").val("Paid").attr("selected","selected");
-               // $("#payment_status").attr("disabled","");
-            }
-            else{
-                $("#payment_status").val("Pending").attr("selected","selected");
-              //  $("#payment_status").removeAttr("disabled","");
-            }
+            // if(pending_amount == 0){
+            //     $("#payment_status").val("Paid").attr("selected","selected");
+            //    // $("#payment_status").attr("disabled","");
+            // }
+            // else{
+            //     $("#payment_status").val("Pending").attr("selected","selected");
+            //   //  $("#payment_status").removeAttr("disabled","");
+            // }
         }
 
         function validateText(e){

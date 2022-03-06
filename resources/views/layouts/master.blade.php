@@ -198,17 +198,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           <li class="nav-item">
                             <a href="#" class="nav-link">
-                              <i class="fas fa-truck nav-icon"></i>
+                              <i class="fab fa-amazon-pay nav-icon"></i>
                               <p>
+<<<<<<< HEAD
                                {{__('messages.outside_payment')}}
+=======
+
+                               <!-- {{__('messages.outside_payment')}} -->
+
+                               {{__('messages.payment')}}
+
+>>>>>>> 4046d18... New extra payment changes
                                 <i class="right fas fa-angle-left"></i>
                               </p>
                             </a>
                             <ul class="nav nav-treeview">
                              <li class="nav-item">
-                                <a href="{{ route('oplog') }}" class="nav-link">
+                                <a href="{{ route('outsidep') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
+<<<<<<< HEAD
                                   <p>Agent Payment Details</p>
+=======
+
+                                <!--   <p>Agent Payment Details</p> -->
+
+                                  <p>   {{__('messages.agent_payment_details')}}</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="{{ route('salary') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>   {{__('messages.salary')}}</p>
+
+>>>>>>> 4046d18... New extra payment changes
                                 </a>
                               </li>
                             </ul>
