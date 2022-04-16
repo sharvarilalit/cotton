@@ -78,6 +78,9 @@ Route::group(['middleware' => 'auth'], function () {
    Route::post('truck-charges/store', [App\Http\Controllers\TruckChargesController::class, 'save'])->name('truck.charges.store');
    Route::get('truck-charges/edit/{id?}', [App\Http\Controllers\TruckChargesController::class, 'add'])->name('truck.charges.edit');
    Route::get('truck-charges/delete/{id}', [App\Http\Controllers\TruckChargesController::class, 'delete'])->name('truck.charges.delete');
+
+    /*get village farmar cost for truck charges findout*/
+    Route::post('/gettruckdetails',[App\Http\Controllers\TruckChargesController::class, 'getVillagecost'])->name('truck.charges.getvillagecost');
    // Route::get('truck-charges/',  [App\Http\Controllers\FarmerTransactionController::class, 'index'])->name('index');
 
    /** Profit loss */
@@ -114,5 +117,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('salary/edit/{id?}', [App\Http\Controllers\SalaryController::class, 'add'])->name('salary.edit');
     Route::get('salary/delete/{id}', [App\Http\Controllers\SalaryController::class, 'delete'])->name('salary.delete');
 
+<<<<<<< HEAD
 >>>>>>> 4046d18... New extra payment changes
+=======
+
+
+>>>>>>> d5dcf15... new changes
 });

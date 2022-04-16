@@ -25,7 +25,13 @@ class FarmerTransactions extends Model
         'payment_mode',
         'mapadi_name',
         'through_person_name',
+<<<<<<< HEAD
 
+=======
+        'trans_date',
+        'product',
+        'trip',
+>>>>>>> d5dcf15... new changes
     ];
 
     public function trucks()

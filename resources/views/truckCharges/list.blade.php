@@ -65,6 +65,8 @@ Truck Charges Entries
                                 <tr>
                                     <th>S.L</th>
                                     <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.product')}}</th>
+                                    <th>{{__('messages.truck_trip')}}</th>
                                     <th>{{__('messages.date')}}</th>
                                     <th>{{ __('messages.village_price_rate') }}</th>
                                     <th>{{ __('messages.vehicle_cost') }}</th>
@@ -73,10 +75,10 @@ Truck Charges Entries
                                     <th>{{ __('messages.route_charges') }}</th>
                                     <th>{{ __('messages.vehicle_fillingout_charges') }}</th>
                                     <th>{{ __('messages.angadi_and_return_person_charges') }}</th>
-                                    <th>Total Charges Amount</th>
-                                    <th>Jingping Amount</th>
+                                    <!-- <th>Total Charges Amount</th> -->
+                                    <!-- <th>Jingping Amount</th> -->
                                     <th>{{__('messages.total_amount')}}</th>
-                                    <th>Action</th>
+                                    <th>{{__('messages.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,6 +86,8 @@ Truck Charges Entries
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$item->trucks->truck_no}}</td>
+                                    <td>{{$item->product  == 1 ?  __('messages.cotton') : __('messages.wheat')}}</td>
+                                    <td>{{$item->trip}}</td>
                                      <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
                                     <td>{{number_format($item->village_charges)}}</td>
                                     <td>{{number_format($item->vehicle_charges)}}</td>
@@ -92,9 +96,9 @@ Truck Charges Entries
                                     <td>{{number_format($item->route_charges)}}</td>
                                     <td>{{number_format($item->vehicle_filling_out_charges)}}</td>
                                     <td>{{number_format($item->angadi_return_person_charges)}}</td> 
-                                    <td>{{number_format($item->total_charges_amount)}}</td>
-                                    <td>{{number_format($item->jingping_amount)}}</td>
-                                    <td>{{number_format($item->total_amount)}}</td>
+                                    <!-- <td>{{number_format($item->total_charges_amount)}}</td> -->
+                                    <!-- <td>{{number_format($item->jingping_amount)}}</td> -->
+                                    <td>{{number_format($item->truck_total_amount)}}</td>
                                     <td><a href='{{route('truck.charges.edit',$item->id)}}' class="btn btn-info btn-sm"><i
                                                 class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('truck.charges.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>

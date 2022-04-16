@@ -53,7 +53,38 @@
       'salary' =>"Salary",
       'tansaction_number' => 'Transction Number',
       'farmer_extra_entries' => 'Farmer Extra Payment',
+<<<<<<< HEAD
 >>>>>>> 4046d18... New extra payment changes
 
+=======
+      'product_type' => 'Product Type',
+      'trip' => 'Truck Trip',
+      'product' => 'Product',
+      'truck_trip' => 'Trip No',
+      'total_extra_amount' => 'Total Extra Amount',
+      'action' => 'Action',
+      'farmer_extra_amount' => 'Farmer Extra Payment',
+      'additional_details' => 'Additional Details',
+      'cotton' => 'Cotton',
+      'wheat' => 'Wheat',
+      'farmer_details' => 'Farmer Details',
+      'trips' => 'Trip',
+      'cotton_Weight' => 'Cotton Weight',
+      'farmer_transaction_details' => 'Farmer Transaction Details',
+      'sent_by' => 'Sent By',
+      'market_entries' => 'Market Entries',
+      'profit_loss_report' => 'Profit/Loss Report.',
+      'market_amount' => 'Market Amount',
+      'truck_amount' => 'Truck Amount',
+      'total_profit_loss' => 'Total Profit/Loss',
+      'profit' => 'PROFIT',
+      'loss' => 'LOSS',
+      'outside_payment_entries' => 'Outside Transaction Entries',
+      'farmer_material_details' => 'Product Entries',
+      'farmer_payment_details' => 'Payment Details',
+      'truck_new_entry' => 'New Entry',
+      'truck_charges_entry' => 'Truck Charges Entry',
+      'report' => 'Report',
+>>>>>>> d5dcf15... new changes
    ];
 ?>

@@ -71,7 +71,33 @@
                                                 @enderror
                                             </div>
 
+                                            <div class="form-group">
+                                                <label for="name">{{ __('messages.truck_trip') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <input type="number" name="trip" class="form-control" id="trip"
+                                                    placeholder="Truck Trip" 
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->trip : '' }}"
+                                                    required=""/>
+                                                @error('trip')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
                                              <div class="form-group">
+                                                <label for="name">{{ __('messages.product_type') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <select type="text" name="product_type" class="form-control" id="product_type" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '1' ? 'selected' : '' }}>Cotton</option>
+                                                    <option value="2" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '2' ? 'selected' : '' }}>Wheat</option>
+                                                   
+                                                </select>
+                                                @error('product')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>                                           
+
+                                            <div class="form-group">
                                                 <label for="name">{{ __('messages.mapadi_name') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="mapadi_name" class="form-control" id="mapadi_name"

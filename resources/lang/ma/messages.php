@@ -47,10 +47,9 @@
 =======
 
       'amount' => '',
-      'agent_name' => '',
+      'agent_name' => 'एजंटचे नाव',
 
       'amount' => 'रक्कम',
-      'agent_name' => '',
       'username' =>'वापरकर्तानाव',
       'payment_mode' =>'पेमेंट मोड',
       'payment_date' =>'पगाराची तारीख',
@@ -58,9 +57,38 @@
       'payment' =>'पेमेंट',
       'agent_payment_details' => 'एजंट पेमेंट तपशील',
       'salary' =>"पगार",
+<<<<<<< HEAD
       'tansaction_number' => ''
 
 >>>>>>> 4046d18... New extra payment changes
+=======
+      'tansaction_number' => '',
+      'total_extra_amount' => 'एकूण अतिरिक्त रक्कम',
+      'action' => 'क्रिया',
+      'farmer_extra_entries' => 'शेतकरी अतिरिक्त देयक',
+      'additional_details' => 'अतिरिक्त तपशील',
+      'product' => 'उत्पादन',
+      'truck_trip' => 'ट्रिप क्रमांक',
+      'cotton' => 'कापूस',
+      'wheat' => 'गहू',
+      'product_type' => 'उत्पादन प्रकार',
+      'farmer_details' => 'शेतकरी तपशील',
+      'trips' => 'ट्रिप',
+      'cotton_Weight' => 'कापसाचे वजन',
+      'farmer_transaction_details' => 'शेतकरी व्यवहार तपशील',
+      'sent_by' => 'व्यक्तीद्वारे',
+      'market_entries' => 'बाजारातील नोंदी',
+      'profit_loss_report' => 'नफा तोटा अहवाल.',
+      'market_amount' => 'बाजार रक्कम',
+      'truck_amount' => 'ट्रक रक्कम',
+      'total_profit_loss' => 'एकूण नफा/तोटा',
+      'outside_payment_entries' => 'बाहेरील व्यवहार नोंदी',
+      'farmer_material_details' => 'शेतकरी माल नोंदी',
+      'farmer_payment_details' => 'शेतकरी पेमेंट तपशील',
+      'truck_new_entry' => 'ट्रक नवीन प्रवेश',
+      'truck_charges_entry' => 'ट्रक शुल्क प्रवेश',
+      'report' => 'अहवाल',
+>>>>>>> d5dcf15... new changes
 
    ];
 ?>

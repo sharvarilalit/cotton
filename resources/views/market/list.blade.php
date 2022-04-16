@@ -8,12 +8,12 @@ Market Entries
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Market Entries</h1>
+                <h1>{{__('messages.market_entries')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Market Entries</li>
+                    <li class="breadcrumb-item active">{{__('messages.market_entries')}}</li>
                 </ol>
             </div>
         </div>
@@ -75,14 +75,16 @@ Market Entries
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Market</th>
-                                    <th>Truck Number</th>
-                                    <th>Market Location</th>
-                                    <th>Date</th>
-                                    <th>Cotton Weight</th>
-                                    <th>Market Price</th>
-                                    <th>Total Amount</th>
-                                    <th>Action</th>
+                                    <th>{{__('messages.market')}}</th>
+                                    <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.truck_trip')}}</th>
+                                    <th>{{__('messages.product')}}</th>
+                                    <th>{{__('messages.market')}} {{__('messages.location')}}</th>
+                                    <th>{{__('messages.date')}}</th>
+                                    <th>{{__('messages.cotton_Weight')}}</th>
+                                    <th>{{__('messages.market_price')}}</th>
+                                    <th>{{__('messages.total_amount')}}</th>
+                                    <th>{{__('messages.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,6 +93,8 @@ Market Entries
                                     <td>{{$key+1}}</td>
                                     <td>{{$item->market_name}}</td>
                                     <td>{{$item->trucks->truck_no}}</td>
+                                     <td>{{$item->trip}}</td>
+                                    <td>{{$item->product  == 1 ? __('messages.cotton'): __('messages.wheat')}}</td>            
                                     <td>{{$item->market_location}}</td>
                                     <td>{{date('d-m-Y',strtotime($item->date))}}</td>
                                      <td>{{ $item->quantity }}</td>

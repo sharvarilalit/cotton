@@ -31,6 +31,7 @@ class ProfitLossController extends Controller
                     ->get();
 
         $profit_data = array();
+<<<<<<< HEAD
         foreach ($market as $key => $value) {
             
             $market = DB::table('truck_charges')
@@ -40,22 +41,68 @@ class ProfitLossController extends Controller
                     ->get();
 
             $pl_date = ($market[0]->date == $value->date) ? $value->date : '';
+=======
+        $records = Truck::join('truck_charges', 'truck.id', '=', 'truck_charges.truck_id')
+        ->join('market', 'truck.id', '=', 'market.truck_id')
+        ->select('truck.*','market.market_price as market_price','market.total_amount as total_amount','market.date as market_date','truck_charges.truck_total_amount as truck_total_amount','truck_charges.date as truck_charges_date','truck_charges.product as truck_charges_product','market.product as market_product','truck_charges.trip as truck_charges_trip','market.trip as market_trip')
+        ->orderBy('truck.id', 'DESC')
+        ->get();
+
+        if($records && !empty($records)){
+            foreach ($records as $key => $value) {
+                // $pl_date = ($value->truck_charges_date == $value->market_date) ? $value->market_date : '';
+
+               // $pl_date =   (($value->truck_charges_date == $value->market_date) && ($value->truck_charges_product == $value->market_product) && ($value->truck_charges_trip == $value->market_trip)) ? $value->market_date : '';
+
+               $pl_date = '';
+               $pl_product = '';
+               $pl_trip = '';
+
+               if(($value->truck_charges_date == $value->market_date) && ($value->truck_charges_product == $value->market_product) && ($value->truck_charges_trip == $value->market_trip)) 
+               {
+                    $pl_date = $value->market_date;
+                    $pl_product = $value->market_product;
+                    $pl_trip = $value->market_trip;
+               }
+
+    
+                $profit_loss = $value->total_amount - $value->truck_total_amount;
+    
+                $result_pl = ($profit_loss > 0) ? "profit" : "loss" ;
+    
+                $profit_data[] = [
+                    'truck_no' => $value->truck_no,
+                    'truck_total_amount' => $value->truck_total_amount,
+                    'market_total_amount' => $value->total_amount,
+                    // 'market_weight' => $value->quantity,
+                    // 'market_rate' => $value->market_price,
+                    'date' => $pl_date,
+                    'profit_loss' => $profit_loss,
+                    'result_pl' => $result_pl,
+                    'product' => $pl_product,
+                    'trip' => $pl_trip
+                ];
+            
+            }
+           
+            }
+>>>>>>> d5dcf15... new changes
 
 
-            $profit_loss = $value->total_amount - $market[0]->truck_total_amount;
+            // $profit_loss = $value->total_amount - $market[0]->truck_total_amount;
 
-            $result_pl = ($profit_loss > 0) ? "Profit" : "Loss" ;
+            // $result_pl = ($profit_loss > 0) ? "Profit" : "Loss" ;
 
-            $profit_data[] = [
-                'truck_no' => $value->truck_no,
-                'truck_total_amount' => $market[0]->truck_total_amount,
-                'market_total_amount' => $value->total_amount,
-                // 'market_weight' => $value->quantity,
-                // 'market_rate' => $value->market_price,
-                'date' => $pl_date,
-                'profit_loss' => $profit_loss,
-                'result_pl' => $result_pl,
-            ];
+            // $profit_data[] = [
+            //     'truck_no' => $value->truck_no,
+            //     'truck_total_amount' => $market[0]->truck_total_amount,
+            //     'market_total_amount' => $value->total_amount,
+            //     // 'market_weight' => $value->quantity,
+            //     // 'market_rate' => $value->market_price,
+            //     'date' => $pl_date,
+            //     'profit_loss' => $profit_loss,
+            //     'result_pl' => $result_pl,
+            // ];
 
             // $profit_data[$value->truck_id]['truck_no'] = $value->truck_no;
             

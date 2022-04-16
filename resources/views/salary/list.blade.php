@@ -52,7 +52,7 @@ Farmer Entries
                                     <th>{{__('messages.amount')}}</th>
                                     <th>{{__('messages.payment_mode')}}</th>
                                     <th>{{__('messages.payment_date')}}</th>
-                                    <th>Action</th>
+                                    <th>{{__('messages.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,7 +64,7 @@ Farmer Entries
                                     <td>{{$item->payment_mode==1?'Online':'Offline'}}</td>
                                     <td>{{date('d-m-Y',strtotime($item->payment_date))}}</td>
                                     <td><a href='{{route('salary.edit',$item->id)}}' class="btn btn-info btn-sm"><i
-                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('farmer.delete',$item->id)}}"
+                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('salary.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>

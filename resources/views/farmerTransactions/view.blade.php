@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>S.L</th>
                                     <th>Farmer Name</th>
+                                    <th>Product</th>
                                     <th>Paid Amount</th>
                                     <th>Date</th>
                                     <th>Payment status</th>
@@ -49,6 +50,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->fname }}</td>
+                                        <td>{{ $item->product == 1 ? 'Cotton': 'Wheat'}}</td>
                                         <td>{{ number_format($item->paid_amount) }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         <td>{{ $item->payment_status }}</td>

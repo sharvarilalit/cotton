@@ -88,9 +88,11 @@ class FarmerTransactionController extends Controller
             'price' => $request->price,
             'total_amount' => (int)str_replace(',', '', $request->total_amount),
             'paid_amount' => $paid_amt,
-            'pending_amount' => $pending_amt,
+            'pending_amount' => (int)$pending_amt,
             'mapadi_name' => $request->mapadi_name,
             'through_person_name' => $request->through_person_name,
+            'product' => $request->product_type,
+            'trip' => $request->trip,
         );
 
        
@@ -102,7 +104,7 @@ class FarmerTransactionController extends Controller
             if($ft){
                 $data['fid'] = $request->farmer_id;
                 $data['transaction_id'] = $id;
-                
+                $data['product'] = (int)$request->product_type;         
                 $data['uid'] = Auth::user()->id;
                 $data['fname'] = $farmer->name;
                 $data['transaction_number'] = $ft->transaction_number;
@@ -149,10 +151,11 @@ class FarmerTransactionController extends Controller
                 $ft = FarmerTransactions::findOrFail($request->id);
 
                 if($ft){
-
+                    
                   
                     $data['fid'] = $request->farmer_id;
                     $data['transaction_id'] = $request->id;
+                    $data['product'] = (int)$request->product_type;   
                     
                     $data['uid'] = Auth::user()->id;
                     $data['fname'] = $fa->name;

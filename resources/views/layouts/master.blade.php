@@ -115,13 +115,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('truck') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>New</p>
+                                  <p>{{__('messages.truck_new_entry')}}</p>
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('truck.charges') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Charges</p>
+                                  <p>{{__('messages.truck_charges_entry')}}</p>
                                 </a>
                               </li>
                             </ul>
@@ -139,19 +139,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('farmer') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
+<<<<<<< HEAD
                                   <p>New</p>
+=======
+                                  <p>{{__('messages.farmar_entries')}}</p>
+>>>>>>> d5dcf15... new changes
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('ftransaction') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
+<<<<<<< HEAD
                                   <p>Details</p>
+=======
+                                  <p> {{__('messages.farmer_material_details')}}</p>
+>>>>>>> d5dcf15... new changes
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('flog') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
+<<<<<<< HEAD
                                   <p>Payment</p>
+=======
+                                  <p>{{__('messages.farmer_payment_details')}}</p>
+>>>>>>> d5dcf15... new changes
                                 </a>
                               </li>
                             </ul>
@@ -181,7 +193,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">
                               <i class="nav-icon fas fa-chart-pie"></i>
                               <p>
-                                Report
+                                {{__('messages.report')}}
                                 <i class="right fas fa-angle-left"></i>
                               </p>
                             </a>
@@ -189,7 +201,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('sales.report') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Sales Report</p>
+                                  <p>{{__('messages.profit_loss_report')}}</p>
                                 </a>
                               </li>
                             </ul>

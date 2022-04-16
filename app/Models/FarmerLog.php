@@ -22,7 +22,8 @@ class FarmerLog extends Model
         'paid_amount',
         'payment_status',
         'payment_mode',
-        'created_at'
+        'created_at',
+        'product'
     ];
 
 

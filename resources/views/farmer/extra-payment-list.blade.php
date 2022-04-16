@@ -52,7 +52,7 @@ Farmer Extra Entries
                                     <th>{{__('messages.amount')}}</th>
                                     <th>{{__('messages.payment_mode')}}</th>
                                     <th>{{__('messages.payment_date')}}</th>
-                                    <th>Action</th>
+                                    <th>{{__('messages.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,7 +75,7 @@ Farmer Extra Entries
                                 </tbody>
                         </table>
                     </div>
-                       <p style="margin-top:20px;text-indent: 20px"><b> Total Extra Amount : {{ number_format($total) }}/-</b></p>
+                       <p style="margin-top:20px;text-indent: 20px"><b> {{__('messages.total_extra_amount')}} : {{ number_format($total) }}/-</b></p>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
