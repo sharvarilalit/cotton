@@ -90,6 +90,9 @@ Farmer Entries
                                     &nbsp;
                                     <a onclick="return confirm('Are you sure?')" href="{{route('farmer.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    &nbsp;
+                                     <a href='{{route('farmer.pdf',$item->id)}}' class="btn btn-dark btn-sm" target="_black"><i class="fas fa-file-pdf"></i></a>
+                                    
                                     </td>
                                 </tr>
                                 @endforeach

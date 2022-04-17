@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
    Route::post('farmer/store', [App\Http\Controllers\FarmerController::class, 'save'])->name('farmer.store');
    Route::get('farmer/edit/{id?}', [App\Http\Controllers\FarmerController::class, 'add'])->name('farmer.edit');
    Route::get('farmer/delete/{id}', [App\Http\Controllers\FarmerController::class, 'delete'])->name('farmer.delete');
+
+   Route::get('farmer/pdf/{id}', [App\Http\Controllers\FarmerPDFController::class, 'generatePDF'])->name('farmer.pdf');
    
 
    Route::get('farmer/extra-payment/{id}', [App\Http\Controllers\FarmerController::class, 'extraPayment'])->name('farmer.extra-payment');
@@ -116,10 +118,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('salary/store', [App\Http\Controllers\SalaryController::class, 'save'])->name('salary.store');
     Route::get('salary/edit/{id?}', [App\Http\Controllers\SalaryController::class, 'add'])->name('salary.edit');
     Route::get('salary/delete/{id}', [App\Http\Controllers\SalaryController::class, 'delete'])->name('salary.delete');
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 >>>>>>> 4046d18... New extra payment changes
 =======
+=======
+  
+    
+>>>>>>> a2e3777... Pdf Farmer
 
 
 >>>>>>> d5dcf15... new changes
