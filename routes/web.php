@@ -101,14 +101,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('outside-payment/export', [App\Http\Controllers\OutsidePaymentController::class, 'export'])->name('outsidep.export');
     Route::get('outside-log/',  [App\Http\Controllers\OutsidePaymentController::class, 'flog'])->name('oplog');
-<<<<<<< HEAD
-=======
-
->>>>>>> 4046d18... New extra payment changes
    Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
 
-<<<<<<< HEAD
-=======
+
     Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
    
 
@@ -118,16 +113,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('salary/store', [App\Http\Controllers\SalaryController::class, 'save'])->name('salary.store');
     Route::get('salary/edit/{id?}', [App\Http\Controllers\SalaryController::class, 'add'])->name('salary.edit');
     Route::get('salary/delete/{id}', [App\Http\Controllers\SalaryController::class, 'delete'])->name('salary.delete');
-<<<<<<< HEAD
-
-<<<<<<< HEAD
->>>>>>> 4046d18... New extra payment changes
-=======
-=======
-  
-    
->>>>>>> a2e3777... Pdf Farmer
-
-
->>>>>>> d5dcf15... new changes
 });
