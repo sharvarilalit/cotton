@@ -12,33 +12,21 @@ class OutsidePayment extends Model
     protected $table ='outside_payment';
 
     protected $fillable = [
-<<<<<<< HEAD
-        'opid',
-=======
-
->>>>>>> 4046d18... New extra payment changes
         'name',
         'amount',
         'transaction_number',
         'payment_status',
         'payment_mode',
         'payment_date',
-<<<<<<< HEAD
-=======
         'transaction_type',
         'pending_amount',
         'farmer_id',
->>>>>>> 4046d18... New extra payment changes
     ];
 
      public function users()
     {
         return $this->belongsTo(User::class,'uid','id');
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 4046d18... New extra payment changes
     // public function farmers()
     // {
     //     return $this->belongsTo(Farmer::class,'farmer_id','id');
