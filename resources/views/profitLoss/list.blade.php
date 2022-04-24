@@ -8,20 +8,12 @@ Market Entries
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-<<<<<<< HEAD
-                <h1>Profit Loss</h1>
-=======
                 <h1>{{__('messages.profit_loss_report')}}</h1>
->>>>>>> d5dcf15... new changes
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-<<<<<<< HEAD
-                    <li class="breadcrumb-item active">Profit Loss</li>
-=======
                     <li class="breadcrumb-item active">{{__('messages.profit_loss_report')}}</li>
->>>>>>> d5dcf15... new changes
                 </ol>
             </div>
         </div>
