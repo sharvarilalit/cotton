@@ -157,31 +157,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('farmer') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-                                  <p>Farmer Entries</p>
-=======
                                   <p>{{__('messages.farmar_entries')}}</p>
->>>>>>> branch_2
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('ftransaction') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-                                  <p> Transaction Details</p>
-=======
                                   <p> {{__('messages.farmer_material_details')}}</p>
->>>>>>> branch_2
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('flog') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-                                  <p>Payment Details</p>
-=======
                                   <p>{{__('messages.farmer_payment_details')}}</p>
->>>>>>> branch_2
                                 </a>
                               </li>
                             </ul>
@@ -231,15 +219,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">
                               <i class="fab fa-amazon-pay nav-icon"></i>
                               <p>
-<<<<<<< HEAD
-                               {{__('messages.payment')}}
-=======
 
                                <!-- {{__('messages.outside_payment')}} -->
 
                                {{__('messages.payment')}}
 
->>>>>>> branch_2
                                 <i class="right fas fa-angle-left"></i>
                               </p>
                             </a>
@@ -247,12 +231,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              <li class="nav-item">
                                 <a href="{{ route('outsidep') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-=======
 
                                 <!--   <p>Agent Payment Details</p> -->
 
->>>>>>> branch_2
                                   <p>   {{__('messages.agent_payment_details')}}</p>
                                 </a>
                               </li>
@@ -260,10 +241,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <a href="{{ route('salary') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>   {{__('messages.salary')}}</p>
-<<<<<<< HEAD
-=======
-
->>>>>>> branch_2
                                 </a>
                               </li>
                             </ul>
