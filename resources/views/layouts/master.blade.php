@@ -212,15 +212,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">
                               <i class="fab fa-amazon-pay nav-icon"></i>
                               <p>
-<<<<<<< HEAD
-                               {{__('messages.outside_payment')}}
-=======
 
                                <!-- {{__('messages.outside_payment')}} -->
 
                                {{__('messages.payment')}}
 
->>>>>>> 4046d18... New extra payment changes
                                 <i class="right fas fa-angle-left"></i>
                               </p>
                             </a>
@@ -228,9 +224,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              <li class="nav-item">
                                 <a href="{{ route('outsidep') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-                                  <p>Agent Payment Details</p>
-=======
 
                                 <!--   <p>Agent Payment Details</p> -->
 
@@ -242,7 +235,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>   {{__('messages.salary')}}</p>
 
->>>>>>> 4046d18... New extra payment changes
                                 </a>
                               </li>
                             </ul>
