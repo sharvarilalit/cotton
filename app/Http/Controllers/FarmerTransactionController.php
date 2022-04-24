@@ -135,16 +135,8 @@ class FarmerTransactionController extends Controller
                
                 $farmer->paid_amount  = $total_amount;
                 $farmer->pending_amount  = (int)str_replace(',', '', $request->pending_amount);
-<<<<<<< HEAD
-                // $farmer->payment_status  = $request->payment_status;
-                // $farmer->payment_mode  = $request->payment_mode;
-                // $farmer->farmer_id  = $request->farmer_id;
-                // $farmer->mapadi_name  = $request->mapadi_name;
-                // $farmer->through_person_name  = $request->through_person_name;
-=======
                
              
->>>>>>> 4046d18... New extra payment changes
                 $result =  $farmer->save();
 
                 $fa = Farmer::findOrFail($request->farmer_id);

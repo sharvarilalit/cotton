@@ -31,17 +31,6 @@ class ProfitLossController extends Controller
                     ->get();
 
         $profit_data = array();
-<<<<<<< HEAD
-        foreach ($market as $key => $value) {
-            
-            $market = DB::table('truck_charges')
-                    ->where('truck_charges.date', '=', $value->date)
-                    ->where('truck_charges.truck_id', '=', $value->truck_id)
-                    ->select('truck_charges.*')
-                    ->get();
-
-            $pl_date = ($market[0]->date == $value->date) ? $value->date : '';
-=======
         $records = Truck::join('truck_charges', 'truck.id', '=', 'truck_charges.truck_id')
         ->join('market', 'truck.id', '=', 'market.truck_id')
         ->select('truck.*','market.market_price as market_price','market.total_amount as total_amount','market.date as market_date','truck_charges.truck_total_amount as truck_total_amount','truck_charges.date as truck_charges_date','truck_charges.product as truck_charges_product','market.product as market_product','truck_charges.trip as truck_charges_trip','market.trip as market_trip')
@@ -86,7 +75,6 @@ class ProfitLossController extends Controller
             }
            
             }
->>>>>>> d5dcf15... new changes
 
 
             // $profit_loss = $value->total_amount - $market[0]->truck_total_amount;
@@ -106,7 +94,7 @@ class ProfitLossController extends Controller
 
             // $profit_data[$value->truck_id]['truck_no'] = $value->truck_no;
             
-        }
+        //}
         // foreach($profit_data as $key=>$item) {
         //     var_dump($item['truck_no']);
         // }

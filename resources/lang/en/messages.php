@@ -41,9 +41,6 @@
       'outside_payment' => 'Outside Payment',
       'agent_name' => 'Agent Name',
       'amount' => 'Amount',
-
-<<<<<<< HEAD
-=======
       'username' =>'Username',
       'payment_mode' =>'Payment Mode',
       'payment_date' =>'Payment Date',
@@ -53,10 +50,6 @@
       'salary' =>"Salary",
       'tansaction_number' => 'Transction Number',
       'farmer_extra_entries' => 'Farmer Extra Payment',
-<<<<<<< HEAD
->>>>>>> 4046d18... New extra payment changes
-
-=======
       'product_type' => 'Product Type',
       'trip' => 'Truck Trip',
       'product' => 'Product',
@@ -85,6 +78,5 @@
       'truck_new_entry' => 'New Entry',
       'truck_charges_entry' => 'Truck Charges Entry',
       'report' => 'Report',
->>>>>>> d5dcf15... new changes
    ];
 ?>

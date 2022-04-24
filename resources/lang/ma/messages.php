@@ -41,14 +41,10 @@
       'mapadi_name' => 'गाडी भरणाऱ्या मापाडी चे नाव',
       'mapadi_name' => 'गाडी भरणाऱ्या मापाडी चे नाव',
       'outside_payment' => '',
-<<<<<<< HEAD
       'amount' => '',
       'agent_name' => '',
-=======
-
       'amount' => '',
       'agent_name' => 'एजंटचे नाव',
-
       'amount' => 'रक्कम',
       'username' =>'वापरकर्तानाव',
       'payment_mode' =>'पेमेंट मोड',
@@ -57,11 +53,6 @@
       'payment' =>'पेमेंट',
       'agent_payment_details' => 'एजंट पेमेंट तपशील',
       'salary' =>"पगार",
-<<<<<<< HEAD
-      'tansaction_number' => ''
-
->>>>>>> 4046d18... New extra payment changes
-=======
       'tansaction_number' => '',
       'total_extra_amount' => 'एकूण अतिरिक्त रक्कम',
       'action' => 'क्रिया',
@@ -88,7 +79,5 @@
       'truck_new_entry' => 'ट्रक नवीन प्रवेश',
       'truck_charges_entry' => 'ट्रक शुल्क प्रवेश',
       'report' => 'अहवाल',
->>>>>>> d5dcf15... new changes
-
    ];
 ?>
