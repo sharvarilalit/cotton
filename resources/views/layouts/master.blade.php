@@ -139,31 +139,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <li class="nav-item">
                                 <a href="{{ route('farmer') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-                                  <p>New</p>
-=======
                                   <p>{{__('messages.farmar_entries')}}</p>
->>>>>>> d5dcf15... new changes
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('ftransaction') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-                                  <p>Details</p>
-=======
                                   <p> {{__('messages.farmer_material_details')}}</p>
->>>>>>> d5dcf15... new changes
                                 </a>
                               </li>
                               <li class="nav-item">
                                 <a href="{{ route('flog') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
-<<<<<<< HEAD
-                                  <p>Payment</p>
-=======
                                   <p>{{__('messages.farmer_payment_details')}}</p>
->>>>>>> d5dcf15... new changes
                                 </a>
                               </li>
                             </ul>
