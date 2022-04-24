@@ -44,6 +44,29 @@ Farmer Entries
                     <!-- /.card-header -->
                     <div class="card-body">
                         <label><a href="{{route('farmer.add') }}" class="btn btn-success">{{__('messages.add')}}</a></label>
+
+
+                           <form id="myform" action='{{ route('farmer') }}' method="get"
+                        >
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <select type="text" name="farmer_id" class="form-control" id="farmer_id"
+                                       >
+                                        <option value="">Filter By Farmer</option>
+                                        @foreach ($farmer as $cats)
+                                            <option value={{ $cats->id }} @if($cats->id==request()->get("farmer_id")) selected @endif>{{ $cats->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                              
+
+                                <button value="submit" class="btn btn-primary h-25 " id="search"
+                                    name="submit">Search</button> &nbsp;&nbsp;
+                                <a href="{{ route('farmer') }}" class="btn btn-danger h-25" id="reset"
+                                    name="reset">Reset</a>
+                            </div>
+                        </form>
+
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -63,9 +86,21 @@ Farmer Entries
                                     <td>{{$item->location}}</td>
                                     <td>{{$item->contact}}</td>
                                     <td>{{$item->alternate_contact}}</td>
-                                    <td><a href='{{route('farmer.edit',$item->id)}}' class="btn btn-info btn-sm"><i
-                                                class="fas fa-edit"></i></a>&nbsp;<a onclick="return confirm('Are you sure?')" href="{{route('farmer.delete',$item->id)}}"
+                                    <td>
+                                        <a href='{{route('farmer.edit',$item->id)}}' class="btn btn-info btn-sm"><i
+                                                class="fas fa-edit"></i></a>
+                                    &nbsp;
+                                    <a href='{{route('farmer.extra-payment',$item->id)}}' class="btn btn-success btn-sm"><i
+                                                class="fa fa-credit-card "></i></a>
+                                    &nbsp;
+                                    <a href='{{route('farmer.extra-list',$item->id)}}' class="btn btn-warning btn-sm"><i
+                                                class="fa fa-eye"></i></a>
+                                    &nbsp;
+                                    <a onclick="return confirm('Are you sure?')" href="{{route('farmer.delete',$item->id)}}"
                                             class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                    &nbsp;
+                                     <a href='{{route('farmer.pdf',$item->id)}}' class="btn btn-dark btn-sm" target="_black"><i class="fas fa-file-pdf"></i></a>
+                                    
                                     </td>
                                 </tr>
                                 @endforeach

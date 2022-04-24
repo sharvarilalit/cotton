@@ -14,11 +14,13 @@ class OutsidePayment extends Model
     protected $fillable = [
         'name',
         'amount',
+        'transaction_number',
         'payment_status',
         'payment_mode',
         'payment_date',
         'transaction_type',
-        'tansaction_number'
+        'pending_amount',
+        'farmer_id',
     ];
 
      public function users()

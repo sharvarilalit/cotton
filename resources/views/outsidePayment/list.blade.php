@@ -8,12 +8,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Outside Transaction Entries</h1>
+                <h1>{{__('messages.outside_payment_entries')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Outside Transaction Entries</li>
+                    <li class="breadcrumb-item active">{{__('messages.outside_payment_entries')}}</li>
                 </ol>
             </div>
         </div>
@@ -49,7 +49,7 @@
                                 <div class="form-group col-md-3">
                                     <button value="submit" class="btn btn-primary  " id="search"
                                         name="submit">Search</button> &nbsp;&nbsp;
-                                    <a href="{{ route('ftransaction') }}" class="btn btn-danger " id="reset"
+                                    <a href="{{ route('outsidep') }}" class="btn btn-danger " id="reset"
                                         name="reset">Reset</a>
                                 </div>
                             </div>
@@ -60,26 +60,26 @@
                                 <tr>
                                     <th>S.L</th>
                                    <!--  <th>Transaction Number</th> -->
-                                    <th>Agent Name</th>
+                                    <th>{{__('messages.agent_name')}}</th>
                                    <!--  <th>Farmer Location</th> -->
                                     <!-- <th>Truck Number</th> -->
-                                    <th>Date</th>
+                                    <th>{{__('messages.date')}}</th>
                                     <!-- <th>Cotton Weight Qintal</th>
                                     <th>Cotton Weight Kg</th> -->
                                     <!-- <th>Cotton Weight</th> -->
-                                    <th>Amount</th>
+                                    <th>{{__('messages.amount')}}</th>
                                     <!-- <th>Total Amount</th> -->
-                                    <th>Paid Amount</th>
-                                    <th>Pending Amount</th>
+                                    <th>{{__('messages.paid_amount')}}</th>
+                                    <th>{{__('messages.pending_amount')}}</th>
                                     <!-- <th>Payment Status</th>
                                     <th>Payment Mode</th> -->
-                                    <th>Action</th>
+                                    <th>{{__('messages.action')}}</th>
                                 </tr>
                                   @forelse($outside_payment as $key=>$item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->name }}</td>                        
-                                        <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->payment_date)) }}</td>
                                       
                                         <td>{{ number_format($item->amount) }}</td>   
                                         <td>{{ number_format($item->paid_amount) }}</td>

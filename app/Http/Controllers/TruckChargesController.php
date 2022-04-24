@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Truck;
 use App\Models\TruckCharges;
+use App\Models\FarmerTransactions;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+
 
 class TruckChargesController extends Controller
 {
@@ -44,6 +47,7 @@ class TruckChargesController extends Controller
     }
     public function save(Request $request)
     {
+        // var_dump("expression");die();
 
         $request->validate([          
             'truck_id' => 'required',
@@ -57,8 +61,8 @@ class TruckChargesController extends Controller
             'route_charges' => 'required', 
             'vehicle_filling_out_charges' => 'required',
             'angadi_return_person_charges' => 'required',
-            'total_charges_amount' => 'required',
-            'jingping_amount' => 'required',
+            // 'total_charges_amount' => 'required',
+            // 'jingping_amount' => 'required',
         ]);
 
        
@@ -72,10 +76,13 @@ class TruckChargesController extends Controller
             'route_charges' => $request->route_charges, 
             'vehicle_filling_out_charges' => $request->vehicle_filling_out_charges,
             'angadi_return_person_charges' => $request->angadi_return_person_charges,
-            'total_charges_amount' => $request->total_charges_amount,
-            'jingping_amount' => $request->jingping_amount,
+            // 'total_charges_amount' => $request->total_charges_amount,
+            // 'jingping_amount' => $request->jingping_amount,
             'truck_total_amount' => (int)str_replace(',', '', $request->total_amount),
+            'product' => $request->product_type,
+            'trip' => $request->trip,
         );
+
 
         if ($request->id == 0) {
             TruckCharges::create($input_array);
@@ -93,9 +100,11 @@ class TruckChargesController extends Controller
                 $truck->route_charges =  $request->route_charges;
                 $truck->vehicle_filling_out_charges =  $request->vehicle_filling_out_charges;
                 $truck->angadi_return_person_charges =  $request->angadi_return_person_charges;
-                $truck->total_charges_amount =  $request->total_charges_amount;
-                $truck->jingping_amount =  $request->jingping_amount;
+                // $truck->total_charges_amount =  $request->total_charges_amount;
+                // $truck->jingping_amount =  $request->jingping_amount;
                 $truck->truck_total_amount = (int)str_replace(',', '', $request->total_amount);
+                $truck->product =  $request->product_type;
+                $truck->trip = $request->trip;
                 $truck->save();
                 return redirect('truck-charges/')->with('success', 'Truck Charges has been updated successfully');
             } else {
@@ -107,5 +116,39 @@ class TruckChargesController extends Controller
     {
         TruckCharges::find($id)->delete();
         return redirect('truck-charges/')->with('success', 'Truck Charges has been deleted successfully');
+    }
+
+    public function getVillagecost(Request $request)
+    {
+        
+        $get_village =  DB::table('farmer_transactions');
+        $get_village =  $get_village->where('product', (int)$request->product_type);
+        $get_village = $get_village->where('trip',(int)$request->truck_trip);
+        $get_village = $get_village->where('truck_id',(int)$request->truck_no);
+        $get_village =  $get_village->orderBy('id', 'DESC')->get();
+
+        $total_amount = 0;
+        $total_cotton = 0;
+        $total_village_cost = 0;
+        $msg ="";
+        
+        if(count($get_village) == 0) {
+            $msg = "Data not exist. Please select proper product ,trip,truck no.";
+        }
+        else{
+             foreach ($get_village as $key => $value) {
+                $total_qty = $value->weight * $value->price;
+                $total_cotton += $total_qty;
+                $total_amount += (int)$value->total_amount;          
+            }
+
+            if($total_amount == (int)$total_cotton)
+            {
+                $total_village_cost = $total_amount;
+            }
+
+        }
+       
+        return response()->json(array('total_village_cost'=> $total_village_cost,'msg' => $msg), 200);
     }
 }

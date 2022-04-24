@@ -78,6 +78,32 @@
                                                 @enderror
                                             </div>
 
+                                              <div class="form-group">
+                                                <label for="name">{{ __('messages.trip') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <input type="number" name="trip" class="form-control" id="trip"
+                                                    placeholder="Truck Trip" 
+                                                    value="{{ isset($getmarketbyId) ? $getmarketbyId->trip : '' }}"
+                                                    required="" onchange="calculateVillageAmount()" />
+                                                @error('trip')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                         <div class="form-group">
+                                            <label for="name">{{ __('messages.product_type') }} <span
+                                                    style='color:red'>*</span></label>
+                                            <select type="text" name="product_type" class="form-control" id="product_type" required="">
+                                                <option value="">Select</option>
+                                                <option value="1" {{  isset($getmarketbyId) && $getmarketbyId->product == '1' ? 'selected' : '' }}>Cotton</option>
+                                                <option value="2" {{  isset($getmarketbyId) && $getmarketbyId->product == '2' ? 'selected' : '' }}>Wheat</option>
+                                               
+                                            </select>
+                                            @error('product')
+                                                <small style="color:red">{{ $message }}</small>
+                                            @enderror
+                                        </div>           
+
                                             <div class="form-group">
                                                 <label for="name">{{ __('messages.date') }} <span
                                                         style='color:red'>*</span></label>
@@ -89,25 +115,33 @@
                                                 @enderror
                                             </div>
 
+                                              <?php if (!empty($getmarketbyId)) {
+                                                         $kintal_kilo = explode('.', $getmarketbyId->quantity); 
+                                                        // var_dump($kintal_kilo);exit;
+                                                     }
+                                            ?>
+
 
                                            <div class="form-group">
                                                 <label for="name">{{ __('messages.truck_weight_qnt') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="truck_weight_qi" class="form-control" id="truck_weight_qi"
                                                     placeholder="Weight in Quintal" onkeyup="calculateAmount()"
-                                                    value="{{ isset($getmarketbyId) ? $getmarketbyId->truck_weight_qi : '' }}"
+                                                  value="{{ isset($getmarketbyId) ? (int)$kintal_kilo[0] : '' }}"
                                                     required="" />
                                                 @error('truck_weight_qi')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror
                                             </div>
 
+
+
                                             <div class="form-group">
                                                 <label for="name">{{ __('messages.truck_weight_kg') }}</label>
                                                 <input type="text" name="truck_weight_kg" class="form-control" id="truck_weight_kg"
                                                     placeholder="Weight in Kg" onkeyup="calculateAmount()"
-                                                    value="{{ isset($getmarketbyId) ? $getmarketbyId->truck_weight_kg*10 : '' }}"
-                                                     />
+                                                    value="{{ isset($getmarketbyId) ? (int)$kintal_kilo[1] : '' }}"
+                                                    maxlength="2" />
                                                 @error('truck_weight_kg')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror

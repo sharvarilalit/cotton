@@ -20,7 +20,9 @@ class Market extends Model
         'truck_id',
         'market_price',
         'total_amount',
-        'quantity'
+        'quantity',
+        'trip',
+        'product',
     ];
 
     public function trucks()

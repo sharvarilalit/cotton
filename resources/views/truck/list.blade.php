@@ -8,12 +8,12 @@ Truck Entries
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Truck Entries</h1>
+                <h1>{{__('messages.truck_entries')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Truck Entries</li>
+                    <li class="breadcrumb-item active">{{__('messages.truck_entries')}}</li>
                 </ol>
             </div>
         </div>
@@ -47,9 +47,9 @@ Truck Entries
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Truck Number</th>
-                                    <th>Additional Details</th>
-                                    <th>Action</th>
+                                    <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.additional_details')}}</th>
+                                    <th>{{__('messages.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

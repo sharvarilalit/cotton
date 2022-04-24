@@ -71,7 +71,33 @@
                                                 @enderror
                                             </div>
 
+                                            <div class="form-group">
+                                                <label for="name">{{ __('messages.truck_trip') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <input type="number" name="trip" class="form-control" id="trip"
+                                                    placeholder="Truck Trip" 
+                                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->trip : '' }}"
+                                                    required=""/>
+                                                @error('trip')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
                                              <div class="form-group">
+                                                <label for="name">{{ __('messages.product_type') }} <span
+                                                        style='color:red'>*</span></label>
+                                                <select type="text" name="product_type" class="form-control" id="product_type" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }}>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '1' ? 'selected' : '' }}>Cotton</option>
+                                                    <option value="2" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '2' ? 'selected' : '' }}>Wheat</option>
+                                                   
+                                                </select>
+                                                @error('product')
+                                                    <small style="color:red">{{ $message }}</small>
+                                                @enderror
+                                            </div>                                           
+
+                                            <div class="form-group">
                                                 <label for="name">{{ __('messages.mapadi_name') }} <span
                                                         style='color:red'>*</span></label>
                                                 <input type="text" name="mapadi_name" class="form-control" id="mapadi_name"
@@ -231,7 +257,7 @@
 
                                             </div>
 
-                                            <div class="form-group">
+                                           <!--  <div class="form-group">
                                                 <label for="menu">{{__('messages.payment_status')}}</label>
                                                  <span class="payment-error" style="color: red">
                                                      {{ isset($getfarmerbyId) ? '*' : '' }}
@@ -246,7 +272,7 @@
 } ?>> Paid </option>
                                                 </select>
                                                
-                                            </div>
+                                            </div> -->
 
 
                                         </div>
@@ -292,15 +318,23 @@
             let pending_amount = parseInt(total_amount.replace(/,/g , '')) - paid_amount;
             $("#pending_amount").val(pending_amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
+
            // console.log('pending_amount', pending_amount)
 
             if(pending_amount != 0){
+
+            if(paid_amount != ""){
                 $("#payment_status").attr("required","");
+
+           // console.log('pending_amount', pending_amount)
+
+            if(pending_amount != 0){
+                // $("#payment_status").attr("required","");
                 $("#payment_mode").attr("required","");
                 $(".payment-error").text("*");
             }
             else{
-                $("#payment_status").removeAttr("required","");
+                // $("#payment_status").removeAttr("required","");
                 $("#payment_mode").removeAttr("required","");
                 $(".payment-error").text(" "); 
             }
@@ -345,6 +379,15 @@
                 $("#payment_status").val("Pending").attr("selected","selected");
               //  $("#payment_status").removeAttr("disabled","");
             }
+
+            // if(pending_amount == 0){
+            //     $("#payment_status").val("Paid").attr("selected","selected");
+            //    // $("#payment_status").attr("disabled","");
+            // }
+            // else{
+            //     $("#payment_status").val("Pending").attr("selected","selected");
+            //   //  $("#payment_status").removeAttr("disabled","");
+            // }
         }
     </script>
     <script type="text/javascript">

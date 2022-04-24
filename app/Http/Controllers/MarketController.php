@@ -73,6 +73,8 @@ class MarketController extends Controller
             'truck_id' => $request->truck_id,
             'market_price' => $request->market_price,
             'total_amount' => (int)str_replace(',', '', $request->total_amount),
+            'trip' => $request->trip,
+            'product' => $request->product_type,
         );
 
         if ($request->id == 0) {
@@ -90,6 +92,8 @@ class MarketController extends Controller
                 // $farmer->truck_weight_kg  = $request->truck_weight_kg/10;
                 $farmer->truck_id  = $request->truck_id;
                 $farmer->market_price  = $request->market_price;
+                $farmer->trip  = $request->trip;
+                $farmer->product  = $request->product_type;
                 $farmer->total_amount  = (int)str_replace(',', '', $request->total_amount);
                 $farmer->save();
                 return redirect('market/')->with('success', 'Market Details has been updated successfully');

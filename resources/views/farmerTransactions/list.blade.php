@@ -8,12 +8,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Farmer Details</h1>
+                <h1>{{__('messages.farmer_details')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Farmer Details</li>
+                    <li class="breadcrumb-item active">{{__('messages.farmer_details')}}</li>
                 </ol>
             </div>
         </div>
@@ -75,31 +75,35 @@
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Transaction Number</th>
-                                    <th>Farmer Name</th>
-                                    <th>Farmer Location</th>
-                                    <th>Truck Number</th>
-                                    <th>Date</th>
+                                    <!-- <th>Transaction Number</th> -->
+                                    <th>{{__('messages.farmar_name')}}</th>
+                                    <th>{{__('messages.product')}}</th>
+                                    <th>{{__('messages.farmar')}} {{__('messages.location')}}</th>
+                                    <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.trips')}}</th>
+                                    <th>{{__('messages.date')}}</th>
                                     <!-- <th>Cotton Weight Qintal</th>
                                     <th>Cotton Weight Kg</th> -->
-                                    <th>Cotton Weight</th>
-                                    <th>Price</th>
-                                    <th>Total Amount</th>
-                                    <th>Paid Amount</th>
-                                    <th>Pending Amount</th>
+                                    <th>{{__('messages.cotton_Weight')}}</th>
+                                    <th>{{__('messages.price')}}</th>
+                                    <th>{{__('messages.total_amount')}}</th>
+                                    <th>{{__('messages.paid_amount')}} </th>
+                                    <th>{{__('messages.pending_amount')}}</th>
                                     <!-- <th>Payment Status</th>
                                     <th>Payment Mode</th> -->
-                                    <th>Action</th>
+                                    <th>{{__('messages.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($allcolors as $key=>$item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $item->transaction_number }}</td>
+                                       <!--  <td>{{ $item->transaction_number }}</td> -->
                                         <td>{{ $item->farmers->name }}</td>
+                                        <td>{{ $item->product == 1 ? __('messages.cotton'): __('messages.wheat')}}</td>
                                         <td>{{ $item->farmers->location }}</td>
                                         <td>{{ $item->trucks->truck_no }}</td>
+                                        <td>{{ $item->trip }}</td>
                                         <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
                                         <td>{{ $item->weight }}</td>
                                         <td>{{ number_format($item->price) }}</td>

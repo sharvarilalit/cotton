@@ -8,12 +8,12 @@ Market Entries
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Sales Report</h1>
+                <h1>{{__('messages.profit_loss_report')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Sales Report</li>
+                    <li class="breadcrumb-item active">{{__('messages.profit_loss_report')}}</li>
                 </ol>
             </div>
         </div>
@@ -41,11 +41,13 @@ Market Entries
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Truck Number</th>
-                                    <th>Date</th>
-                                    <th>Truck Amount</th>
-                                    <th>Market Amount</th>
-                                    <th>Total Profit/Loss</th>
+                                    <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.truck_trip')}}</th>
+                                    <th>{{__('messages.product')}}</th>
+                                    <th>{{__('messages.date')}}</th>
+                                    <th>{{__('messages.truck_amount')}}</th>
+                                    <th>{{__('messages.market_amount')}}</th>
+                                    <th>{{__('messages.total_profit_loss')}}</th>
                                     <th>P/L</th>
                                     <!-- <th>Action</th> -->
                                 </tr>
@@ -56,6 +58,8 @@ Market Entries
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$item['truck_no']}}</td>
+                                    <td>{{$item['trip']}}</td>
+                                    <td>{{$item['product']  == 1 ? __('messages.cotton'): __('messages.wheat')}}</td>
                                     <td>{{date('d-m-Y',strtotime($item['date']))}}</td>
                                     <td>{{ number_format($item['truck_total_amount'])}}</td>
                                     <td>{{number_format($item['market_total_amount'])}}</td>

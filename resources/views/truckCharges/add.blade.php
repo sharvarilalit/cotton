@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> {{ isset($getTruckbyId) ? 'Update' : 'Add' }}</h1>
+                    <h1> {{ isset($getTruckbyId) ? 'Update' : __('messages.add') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label for="name">{{__('messages.truck')}} <span
                                         style='color:red'>*</span></label>
-                                <select type="text" name="truck_id" class="form-control" id="truck_id" required=""  {{ isset($getTruckbyId) ? 'readonly' : '' }}>
+                                <select type="text" name="truck_id" class="form-control" id="truck_id" required=""  {{ isset($getTruckbyId) ? 'readonly' : '' }} onchange="calculateVillageAmount()">
                                     <option value="">Select</option>
                                     @foreach ($truck as $cats)
                                         <option
@@ -63,6 +63,32 @@
                                     <small style="color:red">{{ $message }}</small>
                                 @enderror
                             </div>
+
+                              <div class="form-group">
+                                <label for="name">{{ __('messages.truck_trip') }} <span
+                                        style='color:red'>*</span></label>
+                                <input type="number" name="trip" class="form-control" id="trip"
+                                    placeholder="Truck Trip" 
+                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->trip : '' }}"
+                                    required="" onchange="calculateVillageAmount()" />
+                                @error('trip')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                             <div class="form-group">
+                                <label for="name">{{ __('messages.product_type') }} <span
+                                        style='color:red'>*</span></label>
+                                <select type="text" name="product_type" class="form-control" id="product_type" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }} onchange="calculateVillageAmount()">
+                                    <option value="">Select</option>
+                                    <option value="1" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '1' ? 'selected' : '' }}>Cotton</option>
+                                    <option value="2" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '2' ? 'selected' : '' }}>Wheat</option>
+                                   
+                                </select>
+                                @error('product')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>                
 
                             <div class="form-group">
                                 <label for="name">{{ __('messages.date') }} <span
@@ -79,7 +105,7 @@
                                 <label for="exampleInputEmail1">{{ __('messages.village_price_rate') }}<span
                                         style='color:red'>*</span></label>
                                 <input type="text" name="village_charges" class="form-control" id="village_charges" placeholder="Village Price Rate"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->village_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()">
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->village_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()" readonly="">
                                 @error('village_charges')
                                     <span>{{ $message }}</span>
                                 @enderror
@@ -250,6 +276,31 @@
         let total = parseInt(village_charges) + parseFloat(vehicle_charges)+ parseFloat(labor_charges)+ parseFloat(village_commision)+ parseFloat(route_charges)+ parseFloat(vehicle_filling_out_charges)+ parseFloat(angadi_return_person_charges);
         $("#total_amount").val(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             // alert(getValue);
+    }
+
+    function calculateVillageAmount() {
+       let truck_no = $("#truck_id").val();
+       let village_charges = $("#village_charges").val(); 
+       let product_type = $("#product_type").val(); 
+       let truck_trip = $("#trip").val(); 
+
+        $.ajax({
+           type:'POST',
+           url:'/gettruckdetails',
+           data:{ 'product_type':product_type,'truck_trip':truck_trip,'truck_no':truck_no ,'_token':'<?php echo csrf_token() ?>'},
+           success:function(data) {
+                if(data.msg != "" && data.total_village_cost == 0) {
+                     alert(data.msg);
+                     $("#village_charges").val(data.total_village_cost);
+                }
+                else{
+                   $("#village_charges").val(data.total_village_cost);
+                }
+              
+
+           }
+        });
+
     }
 </script>
 

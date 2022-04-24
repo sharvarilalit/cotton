@@ -68,10 +68,7 @@ class FarmerTransactionController extends Controller
             'farmer_id' => 'required',
             'price' => 'required',
             'total_amount' => 'required',
-            // 'payment_status' => 'required',
-            // 'payment_mode' => 'required',
-            // 'date' => 'required|unique:farmer_transactions,date,' . $request->id . '|unique:farmer_transactions,truck_id,' . $request->id . '|unique:farmer_transactions,farmer_id,' . $request->id
-             // 'date' =>'required|unique:farmer_transactions,date|unique:farmer_transactions,truck_id|unique:farmer_transactions,farmer_id,' . $request->id
+         
             'date' => Rule::unique('farmer_transactions')->ignore($request->id)->where(function ($query) use ($request) {
                  return $query->where('truck_id', $request->truck_id)->where('farmer_id', $request->farmer_id)->where('date',$request->date);
              }),
@@ -87,19 +84,17 @@ class FarmerTransactionController extends Controller
 
         $input_array = array(
             'date' => $request->date,
-            // 'cotton_weight_qi' => $request->cotton_weight_qi,
-            // 'cotton_weight_kg' => $request->kg,
             'weight' => $cotton_weight,
             'truck_id' => $request->truck_id,
             'farmer_id' => $request->farmer_id,
             'price' => $request->price,
             'total_amount' => (int)str_replace(',', '', $request->total_amount),
             'paid_amount' => $paid_amt,
-            'pending_amount' => $pending_amt,
-            // 'payment_status' => $request->payment_status,
-            // 'payment_mode' => $request->payment_mode,
+            'pending_amount' => (int)$pending_amt,
             'mapadi_name' => $request->mapadi_name,
             'through_person_name' => $request->through_person_name,
+            'product' => $request->product_type,
+            'trip' => $request->trip,
         );
 
        
@@ -111,12 +106,13 @@ class FarmerTransactionController extends Controller
             if($ft){
                 $data['fid'] = $request->farmer_id;
                 $data['transaction_id'] = $id;
-                // $data['operation'] = "Created Entry";
+                $data['product'] = (int)$request->product_type;         
                 $data['uid'] = Auth::user()->id;
                 $data['fname'] = $farmer->name;
                 $data['transaction_number'] = $ft->transaction_number;
                 $data['paid_amount'] = $request->paid_amount;
-                $data['payment_status'] = $request->payment_status;
+                
+                $data['payment_status'] = "Paid";
                 $data['payment_mode'] = $request->payment_mode;
                 $data['created_at'] = $request->date;
 
@@ -138,38 +134,29 @@ class FarmerTransactionController extends Controller
 
             if ($farmer) {
                 $farmer->date = $request->date;
-                // $farmer->cotton_weight_qi  = $request->cotton_weight_qi;
-                // $farmer->cotton_weight_kg  = $request->cotton_weight_kg/10;
-                // $farmer->weight = $cotton_weight;
-                // $farmer->truck_id  = $request->truck_id;
-                // $farmer->price  = $request->price;
-                // $farmer->total_amount  = $request->total_amount;
+               
                 $farmer->paid_amount  = $total_amount;
                 $farmer->pending_amount  = (int)str_replace(',', '', $request->pending_amount);
-                // $farmer->payment_status  = $request->payment_status;
-                // $farmer->payment_mode  = $request->payment_mode;
-                // $farmer->farmer_id  = $request->farmer_id;
-                // $farmer->mapadi_name  = $request->mapadi_name;
-                // $farmer->through_person_name  = $request->through_person_name;
-                if( $request->pending_amount==0){
-                    $farmer->payment_status  = $request->payment_status;
-                }
+               
+             
                 $result =  $farmer->save();
 
                 $fa = Farmer::findOrFail($request->farmer_id);
                 $ft = FarmerTransactions::findOrFail($request->id);
 
                 if($ft){
-
+                    
                   
                     $data['fid'] = $request->farmer_id;
                     $data['transaction_id'] = $request->id;
-                    // $data['operation'] = "Updated Entry";
+                    $data['product'] = (int)$request->product_type;   
+                    
                     $data['uid'] = Auth::user()->id;
                     $data['fname'] = $fa->name;
                     $data['transaction_number'] = $ft->transaction_number;
                     $data['paid_amount'] = $request->paid_amount;
-                    $data['payment_status'] = $request->payment_status;
+                    
+                    $data['payment_status'] = "Paid";
                     $data['payment_mode'] = $request->payment_mode;
                     $data['created_at'] = $request->trans_date;
 
@@ -192,7 +179,7 @@ class FarmerTransactionController extends Controller
             $fa = Farmer::findOrFail($ft->farmer_id);
             $data['fid'] = $ft->farmer_id;
             $data['transaction_id'] = $ft->id;
-            // $data['operation'] = "Deleted Entry";
+            
             $data['uid'] = Auth::user()->id;
             $data['fname'] = $fa->name;
             $data['transaction_number'] = $ft->transaction_number;

@@ -42,6 +42,19 @@ Route::group(['middleware' => 'auth'], function () {
    Route::get('farmer/edit/{id?}', [App\Http\Controllers\FarmerController::class, 'add'])->name('farmer.edit');
    Route::get('farmer/delete/{id}', [App\Http\Controllers\FarmerController::class, 'delete'])->name('farmer.delete');
 
+   Route::get('farmer/pdf/{id}', [App\Http\Controllers\FarmerPDFController::class, 'generatePDF'])->name('farmer.pdf');
+   
+
+   Route::get('farmer/extra-payment/{id}', [App\Http\Controllers\FarmerController::class, 'extraPayment'])->name('farmer.extra-payment');
+
+   Route::post('farmer/extra-store', [App\Http\Controllers\FarmerController::class, 'extraSave'])->name('farmer.extra-store');
+   Route::get('farmer/extra-list/{id}',  [App\Http\Controllers\FarmerController::class, 'extraList'])->name('farmer.extra-list');
+   Route::get('farmer/extra-delete/{id}', [App\Http\Controllers\FarmerController::class, 'extraDelete'])->name('farmer.extra-delete');
+
+
+
+
+
    /** Market module */
    Route::get('market/',  [App\Http\Controllers\MarketController::class, 'index'])->name('market');
    Route::get('market/add', [App\Http\Controllers\MarketController::class, 'add'])->name('market.add');
@@ -67,6 +80,9 @@ Route::group(['middleware' => 'auth'], function () {
    Route::post('truck-charges/store', [App\Http\Controllers\TruckChargesController::class, 'save'])->name('truck.charges.store');
    Route::get('truck-charges/edit/{id?}', [App\Http\Controllers\TruckChargesController::class, 'add'])->name('truck.charges.edit');
    Route::get('truck-charges/delete/{id}', [App\Http\Controllers\TruckChargesController::class, 'delete'])->name('truck.charges.delete');
+
+    /*get village farmar cost for truck charges findout*/
+    Route::post('/gettruckdetails',[App\Http\Controllers\TruckChargesController::class, 'getVillagecost'])->name('truck.charges.getvillagecost');
    // Route::get('truck-charges/',  [App\Http\Controllers\FarmerTransactionController::class, 'index'])->name('index');
 
    /** Profit loss */
@@ -83,6 +99,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('outside-payment/export', [App\Http\Controllers\OutsidePaymentController::class, 'export'])->name('outsidep.export');
     Route::get('outside-log/',  [App\Http\Controllers\OutsidePaymentController::class, 'flog'])->name('oplog');
+   Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
+
+
     Route::get('outside-payment/view/{id?}', [App\Http\Controllers\OutsidePaymentController::class, 'viewHistroy'])->name('outsidep.view');
    
 

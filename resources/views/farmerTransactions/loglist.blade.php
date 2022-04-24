@@ -8,12 +8,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Farmer Transaction Details</h1>
+                <h1>{{__('messages.farmer_transaction_details')}} </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Farmer Transaction Details</li>
+                    <li class="breadcrumb-item active">{{__('messages.farmer_transaction_details')}} </li>
                 </ol>
             </div>
         </div>
@@ -64,12 +64,12 @@
                             <thead>
                                 <tr>
                                     <th>S.L</th>
-                                    <th>Farmer Name</th>
-                                    <th>Paid Amount</th>
-                                    <th>Date</th>
-                                    <th>Payment status</th>
-                                    <th>Payment mode</th>
-                                    <th>Sent By</th>
+                                    <th>{{__('messages.farmar_name')}} </th>
+                                    <th>{{__('messages.paid_amount')}} </th>
+                                    <th>{{__('messages.date')}} </th>
+                                    <th>{{__('messages.payment_status')}} </th>
+                                    <th>{{__('messages.payment_mode')}} </th>
+                                    <th>{{__('messages.sent_by')}} </th>
                                 </tr>
                             </thead>
                             <tbody>
