@@ -92,8 +92,6 @@
                                                 class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
                                            <?php } ?>
                                          
-                                                <a href='{{ route('outsidep.export') }}'
-                                                    class="btn btn-success btn-sm"><i class="fas fa-download"></i></a>&nbsp;
                                                  <a
                                                     href="{{ route('outsidep.view', $item->id) }}"
                                                     class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>

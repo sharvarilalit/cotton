@@ -58,6 +58,7 @@ class ProfitLossController extends Controller
            
             }
 
+        //dd($records);
         return view('profitLoss.list', compact('profit_data'));
 
             // $profit_loss = $value->total_amount - $market[0]->truck_total_amount;

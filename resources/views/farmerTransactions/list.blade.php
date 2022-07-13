@@ -67,10 +67,14 @@
                                 <button value="submit" class="btn btn-primary h-25 " id="search"
                                     name="submit">Search</button> &nbsp;&nbsp;
                                 <a href="{{ route('ftransaction') }}" class="btn btn-danger h-25" id="reset"
-                                    name="reset">Reset</a>
+                                    name="reset">Reset</a>&nbsp;&nbsp;
+                                <button type="button" value="export" class="btn btn-info h-25 " id="export"
+                                    name="submit">Export</button>
+            
+                               
                             </div>
                         </form>
-
+                      
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -116,9 +120,6 @@
                                                 <a href='{{ route('ftransaction.edit', $item->id) }}'
                                                 class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>&nbsp;
                                            <?php } ?>
-                                         
-                                                <a href='{{ route('ftransaction.export') }}'
-                                                    class="btn btn-success btn-sm"><i class="fas fa-download"></i></a>&nbsp;
                                                  <a
                                                     href="{{ route('ftransaction.view', $item->id) }}"
                                                     class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
@@ -159,6 +160,13 @@
             "info": true,
             "autoWidth": true,
             "responsive": true,
+        });
+
+        $(document).on('click','#export',function(){       
+            var farmer_id = $('#farmer_id').val();
+            var truck_id = $('#truck_id').val();        
+            var date = $('#date').val();     
+               window.open("ftransaction.export?farmer_id="+ farmer_id+"&truck_id=" + truck_id + "&date=" + date +"", '_blank');
         });
     });
 </script>

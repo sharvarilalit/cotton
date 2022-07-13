@@ -361,8 +361,6 @@
             else{
                 $("#paid-error").text("");
             }
-<<<<<<< HEAD
-=======
 
             // if(pending_amount == 0){
             //     $("#payment_status").val("Paid").attr("selected","selected");
@@ -372,7 +370,6 @@
             //     $("#payment_status").val("Pending").attr("selected","selected");
             //   //  $("#payment_status").removeAttr("disabled","");
             // }
->>>>>>> 4046d18... New extra payment changes
         }
     </script>
     <script type="text/javascript">
