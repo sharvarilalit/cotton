@@ -61,6 +61,9 @@ Route::group(['middleware' => 'auth'], function () {
    Route::post('market/store', [App\Http\Controllers\MarketController::class, 'save'])->name('market.store');
    Route::get('market/edit/{id?}', [App\Http\Controllers\MarketController::class, 'add'])->name('market.edit');
    Route::get('market/delete/{id}', [App\Http\Controllers\MarketController::class, 'delete'])->name('market.delete');
+   Route::post('/gettruckcode',[App\Http\Controllers\MarketController::class, 'getTruckCode'])->name('market.getTruckCode');
+   Route::post('/gettruckChargesdetails',[App\Http\Controllers\MarketController::class, 'gettruckChargesdetails'])->name('market.gettruckChargesdetails');
+
 
 
    /** Farmer Transaction module */

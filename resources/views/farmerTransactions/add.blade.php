@@ -110,12 +110,11 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name">{{ __('messages.through_person_name') }} <span
-                                                        style='color:red'>*</span></label>
+                                                <label for="name">{{ __('messages.through_person_name') }}</label>
                                                 <input type="text" name="through_person_name" class="form-control" id="through_person_name"
-                                                    placeholder="Mapadi Name" 
+                                                    placeholder="Through Person Name" 
                                                     value="{{ isset($getfarmerbyId) ? $getfarmerbyId->through_person_name : '' }}"
-                                                    required="" onkeypress="validateText(event)" maxlength="100" {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
+                                                     onkeypress="validateText(event)" maxlength="100" {{ isset($getfarmerbyId) ? 'readonly' : '' }}/>
                                                 @error('through_person_name')
                                                     <small style="color:red">{{ $message }}</small>
                                                 @enderror

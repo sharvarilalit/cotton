@@ -48,7 +48,7 @@
                                 @enderror
                             </div>
  -->
-                            <div class="form-group">
+                            <div class="form-group"> 
                                 <label for="name">{{__('messages.truck')}} <span
                                         style='color:red'>*</span></label>
                                 <select type="text" name="truck_id" class="form-control" id="truck_id" required=""  {{ isset($getTruckbyId) ? 'readonly' : '' }} onchange="calculateVillageAmount()">
@@ -68,8 +68,8 @@
                                 <label for="name">{{ __('messages.truck_trip') }} <span
                                         style='color:red'>*</span></label>
                                 <input type="number" name="trip" class="form-control" id="trip"
-                                    placeholder="Truck Trip" 
-                                    value="{{ isset($getfarmerbyId) ? $getfarmerbyId->trip : '' }}"
+                                    placeholder="Truck Trip"  {{ isset($getTruckbyId) ? 'readonly' : '' }}
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->trip : '' }}"
                                     required="" onchange="calculateVillageAmount()" />
                                 @error('trip')
                                     <small style="color:red">{{ $message }}</small>
@@ -79,10 +79,10 @@
                              <div class="form-group">
                                 <label for="name">{{ __('messages.product_type') }} <span
                                         style='color:red'>*</span></label>
-                                <select type="text" name="product_type" class="form-control" id="product_type" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }} onchange="calculateVillageAmount()">
+                                <select {{ isset($getTruckbyId) ? 'readonly' : '' }} type="text" name="product_type" class="form-control" id="product_type" required="" {{ isset($getfarmerbyId) ? 'readonly' : '' }} onchange="calculateVillageAmount()">
                                     <option value="">Select</option>
-                                    <option value="1" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '1' ? 'selected' : '' }}>Cotton</option>
-                                    <option value="2" {{  isset($getfarmerbyId) && $getfarmerbyId->product == '2' ? 'selected' : '' }}>Wheat</option>
+                                    <option value="1" {{  isset($getTruckbyId) && $getTruckbyId->product == '1' ? 'selected' : '' }}>Cotton</option>
+                                    <option value="2" {{  isset($getTruckbyId) && $getTruckbyId->product == '2' ? 'selected' : '' }}>Wheat</option>
                                    
                                 </select>
                                 @error('product')
@@ -107,6 +107,16 @@
                                 <input type="text" name="village_charges" class="form-control" id="village_charges" placeholder="Village Price Rate"
                                     value="{{ isset($getTruckbyId) ? $getTruckbyId->village_charges : '' }}" required="" onkeypress="validateAmount(event)"  onkeyup="calculateAmount()" readonly="">
                                 @error('village_charges')
+                                    <span>{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">{{ __('messages.total_quantity') }}<span
+                                        style='color:red'>*</span></label>
+                                <input type="text" name="total_quantity" class="form-control" id="total_quantity" placeholder="Village Price Rate"
+                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->total_quantity : '' }}" required="" readonly="">
+                                @error('total_quantity')
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
@@ -195,8 +205,7 @@
                                 <label for="name">{{ __('messages.total_amount') }} <span
                                         style='color:red'>*</span></label>
                                 <input type="text" name="total_amount" class="form-control"
-                                    id="total_amount" placeholder="Total Amount"
-                                    value="{{ isset($getTruckbyId) ? $getTruckbyId->total_amount : '' }}"
+                                    id="total_amount" placeholder="Total Amount" 
                                      readonly />
                                 @error('total_amount')
                                     <small style="color:red">{{ $message }}</small>
@@ -255,6 +264,42 @@
 @section('script')
 
 <script type="text/javascript">
+  $(function() {
+           
+           calculateVillageAmount();
+           
+          
+           $('#myform').validate({
+               rules: {
+                   truck_no: {
+                       required: true
+                   },
+                   truck_mapadi_name: {
+                       required: true
+                   },
+                   truck_person_name: {
+                       required: true
+                   },
+               },
+               messages: {
+                   truck_no: {
+                       required: "Please enter a Truck Number",
+                   },
+               },
+               errorElement: 'span',
+               errorPlacement: function(error, element) {
+                   error.addClass('invalid-feedback');
+                   element.closest('.form-group').append(error);
+               },
+               highlight: function(element, errorClass, validClass) {
+                   $(element).addClass('is-invalid');
+               },
+               unhighlight: function(element, errorClass, validClass) {
+                   $(element).removeClass('is-invalid');
+               }
+           });
+       });
+
      function validateAmount(e){
         var key = e.keyCode;
         if (!(key >= 48 && key <= 57)) {
@@ -292,50 +337,22 @@
                 if(data.msg != "" && data.total_village_cost == 0) {
                      alert(data.msg);
                      $("#village_charges").val(data.total_village_cost);
+                     $("#total_quantity").val(data.total_weight);
+
+                     calculateAmount();
+
                 }
                 else{
                    $("#village_charges").val(data.total_village_cost);
-                }
-              
+                   $("#total_quantity").val(data.total_weight);
 
+                   calculateAmount();
+
+                }
            }
         });
+   
 
     }
 </script>
-
-    <script>
-        $(function() {
-           
-            $('#myform').validate({
-                rules: {
-                    truck_no: {
-                        required: true
-                    },
-                    truck_mapadi_name: {
-                        required: true
-                    },
-                    truck_person_name: {
-                        required: true
-                    },
-                },
-                messages: {
-                    truck_no: {
-                        required: "Please enter a Truck Number",
-                    },
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
-        });
-    </script>
 @endsection

@@ -42,6 +42,7 @@ Market Entries
                                 <tr>
                                     <th>S.L</th>
                                     <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.truck_code')}}</th>
                                     <th>{{__('messages.truck_trip')}}</th>
                                     <th>{{__('messages.product')}}</th>
                                     <th>{{__('messages.date')}}</th>
@@ -58,6 +59,7 @@ Market Entries
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$item['truck_no']}}</td>
+                                    <td>{{$item['truck_code']}}</td>
                                     <td>{{$item['trip']}}</td>
                                     <td>{{$item['product']  == 1 ? __('messages.cotton'): __('messages.wheat')}}</td>
                                     <td>{{date('d-m-Y',strtotime($item['date']))}}</td>

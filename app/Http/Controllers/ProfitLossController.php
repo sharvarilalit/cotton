@@ -15,7 +15,7 @@ class ProfitLossController extends Controller
         $profit_data = array();
         $records = Truck::join('truck_charges', 'truck.id', '=', 'truck_charges.truck_id')
         ->join('market', 'truck.id', '=', 'market.truck_id')
-        ->select('truck.*','market.market_price as market_price','market.total_amount as total_amount','market.date as market_date','truck_charges.truck_total_amount as truck_total_amount','truck_charges.date as truck_charges_date','truck_charges.product as truck_charges_product','market.product as market_product','truck_charges.trip as truck_charges_trip','market.trip as market_trip')
+        ->select('truck.*','market.market_price as market_price','market.total_amount as total_amount','market.date as market_date','truck_charges.truck_total_amount as truck_total_amount', 'truck_charges.truck_unique_code as truck_code','truck_charges.date as truck_charges_date','truck_charges.product as truck_charges_product','market.product as market_product','truck_charges.trip as truck_charges_trip','market.trip as market_trip')
         ->orderBy('truck.id', 'DESC')
         ->get();
 
@@ -43,6 +43,7 @@ class ProfitLossController extends Controller
     
                 $profit_data[] = [
                     'truck_no' => $value->truck_no,
+                    'truck_code' => $value->truck_code,
                     'truck_total_amount' => $value->truck_total_amount,
                     'market_total_amount' => $value->total_amount,
                     // 'market_weight' => $value->quantity,

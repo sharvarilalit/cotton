@@ -23,6 +23,7 @@ class Market extends Model
         'quantity',
         'trip',
         'product',
+        'truck_code'
     ];
 
     public function trucks()

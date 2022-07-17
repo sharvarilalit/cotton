@@ -61,6 +61,7 @@ class TruckChargesController extends Controller
             'route_charges' => 'required', 
             'vehicle_filling_out_charges' => 'required',
             'angadi_return_person_charges' => 'required',
+            'total_quantity'=>'required'
             // 'total_charges_amount' => 'required',
             // 'jingping_amount' => 'required',
         ]);
@@ -81,6 +82,8 @@ class TruckChargesController extends Controller
             'truck_total_amount' => (int)str_replace(',', '', $request->total_amount),
             'product' => $request->product_type,
             'trip' => $request->trip,
+            'truck_unique_code' => 'T'.$request->product_type.'-'.strtotime($request->date),
+            'total_quantity' =>$request->total_quantity
         );
 
 
@@ -105,6 +108,7 @@ class TruckChargesController extends Controller
                 $truck->truck_total_amount = (int)str_replace(',', '', $request->total_amount);
                 $truck->product =  $request->product_type;
                 $truck->trip = $request->trip;
+                $truck->total_quantity =$request->total_quantity;
                 $truck->save();
                 return redirect('truck-charges/')->with('success', 'Truck Charges has been updated successfully');
             } else {
@@ -130,6 +134,7 @@ class TruckChargesController extends Controller
         $total_amount = 0;
         $total_cotton = 0;
         $total_village_cost = 0;
+        $total_weight =0;
         $msg ="";
         
         if(count($get_village) == 0) {
@@ -137,6 +142,7 @@ class TruckChargesController extends Controller
         }
         else{
              foreach ($get_village as $key => $value) {
+                $total_weight += $value->weight;
                 $total_qty = $value->weight * $value->price;
                 $total_cotton += $total_qty;
                 $total_amount += (int)$value->total_amount;          
@@ -149,6 +155,7 @@ class TruckChargesController extends Controller
 
         }
        
-        return response()->json(array('total_village_cost'=> $total_village_cost,'msg' => $msg), 200);
+        return response()->json(array('total_village_cost'=> $total_village_cost,'total_weight'=>$total_weight, 'msg' => $msg), 200);
     }
+    
 }

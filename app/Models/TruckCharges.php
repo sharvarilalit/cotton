@@ -26,7 +26,9 @@ class TruckCharges extends Model
         'jingping_amount',
         'truck_total_amount',
         'product',
-        'trip'
+        'trip',
+        'truck_unique_code',
+        'total_quantity'
     ];
 
     public function trucks()

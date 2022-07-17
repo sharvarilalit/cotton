@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Truck;
 use App\Models\Market;
+use App\Models\TruckCharges;
+
 use Illuminate\Validation\Rule;
 
 class MarketController extends Controller
@@ -58,6 +60,7 @@ class MarketController extends Controller
             'date' => Rule::unique('market')->ignore($request->id)->where(function ($query) use ($request) {
                 return $query->where('truck_id', $request->truck_id)->where('date',$request->date);
             }),
+            'truck_code'=>'required'
         ]);
 
         $kg_weight = (!empty($request->truck_weight_kg)) ? $request->truck_weight_kg : 00;
@@ -75,6 +78,7 @@ class MarketController extends Controller
             'total_amount' => (int)str_replace(',', '', $request->total_amount),
             'trip' => $request->trip,
             'product' => $request->product_type,
+            'truck_code' => $request->truck_code
         );
 
         if ($request->id == 0) {
@@ -106,5 +110,26 @@ class MarketController extends Controller
     {
         Market::find($id)->delete();
         return redirect('market/')->with('success', 'Market Details has been deleted successfully');
+    }
+
+    public function getTruckCode(Request $request)
+    {
+        $truckCode = TruckCharges::where('truck_id',$request->truck_no)->get()->toArray();
+        $data=[];
+        if(count($truckCode) == 0) {
+            $data=[];
+        }
+        else{
+            $data = $truckCode;
+
+        }
+       
+        return response()->json(array('data'=> $data), 200);
+    }
+
+    public function gettruckChargesdetails(Request $request)
+    {
+        $details = TruckCharges::where('truck_unique_code',$request->truck_charges_id)->get();
+        return response()->json(array('data'=> $details), 200);
     }
 }

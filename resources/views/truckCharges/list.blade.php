@@ -65,10 +65,12 @@ Truck Charges Entries
                                 <tr>
                                     <th>S.L</th>
                                     <th>{{__('messages.truck_number')}}</th>
+                                    <th>{{__('messages.truck_code')}}</th>
                                     <th>{{__('messages.product')}}</th>
                                     <th>{{__('messages.truck_trip')}}</th>
                                     <th>{{__('messages.date')}}</th>
                                     <th>{{ __('messages.village_price_rate') }}</th>
+                                    <th>{{ __('messages.total_quantity') }}</th>
                                     <th>{{ __('messages.vehicle_cost') }}</th>
                                     <th>{{ __('messages.labour_cost') }}</th>
                                     <th>{{ __('messages.village_commission') }}</th>
@@ -86,10 +88,12 @@ Truck Charges Entries
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$item->trucks->truck_no}}</td>
+                                    <td>{{$item->truck_unique_code}}</td>
                                     <td>{{$item->product  == 1 ?  __('messages.cotton') : __('messages.wheat')}}</td>
                                     <td>{{$item->trip}}</td>
                                      <td>{{ date('d-m-Y', strtotime($item->date)) }}</td>
                                     <td>{{number_format($item->village_charges)}}</td>
+                                    <th>{{$item->total_quantity}}</th>
                                     <td>{{number_format($item->vehicle_charges)}}</td>
                                     <td>{{number_format($item->labor_charges)}}</td>
                                     <td>{{number_format($item->village_commision)}}</td> 
